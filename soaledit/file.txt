@@ -1,0 +1,12 @@
+D:\xampp2\htdocs\proto\soal_editor\web\css
+D:\xampp2\htdocs\proto\soal_editor\web\js
+D:\xampp2\htdocs\proto\soal_editor\web\js\ha
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\cat
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\ha
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\soal
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\tombol
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\cat\cat
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\soal\baru
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\soal\daftar
+D:\xampp2\htdocs\proto\soal_editor\web\js\soalEdit\soal\edit

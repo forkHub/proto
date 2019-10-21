@@ -1,0 +1,33 @@
+div.input-umum {
+	width: 100%;
+	max-width: 800px;
+	padding:16px;
+	margin: auto;
+	margin-top:32px;
+	background-color:white;
+}
+
+div.input-umum
+p.label {
+	margin-bottom: 0px;
+}
+
+div.input-umum
+p.validasi {
+	display: none;
+	margin: 0px;
+	color: red;
+	margin-bottom: 8px;
+}
+
+div.input-umum 
+p {
+	font-weight: bold;
+}
+
+div.input-umum
+button {
+	width: 100%;
+	padding:8px;
+	margin-top: 8px;
+}

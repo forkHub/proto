@@ -1,0 +1,12 @@
+div.cat-item {
+	margin-bottom: 8px;
+}
+
+div.cat-item.selected {
+	border: 3px solid green;
+}
+
+div.cat-item button {
+	width: 100%;
+	padding:8px;
+}

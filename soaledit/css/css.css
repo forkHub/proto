@@ -1,0 +1,51 @@
+html, body, div, p, input  {
+	box-sizing: border-box;
+}
+
+div.cont {
+	display: table;
+	width: 100%;
+}
+
+div.cont
+div.kanan {
+	display: table-cell;
+	width: 10%;
+	min-width: 150px;
+	text-align: center;
+	border: 1px solid;
+	padding: 8px;
+}
+
+div.cont 
+div.kiri {
+	display: table-cell;
+	width: 90%;
+	border: 1px solid;
+	padding: 8px;
+}
+
+div.kanan
+button.tombol {
+	display: block;
+	padding: 8px;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+div.modal-cont {
+	position: fixed;
+	top:0px;
+	left:0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: rgba(0,0,0,.5);
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+input, textarea {
+	padding:8px;
+	width: 100%;
+}

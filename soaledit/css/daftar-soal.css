@@ -1,0 +1,12 @@
+div.daftar-soal {
+	margin-bottom: 8px;
+}
+
+div.daftar-soal.selected {
+	border: 3px solid green;
+}
+
+div.daftar-soal button.item {
+	padding:8px;
+	width: 100%;
+}
