@@ -19,6 +19,9 @@ export class Game {
             window.onresize = () => {
                 this.onResize();
             };
+            setTimeout(() => {
+                this.onResize();
+            }, 1000);
             this.onResize();
         };
     }
