@@ -6,6 +6,7 @@ export class Debug {
         this.cont.innerHTML = '';
     }
     write(str) {
+        console.log('debug write ' + str);
         this.cont.innerHTML += ("<p>" + str + "</p>");
     }
 }

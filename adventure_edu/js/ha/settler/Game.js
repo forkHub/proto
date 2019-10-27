@@ -38,8 +38,9 @@ export class Game {
         ch = 480 * ratio;
         canvas.style.width = cw + 'px';
         canvas.style.height = ch + 'px';
-        canvas.style.top = ((window.innerHeight / 2) - (ch / 2)) + 'px';
-        canvas.style.left = ((window.innerWidth / 2) - (cw / 2)) + 'px';
+        // canvas.style.top = ((window.innerHeight / 2) - (ch / 2)) + 'px';
+        // canvas.style.left = ((window.innerWidth / 2) - (cw / 2)) + 'px';
+        this._debug.write('window innerwidth ' + window.innerWidth);
     }
     init() {
         Global.getInst().mainChar = new MainChar();
