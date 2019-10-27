@@ -1,0 +1,37 @@
+<html>
+
+<head>
+	<style>
+		canvas {
+			width: 640;
+			height: 480;
+			image-rendering: crisp-edges;
+			image-rendering: pixelated;
+			image-rendering: crisp-edges;
+		}
+
+		div#preloader {
+			display: none;
+		}
+	</style>
+
+	<script src="./js/createjs.js"></script>
+	<script src="./js/Data.js"></script>
+	<script type="module" src="js/ha/settler/Game.js"></script>
+
+</head>
+
+<body>
+	<div id="preloader">
+		<img id="petak" src="images/petak_air.png" crossorigin="anonymous" />
+		<img id="box" src="images/box.png" crossorigin="anonymous" />
+		<img id="jalan" src="images/jln.png" crossorigin="anonymous" />
+		<img id="bulan" src="images/bulan.png" crossorigin="anonymous" />
+	</div>
+	<canvas id="canvas" width="320" height="240"></canvas>
+	<div id="debug">
+
+	</div>
+</body>
+
+</html>
