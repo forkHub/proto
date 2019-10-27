@@ -41,6 +41,7 @@ export class Game {
         // canvas.style.top = ((window.innerHeight / 2) - (ch / 2)) + 'px';
         // canvas.style.left = ((window.innerWidth / 2) - (cw / 2)) + 'px';
         this._debug.write('window innerwidth ' + window.innerWidth);
+        this._debug.write('canvas innerwidth ' + canvas.style.width);
     }
     init() {
         Global.getInst().mainChar = new MainChar();
