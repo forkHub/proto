@@ -1,4 +1,5 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
 	<style>
@@ -8,10 +9,19 @@
 			image-rendering: crisp-edges;
 			image-rendering: pixelated;
 			image-rendering: crisp-edges;
+			margin: auto;
+			position: relative;
+
 		}
 
 		div#preloader {
 			display: none;
+		}
+
+		html,
+		body,
+		div {
+			margin: 0px;
 		}
 	</style>
 
@@ -32,6 +42,30 @@
 	<div id="debug">
 
 	</div>
+	<script>
+		window.onresize = () => {
+			let ww = window.innerWidth;
+			let wh = window.innerHeight;
+
+			let gw = ww / 640;
+			let gh = wh / 480;
+
+			let ratio = Math.min(gw, gh);
+
+			let cw = canvas.style.width;
+			let ch = canvas.style.height;
+
+			cw = 640 * ratio;
+			ch = 480 * ratio;
+
+			canvas.style.width = cw;
+			canvas.style.height = ch;
+
+			canvas.style.top = ((window.innerHeight / 2) - (ch / 2)) + 'px';
+			canvas.style.left = ((window.innerWidth / 2) - (cw / 2)) + 'px';
+
+		}
+	</script>
 </body>
 
 </html>
