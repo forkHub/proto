@@ -16,7 +16,27 @@ export class Game {
         Game._inst = this;
         window.onload = () => {
             this.init();
+            window.onresize = () => {
+                this.onResize();
+            };
+            this.onResize();
         };
+    }
+    onResize() {
+        let canvas = document.querySelector('canvas');
+        let ww = window.innerWidth;
+        let wh = window.innerHeight;
+        let gw = ww / 640;
+        let gh = wh / 480;
+        let ratio = Math.min(gw, gh);
+        let cw = parseInt(canvas.style.width);
+        let ch = parseInt(canvas.style.height);
+        cw = 640 * ratio;
+        ch = 480 * ratio;
+        canvas.style.width = cw + 'px';
+        canvas.style.height = ch + 'px';
+        canvas.style.top = ((window.innerHeight / 2) - (ch / 2)) + 'px';
+        canvas.style.left = ((window.innerWidth / 2) - (cw / 2)) + 'px';
     }
     init() {
         Global.getInst().mainChar = new MainChar();
