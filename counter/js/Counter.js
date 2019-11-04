@@ -21,7 +21,7 @@ export class Counter {
             this.counter++;
             this.batasctr++;
             this.hitungP.innerText = this.counter + '';
-            if (this.batasctr >= 10) {
+            if (this.batasctr >= 100) {
                 this.batasctr = 0;
                 this.pencetBtn.disabled = true;
             }
