@@ -1,0 +1,32 @@
+html, body,div {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+}
+
+div.cont {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+button {
+	width: 100%;
+	padding: 12px;
+}
+
+div.setting
+div.menu {
+	padding: 8px;
+	display: none;
+}
+
+button.pencet {
+	flex: 1;
+	padding-top: 32px;
+	padding-bottom: 32px;
+}
+
+p.counter {
+	font-size: xx-large;
+	text-align: center;
+}
