@@ -9,6 +9,6 @@ md data
 md imgs
 md js
 
-xcopy ..\..\..\proto\soal\web\*.* . /s /q
+xcopy ..\..\..\proto\soal\web\*.* . /s /y
 
 ren game2.html index.html
