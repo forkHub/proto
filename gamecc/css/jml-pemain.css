@@ -1,0 +1,39 @@
+
+div.jml-pemain {
+    position: absolute;
+    text-align: center;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+div.jml-pemain 
+p.pilih
+{
+    color: black;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+div.jml-pemain 
+span.jml
+{
+    color: black;
+    font-size: xx-large;
+}
+
+
+div.jml-pemain 
+button.jml {
+    background-color: coral;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 32px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+div.jml-pemain 
+button.jml:hover {
+    background-color: chocolate;
+}

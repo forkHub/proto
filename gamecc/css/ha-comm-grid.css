@@ -1,0 +1,18 @@
+
+div.ha-comm-grid {
+    display:table;
+    width: 100%;
+}
+
+div.ha-comm-grid
+div.row {
+    display: table-row;
+}
+
+div.ha-comm-grid
+div.coll {
+    display: table-cell;
+    text-align: center;
+    padding: 8px;
+    box-sizing: border-box;
+}

@@ -1,0 +1,77 @@
+
+div.edit-user {
+    display: table;
+    box-sizing: border-box;
+    width: 10%;
+	height: 10%;
+	margin: auto;
+	/* margin-top: 16px; */
+	font-size: medium;
+}
+
+div.edit-user 
+div.input-cont {
+    display: table-cell;
+    width: 10%;
+    padding: 0px;
+	vertical-align: middle;
+	text-align: left;	
+}
+
+div.edit-user 
+div.input-cont
+input {
+    width:250px;
+}
+
+
+div.edit-user 
+div.img-cont {
+    display: table-cell;
+    padding: 8px;
+	vertical-align: middle;
+	max-width: 16px;
+}
+
+div.edit-user 
+div.img-cont
+button {
+    width: 64px;
+    height:64px;
+    text-align: center;
+}
+
+div.edit-user 
+div.img-cont
+button
+img {
+    width: 100%;
+	margin: auto;
+	/* max-width: 32px; */
+}
+
+
+/*Avatar*/
+div.pages-edit-pemain-avatar {
+    width: 100%;
+    margin:auto;
+    text-align: center;
+}
+
+/*img button*/
+div.pages-edit-pemain-img-btn {
+    text-align: center;
+}
+
+div.pages-edit-pemain-img-btn 
+btn {
+    width: 100%;
+    margin: auto;
+    text-align: center
+}
+
+div.pages-edit-pemain-img-btn 
+img {
+    width: 100%;
+    margin: auto;
+}

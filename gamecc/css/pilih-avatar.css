@@ -1,0 +1,23 @@
+
+div.pilih-avatar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+
+div.pilih-avatar 
+div.grid-cont {
+	margin: auto;
+	max-width: 600px;
+}
+
+
+div.pilih-avatar 
+p {
+	font-size: xx-large;
+	font-weight: bold;
+}
