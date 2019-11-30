@@ -1,0 +1,40 @@
+<html>
+
+<head>
+	<style>
+		html,
+		body {
+			box-sizing: border-box;
+		}
+
+		body {
+			padding: 32px;
+			max-width: 800px;
+		}
+
+		input {
+			width: 32px;
+		}
+	</style>
+	<script src='./js/index.js'></script>
+</head>
+
+<body>
+	<div class='cont'>
+		<span class='jml'></span> =
+		<input id="puluhan" type='number' placeholder="0" /> +
+		<input id="satuan" type='number' placeholder="0" />
+		<hr />
+		<button class='normal kirim'>Kirim</button>
+	</div>
+	<div class='feedback benar'>
+		<p class='feedback'>Jawaban kamu benar</p>
+		<button>soal berikutnya</button>
+	</div>
+	<div class='feedback salah'>
+		<p class='feedback'>Jawaban kamu salah</p>
+		<button>soal berikutnya</button>
+	</div>
+</body>
+
+</html>
