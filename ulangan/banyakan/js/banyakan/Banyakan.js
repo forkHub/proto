@@ -101,6 +101,7 @@ export class Banyakan {
     mulaiLagi() {
         this.resetSoal();
         this._nilai = 0;
+        this.soalidx = 0;
     }
     resetSoal() {
         this.acak.acak();

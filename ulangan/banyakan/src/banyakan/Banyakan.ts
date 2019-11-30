@@ -124,6 +124,7 @@ export class Banyakan {
 	mulaiLagi(): void {
 		this.resetSoal();
 		this._nilai = 0;
+		this.soalidx = 0;
 	}
 
 	resetSoal(): void {
