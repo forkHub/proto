@@ -1,42 +1,43 @@
-import { Banyakan } from "./banyakan/Banyakan.js";
-import { Dom } from "./Dom.js";
+import { Game } from "../Game.js";
+import { BaseComponent } from "./BaseComponent.js";
 
-export class Selesai {
-	private _view: HTMLDivElement = null;
+export class Selesai extends BaseComponent {
 	private _tombol: HTMLButtonElement = null;
+	private _menuTbl: HTMLButtonElement = null;
 	private nilaiP: HTMLParagraphElement = null;
 
 	constructor() {
-
-	}
-
-	tampil(cont: HTMLDivElement): void {
-		cont.appendChild(this._view);
-		this.nilaiP.innerHTML = Banyakan.inst.nilai + '';
+		super();
 	}
 
 	init(): void {
-		this._view = Banyakan.inst.template.selesai;
-		this._tombol = Dom.getEl(this._view, 'button') as HTMLButtonElement;
+		this._elHtml = Game.inst.template.selesai;
+		this._tombol = this.getEl('button.mulai') as HTMLButtonElement;
+		this._menuTbl = this.getEl('button.menu') as HTMLButtonElement;
+		this.nilaiP = this.getEl('p.nilai') as HTMLParagraphElement;
+	}
+
+	attach(): void {
+		super.attach(Game.inst.cont);
+	}
+
+	public set onClick(value: Function) {
 		this._tombol.onclick = () => {
-			this._view.parentElement.removeChild(this._view);
-			Banyakan.inst.mulaiLagi();
+			this.detach();
+			value();
 		}
-		this.nilaiP = Dom.getEl(this._view, 'p.nilai') as HTMLParagraphElement;
 	}
 
-	public get view(): HTMLDivElement {
-		return this._view;
-	}
-	public set view(value: HTMLDivElement) {
-		this._view = value;
+	public set onMenuClick(value: Function) {
+		this._menuTbl.onclick = () => {
+			this.detach();
+			value();
+		}
 	}
 
-	public get tombol(): HTMLButtonElement {
-		return this._tombol;
-	}
-	public set tombol(value: HTMLButtonElement) {
-		this._tombol = value;
+
+	public set nilai(value: number) {
+		this.nilaiP.innerHTML = value + '';
 	}
 
 }

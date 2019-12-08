@@ -1,9 +1,10 @@
-import { Dom } from "./src/Dom";
-import { Feedback } from "./src/Feedback";
-import { Selesai } from "./src/Selesai";
-import { Template } from "./src/Template";
-import { Banyakan } from "./src/banyakan/Banyakan";
-import { Acak } from "./src/Acak";
+import { Dom } from "./src/Dom.js";
+import { Feedback } from "./src/Feedback.js";
+import { Selesai } from "./src/Selesai.js";
+import { Template } from "./src/Template.js";
+import { Banyakan } from "./src/banyakan/Banyakan.js";
+import { Puluhan } from "./src/puluhan/Puluhan.js";
+import { Menu } from "./Menu.js";
 export class Game {
     constructor() {
         this._dom = null;
@@ -11,16 +12,48 @@ export class Game {
         this._selesai = null;
         this._template = null;
         this._banyakan = null;
-        this._acak = null;
+        this._cont = null;
+        this._puluhan = null;
+        this._menu = null;
         Game._inst = this;
+        this._template = new Template();
         this._dom = new Dom();
         this._feedback = new Feedback();
         this._selesai = new Selesai();
-        this._template = new Template();
         this._banyakan = new Banyakan();
-        this._acak = new Acak(10);
+        this._puluhan = new Puluhan();
+        this._menu = new Menu();
+        window.onload = () => {
+            this.init();
+        };
     }
     init() {
+        this._cont = document.body.querySelector('div.cont');
+        this._banyakan.init();
+        this._selesai.init();
+        this._feedback.init();
+        this._puluhan.init();
+        //this._cont.appendChild(this._banyakan.pageCont.elHtml);
+        this._menu.init();
+        this._menu.attach(this._cont);
+        //debug
+    }
+    debug() {
+        this._menu.puluhanClick();
+        this._puluhan.soalTerjawab = 10;
+        this._puluhan.kirimClick();
+        this._puluhan.feedbackOnClick();
+    }
+    getStackTrace() {
+        try {
+            throw new Error();
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    get menu() {
+        return this._menu;
     }
     static get inst() {
         return Game._inst;
@@ -40,7 +73,11 @@ export class Game {
     get banyakan() {
         return this._banyakan;
     }
-    get acak() {
-        return this._acak;
+    get cont() {
+        return this._cont;
+    }
+    get puluhan() {
+        return this._puluhan;
     }
 }
+new Game();

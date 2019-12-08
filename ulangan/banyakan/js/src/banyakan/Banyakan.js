@@ -1,26 +1,25 @@
 import { Angka } from "./Angka.js";
-import { Dom } from "../Dom.js";
 import { Acak } from "../Acak.js";
-import { Selesai } from "../Selesai.js";
 import { Template } from "../Template.js";
-import { Feedback, FeedbackEnum } from "../Feedback.js";
+import { FeedbackEnum } from "../Feedback.js";
 import { Page } from "./Page.js";
+import { Game } from "../../Game.js";
 export class Banyakan {
     constructor() {
+        // Banyakan._inst = this;
         this.angka1 = new Angka();
         this.angka2 = new Angka();
         this.acak = new Acak(10);
-        this.soalidx = 1;
+        this.soalidx = 0;
         this._template = null;
-        this._cont = null;
         this.selesai = null;
         this._nilai = 0;
         this._feedback = null;
         this._pageCont = null;
-        Banyakan._inst = this;
-        window.onload = () => {
-            this.init();
-        };
+        this._angkaSaja = false;
+        // window.onload = () => {
+        // 	this.init();
+        // }
         this._pageCont = new Page();
     }
     init() {
@@ -28,13 +27,10 @@ export class Banyakan {
         this.acak.max = 10;
         this.acak.acak();
         console.log('init');
-        this._cont = Dom.getEl(document.body, 'div.cont');
-        this.selesai = new Selesai();
-        this.selesai.init();
-        this.feedbackInit();
+        this.selesai = Game.inst.selesai;
+        this._feedback = Game.inst.feedback;
         this.angkaInit();
         this.resetSoal();
-        this._pageCont.attach(this._cont);
     }
     angkaInit() {
         this.angka1.view = this._template.angka1;
@@ -60,36 +56,38 @@ export class Banyakan {
             }
         };
     }
-    feedbackInit() {
-        this._feedback = new Feedback();
-        this._feedback.onClick = () => {
-            this.feedbackClick();
-        };
-        this._feedback.init();
-    }
     feedbackClick() {
         console.log('feed back click');
-        this.feedbackHide();
+        this._feedback.detach();
         this.soalidx++;
-        if (this.soalidx >= 11) {
-            console.log('feedback click ' + this.soalidx + '/nilai ' + this.nilai);
-            this.selesai.tampil(this._cont);
+        if (this.soalidx >= 10) {
+            console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
+            this.selesai.attach();
+            this.selesai.onClick = () => {
+                this.selesai.detach();
+                this.mulaiLagi();
+            };
+            this.selesai.nilai = this._nilai;
         }
         else {
             this.resetSoal();
         }
     }
     feedbackSalahShow() {
-        this.feedbackHide();
-        this._feedback.attach(this._cont);
+        this._feedback.attach(Game.inst.cont);
         this._feedback.label = "Jawaban Salah";
         this._feedback.type = FeedbackEnum.SALAH;
+        this._feedback.onClick = () => {
+            this.feedbackClick();
+        };
     }
     feedbackBenarShow() {
-        this.feedbackHide();
-        this._feedback.attach(this._cont);
+        this._feedback.attach(Game.inst.cont);
         this._feedback.label = 'Jawaban Benar';
         this._feedback.type = FeedbackEnum.BENAR;
+        this._feedback.onClick = () => {
+            this.feedbackClick();
+        };
     }
     ambilAngka(n) {
         while (true) {
@@ -109,28 +107,14 @@ export class Banyakan {
         this.angka2.angka = this.ambilAngka(this.angka1.angka);
         this.angka1.tulis();
         this.angka2.tulis();
-        // this._nilai = 0;
     }
-    feedbackHide() {
-        // console.log('feedback hide');
-        // this.feedbackBenar.style.display = 'none';
-        // this.feedbackSalah.style.display = 'none';
-        this._feedback.detach();
+    get angkaSaja() {
+        return this._angkaSaja;
     }
-    // constructor() {
-    // }
-    static get inst() {
-        return Banyakan._inst;
+    set angkaSaja(value) {
+        this._angkaSaja = value;
     }
-    get template() {
-        return this._template;
-    }
-    get nilai() {
-        return this._nilai;
-    }
-    get feedback() {
-        return this._feedback;
+    get pageCont() {
+        return this._pageCont;
     }
 }
-Banyakan._inst = null;
-new Banyakan();

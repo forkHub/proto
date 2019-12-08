@@ -15,7 +15,7 @@ export class Angka {
 
 	}
 
-	tulis(): void {
+	tulis(pakaiGambar: boolean = true): void {
 		let str: string = '';
 		let idx: number = 0;
 		let icon: string = '';
@@ -27,6 +27,10 @@ export class Angka {
 			str += icon;
 		}
 		str += "<br/>(" + this._angka + ")";
+
+		if (!pakaiGambar) {
+			str = this._angka + '';
+		}
 
 		this._view.innerHTML = str;
 	}

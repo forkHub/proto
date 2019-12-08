@@ -1,0 +1,23 @@
+div.puluhan {
+	font-size: xx-large;
+	text-align: center;
+}
+
+div.puluhan p {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+div.puluhan
+input#puluhan,
+div.puluhan
+input#satuan
+ {
+	border: 1px solid;
+    border-radius: 5px;
+    width: 72px;
+    padding: 4px;
+    text-align: center;
+    /* width: min-content; */
+    font-size: xx-large;
+}

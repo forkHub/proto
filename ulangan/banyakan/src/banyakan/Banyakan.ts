@@ -1,31 +1,31 @@
 import { Angka } from "./Angka.js";
-import { Dom } from "../Dom.js";
 import { Acak } from "../Acak.js";
 import { Selesai } from "../Selesai.js";
 import { Template } from "../Template.js";
 import { Feedback, FeedbackEnum } from "../Feedback.js";
 import { Page } from "./Page.js";
+import { Game } from "../../Game.js";
 
 export class Banyakan {
-	private static _inst: Banyakan = null;
 
 	private angka1: Angka = new Angka();
 	private angka2: Angka = new Angka();
 	private acak: Acak = new Acak(10);
-	private soalidx: number = 1;
+	private soalidx: number = 0;
+
 	private _template: Template = null;
-	private _cont: HTMLDivElement = null;
 	private selesai: Selesai = null;
 	private _nilai: number = 0;
 	private _feedback: Feedback = null;
 	private _pageCont: Page = null;
+	private _angkaSaja: boolean = false;
 
 	constructor() {
-		Banyakan._inst = this;
+		// Banyakan._inst = this;
 
-		window.onload = () => {
-			this.init();
-		}
+		// window.onload = () => {
+		// 	this.init();
+		// }
 
 		this._pageCont = new Page();
 	}
@@ -39,16 +39,12 @@ export class Banyakan {
 
 		console.log('init');
 
-		this._cont = Dom.getEl(document.body, 'div.cont') as HTMLDivElement;
-
-		this.selesai = new Selesai();
-		this.selesai.init();
-		this.feedbackInit();
+		this.selesai = Game.inst.selesai;
+		this._feedback = Game.inst.feedback;
 
 		this.angkaInit();
 
 		this.resetSoal();
-		this._pageCont.attach(this._cont);
 	}
 
 	angkaInit(): void {
@@ -79,21 +75,19 @@ export class Banyakan {
 		}
 	}
 
-	feedbackInit(): void {
-		this._feedback = new Feedback();
-		this._feedback.onClick = () => {
-			this.feedbackClick();
-		}
-		this._feedback.init();
-	}
-
 	feedbackClick(): void {
 		console.log('feed back click');
-		this.feedbackHide();
+		this._feedback.detach();
 		this.soalidx++;
-		if (this.soalidx >= 11) {
-			console.log('feedback click ' + this.soalidx + '/nilai ' + this.nilai);
-			this.selesai.tampil(this._cont);
+
+		if (this.soalidx >= 10) {
+			console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
+			this.selesai.attach();
+			this.selesai.onClick = () => {
+				this.selesai.detach();
+				this.mulaiLagi();
+			}
+			this.selesai.nilai = this._nilai;
 		}
 		else {
 			this.resetSoal();
@@ -101,17 +95,21 @@ export class Banyakan {
 	}
 
 	feedbackSalahShow(): void {
-		this.feedbackHide();
-		this._feedback.attach(this._cont);
+		this._feedback.attach(Game.inst.cont);
 		this._feedback.label = "Jawaban Salah";
 		this._feedback.type = FeedbackEnum.SALAH;
+		this._feedback.onClick = () => {
+			this.feedbackClick();
+		}
 	}
 
 	feedbackBenarShow(): void {
-		this.feedbackHide();
-		this._feedback.attach(this._cont);
+		this._feedback.attach(Game.inst.cont);
 		this._feedback.label = 'Jawaban Benar';
 		this._feedback.type = FeedbackEnum.BENAR;
+		this._feedback.onClick = () => {
+			this.feedbackClick();
+		}
 	}
 
 	ambilAngka(n: number): number {
@@ -134,36 +132,16 @@ export class Banyakan {
 
 		this.angka1.tulis();
 		this.angka2.tulis();
-		// this._nilai = 0;
 	}
 
-	feedbackHide(): void {
-		// console.log('feedback hide');
-		// this.feedbackBenar.style.display = 'none';
-		// this.feedbackSalah.style.display = 'none';
-		this._feedback.detach();
+	public get angkaSaja(): boolean {
+		return this._angkaSaja;
 	}
-
-	// constructor() {
-	// }
-
-	public static get inst(): Banyakan {
-		return Banyakan._inst;
+	public set angkaSaja(value: boolean) {
+		this._angkaSaja = value;
 	}
-
-	public get template(): Template {
-		return this._template;
+	public get pageCont(): Page {
+		return this._pageCont;
 	}
-
-	public get nilai(): number {
-		return this._nilai;
-	}
-
-	public get feedback(): Feedback {
-		return this._feedback;
-	}
-
 
 }
-
-new Banyakan();
