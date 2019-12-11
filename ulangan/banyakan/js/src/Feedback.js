@@ -23,9 +23,9 @@ export class Feedback extends BaseComponent {
     }
     set onClick(value) {
         this._onClick = value;
-        console.log('feedbacak set on click ');
+        // console.log('feedbacak set on click ');
         this.button.onclick = () => {
-            console.log('feedback on click');
+            // console.log('feedback on click');
             this.detach();
             this._onClick();
         };

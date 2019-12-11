@@ -2,28 +2,33 @@ import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { Template } from "../Template.js";
 import { FeedbackEnum } from "../Feedback.js";
-import { Page } from "./Page.js";
+// import { Page } from "./Page.js";
 import { Game } from "../../Game.js";
-export class Banyakan {
+import { BaseComponent } from "../BaseComponent.js";
+export class Banyakan extends BaseComponent {
     constructor() {
-        // Banyakan._inst = this;
+        super();
         this.angka1 = new Angka();
         this.angka2 = new Angka();
+        this.angka3 = new Angka();
         this.acak = new Acak(10);
         this.soalidx = 0;
-        this._template = null;
+        this._templateManager = null;
         this.selesai = null;
         this._nilai = 0;
         this._feedback = null;
-        this._pageCont = null;
         this._angkaSaja = false;
-        // window.onload = () => {
-        // 	this.init();
-        // }
-        this._pageCont = new Page();
+        this._jmlSoal = 2;
+        this._template =
+            `<div class='banyakan'>
+				<h1 class='perintah'>Mana Yang Lebih Banyak?</h1>
+				<div class='cont'></div>
+			</div>`;
+        this.build();
+        this._cont = this.getEl('div.cont');
     }
     init() {
-        this._template = new Template();
+        this._templateManager = new Template();
         this.acak.max = 10;
         this.acak.acak();
         console.log('init');
@@ -33,39 +38,77 @@ export class Banyakan {
         this.resetSoal();
     }
     angkaInit() {
-        this.angka1.view = this._template.angka1;
-        this._pageCont.cont.appendChild(this.angka1.view);
-        this.angka2.view = this._template.angka2;
-        this._pageCont.cont.appendChild(this.angka2.view);
+        this.angka1.view = this._templateManager.angka1;
+        this._cont.appendChild(this.angka1.view);
+        this.angka2.view = this._templateManager.angka2;
+        this._cont.appendChild(this.angka2.view);
         this.angka1.view.onclick = () => {
-            if (this.angka1.angka > this.angka2.angka) {
-                this._nilai++;
-                this.feedbackBenarShow();
-            }
-            else {
-                this.feedbackSalahShow();
-            }
+            this.angka1Click();
         };
         this.angka2.view.onclick = () => {
-            if (this.angka2.angka > this.angka1.angka) {
-                this._nilai++;
-                this.feedbackBenarShow();
-            }
-            else {
-                this.feedbackSalahShow();
-            }
+            this.angka2Click();
+        };
+        this.angka3Init();
+    }
+    angka3Init() {
+        // if (this._jmlSoal != 3) return;
+        this.angka3.view = this._templateManager.angka3;
+        this.angka3.angka = -1;
+        this.angka3.view.onclick = () => {
+            this.angka3Click();
         };
     }
+    palingBesar(n) {
+        if (this.angka1.angka != n && this.angka1.angka < n)
+            return false;
+        if (this.angka2.angka != n && this.angka2.angka < n)
+            return false;
+        if (this.angka3.angka != n && this.angka3.angka < n)
+            return false;
+        return true;
+    }
+    angka1Click() {
+        if ((this.angka1.angka > this.angka2.angka) && (this.angka1.angka > this.angka3.angka)) {
+            this._nilai++;
+            this.feedbackBenarShow();
+        }
+        else {
+            this.feedbackSalahShow();
+        }
+    }
+    angka2Click() {
+        if (this.angka2.angka > this.angka1.angka && (this.angka2.angka > this.angka3.angka)) {
+            this._nilai++;
+            this.feedbackBenarShow();
+        }
+        else {
+            this.feedbackSalahShow();
+        }
+    }
+    angka3Click() {
+        if (this.angka3.angka > this.angka1.angka && (this.angka3.angka > this.angka2.angka)) {
+            this._nilai++;
+            this.feedbackBenarShow();
+        }
+        else {
+            this.feedbackSalahShow();
+        }
+    }
     feedbackClick() {
-        console.log('feed back click');
+        // console.log('feed back click');
         this._feedback.detach();
         this.soalidx++;
         if (this.soalidx >= 10) {
-            console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
+            // console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
             this.selesai.attach();
             this.selesai.onClick = () => {
                 this.selesai.detach();
                 this.mulaiLagi();
+            };
+            this.selesai.onMenuClick = () => {
+                this.detach();
+                // this.selesai.detach();
+                Game.inst.menu.attach(Game.inst.cont);
             };
             this.selesai.nilai = this._nilai;
         }
@@ -89,11 +132,12 @@ export class Banyakan {
             this.feedbackClick();
         };
     }
-    ambilAngka(n) {
+    ambilAngka(n, n2) {
         while (true) {
             let res = this.acak.get();
-            if ((res + 1) != n)
-                return res + 1;
+            res++;
+            if ((res != n) && (res != n2))
+                return res;
         }
     }
     mulaiLagi() {
@@ -103,10 +147,17 @@ export class Banyakan {
     }
     resetSoal() {
         this.acak.acak();
-        this.angka1.angka = this.ambilAngka(-1);
-        this.angka2.angka = this.ambilAngka(this.angka1.angka);
-        this.angka1.tulis();
-        this.angka2.tulis();
+        this.angka1.angka = this.ambilAngka(-1, 1);
+        this.angka2.angka = this.ambilAngka(this.angka1.angka, 1);
+        if (this._jmlSoal == 3) {
+            this.angka3.angka = this.ambilAngka(this.angka1.angka, this.angka2.angka);
+        }
+        else {
+            this.angka3.angka = -1;
+        }
+        this.angka1.tulis(this._angkaSaja);
+        this.angka2.tulis(this._angkaSaja);
+        this.angka3.tulis(this._angkaSaja);
     }
     get angkaSaja() {
         return this._angkaSaja;
@@ -114,7 +165,16 @@ export class Banyakan {
     set angkaSaja(value) {
         this._angkaSaja = value;
     }
-    get pageCont() {
-        return this._pageCont;
+    get jmlSoal() {
+        return this._jmlSoal;
+    }
+    set jmlSoal(value) {
+        this._jmlSoal = value;
+        if (this.angka3.view.parentElement) {
+            this.angka3.view.parentElement.removeChild(this.angka3.view);
+        }
+        if (this._jmlSoal == 3) {
+            this._cont.appendChild(this.angka3.view);
+        }
     }
 }

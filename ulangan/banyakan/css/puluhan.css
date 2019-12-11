@@ -1,10 +1,10 @@
 div.puluhan {
-	font-size: xx-large;
+	font-size: large;
 	text-align: center;
 }
 
 div.puluhan p {
-	font-size: x-large;
+	font-size: large;
 	font-weight: bold;
 }
 
@@ -15,9 +15,9 @@ input#satuan
  {
 	border: 1px solid;
     border-radius: 5px;
-    width: 72px;
-    padding: 4px;
+    width: 42px;
+    padding: 2px;
     text-align: center;
     /* width: min-content; */
-    font-size: xx-large;
+    font-size: large;
 }

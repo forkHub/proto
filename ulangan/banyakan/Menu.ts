@@ -33,18 +33,23 @@ export class Menu extends BaseComponent {
 
 		this.banyakanTbl.label = 'Membandingkan';
 		this.banyakanTbl.attach(this.cont);
+		this.banyakanTbl.onClick = () => {
+			this.banyakanClick();
+		}
 	}
 
 	puluhanClick(): void {
 		this.detach();
 		Game.inst.puluhan.attach(Game.inst.cont);
+		Game.inst.puluhan.mulaiLagi();
 	}
 
-	banyakanMulai(): void {
+	banyakanClick(): void {
+		console.log('banyakan click');
 		this.detach();
-		this.banyakanTbl.onClick = () => {
-			Game.inst.banyakan.pageCont.attach(Game.inst.cont);
-		}
-
+		Game.inst.banyakan.jmlSoal = 3;
+		Game.inst.banyakan.angkaSaja = true;
+		Game.inst.banyakan.attach(Game.inst.cont);
+		Game.inst.banyakan.mulaiLagi();
 	}
 }

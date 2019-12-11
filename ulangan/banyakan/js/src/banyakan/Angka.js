@@ -12,7 +12,7 @@ export class Angka {
             "&#127829", "&#127830"
         ];
     }
-    tulis(pakaiGambar = true) {
+    tulis(angkaSaja) {
         let str = '';
         let idx = 0;
         let icon = '';
@@ -22,7 +22,7 @@ export class Angka {
             str += icon;
         }
         str += "<br/>(" + this._angka + ")";
-        if (!pakaiGambar) {
+        if (angkaSaja) {
             str = this._angka + '';
         }
         this._view.innerHTML = str;

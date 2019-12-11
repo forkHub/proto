@@ -15,7 +15,7 @@ export class Angka {
 
 	}
 
-	tulis(pakaiGambar: boolean = true): void {
+	tulis(angkaSaja: boolean): void {
 		let str: string = '';
 		let idx: number = 0;
 		let icon: string = '';
@@ -28,7 +28,7 @@ export class Angka {
 		}
 		str += "<br/>(" + this._angka + ")";
 
-		if (!pakaiGambar) {
+		if (angkaSaja) {
 			str = this._angka + '';
 		}
 

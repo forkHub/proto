@@ -12,6 +12,9 @@ export class Template {
     get angka2() {
         return this.getEl('div.angka.dua');
     }
+    get angka3() {
+        return this.getEl('div.angka.tiga');
+    }
     get selesai() {
         return this.getEl('div.selesai');
     }

@@ -87,7 +87,7 @@ export class Puluhan extends BaseComponent {
 
 	selesaiMulaiLagiClick(): void {
 		this._soalTerjawab = 0;
-		console.log('mulai lagi click');
+		// console.log('mulai lagi click');
 		this.resetSoal();
 	}
 
@@ -97,10 +97,10 @@ export class Puluhan extends BaseComponent {
 	}
 
 	kirimClick(): void {
-		console.log('kirim klik');
+		// console.log('kirim klik');
 
 		if (this.checkBenar()) {
-			console.log('benar');
+			// console.log('benar');
 			this.jmlBenar++;
 			this._soalTerjawab++;
 			Game.inst.feedback.attach(Game.inst.cont);
@@ -111,7 +111,7 @@ export class Puluhan extends BaseComponent {
 			}
 		}
 		else {
-			console.log('salah');
+			// console.log('salah');
 			this._soalTerjawab++;
 
 			Game.inst.feedback.attach(Game.inst.cont);
@@ -135,8 +135,8 @@ export class Puluhan extends BaseComponent {
 		this.puluhan = Math.floor(this.jumlah / 10);
 		this.satuan = this.jumlah % 10;
 
-		console.log('ambil angka 2');
-		console.log('puluhan ' + this.puluhan + '/satuan ' + this.satuan + '/jumlah ' + this.jumlah);
+		// console.log('ambil angka 2');
+		// console.log('puluhan ' + this.puluhan + '/satuan ' + this.satuan + '/jumlah ' + this.jumlah);
 	}
 
 	// ambilAngka(): void {

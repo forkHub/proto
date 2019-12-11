@@ -17,6 +17,10 @@ export class Template {
 		return this.getEl('div.angka.dua') as HTMLDivElement;
 	}
 
+	get angka3(): HTMLDivElement {
+		return this.getEl('div.angka.tiga') as HTMLDivElement;
+	}
+
 	get selesai(): HTMLDivElement {
 		return this.getEl('div.selesai') as HTMLDivElement;
 	}

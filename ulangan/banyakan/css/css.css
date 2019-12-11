@@ -4,7 +4,8 @@ body, div {
 }
 
 body {
-	padding: 16px;
+	padding: 8px;
+	width: 360px;
 	max-width: 640px;
 	margin: 0px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -32,7 +33,7 @@ button.normal {
     color: white;
     border: 1px solid green;
 	box-shadow: 0px 2px 0px 0px rgb(2, 138, 43);
-	font-size: x-large;
+	font-size: large;
 	margin: auto;
 	margin-bottom: 16px;
 }
@@ -90,7 +91,7 @@ div.cont
 p {
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: center;
-	font-size: xx-large;
+	font-size: x-large;
 }
 
 div.cont
