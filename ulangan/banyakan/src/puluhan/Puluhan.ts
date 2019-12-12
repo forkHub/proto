@@ -51,9 +51,13 @@ export class Puluhan extends BaseComponent {
 
 		this.kirimBtn = this.getEl('button.kirim') as HTMLButtonElement;
 
-		console.log(this.jumlahEl);
-		console.log(this.puluhanEl);
-		console.log(this.satuanEl);
+		// console.log(this.jumlahEl);
+		// console.log(this.puluhanEl);
+		// console.log(this.satuanEl);
+
+		this.puluhanEl.tabIndex = 0;
+		this.puluhanEl.autofocus = true;
+		this.satuanEl.tabIndex = 1;
 
 		this.resetSoal();
 
@@ -151,8 +155,9 @@ export class Puluhan extends BaseComponent {
 	resetSoal() {
 		this.ambilAngka2();
 		this.jumlahEl.innerHTML = this.jumlah + '';
-		this.satuanEl.value = '0';
-		this.puluhanEl.value = '0';
+		this.satuanEl.value = '';
+		this.puluhanEl.value = '';
+		this.puluhanEl.focus();
 	}
 
 	checkBenar(): boolean {
