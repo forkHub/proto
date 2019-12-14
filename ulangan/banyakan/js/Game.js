@@ -1,9 +1,9 @@
-import { Dom } from "./src/Dom.js";
-import { Feedback } from "./src/Feedback.js";
-import { Selesai } from "./src/Selesai.js";
-import { Template } from "./src/Template.js";
-import { Banyakan } from "./src/banyakan/Banyakan.js";
-import { Puluhan } from "./src/puluhan/Puluhan.js";
+import { Dom } from "./Dom.js";
+import { Feedback } from "./Feedback.js";
+import { Selesai } from "./Selesai.js";
+import { Template } from "./Template.js";
+import { Banyakan } from "./banyakan/Banyakan.js";
+import { Puluhan } from "./puluhan/Puluhan.js";
 import { Menu } from "./Menu.js";
 export class Game {
     constructor() {
@@ -39,10 +39,6 @@ export class Game {
         //debug
     }
     debug() {
-        this._menu.puluhanClick();
-        this._puluhan.soalTerjawab = 10;
-        this._puluhan.kirimClick();
-        this._puluhan.feedbackOnClick();
     }
     getStackTrace() {
         try {

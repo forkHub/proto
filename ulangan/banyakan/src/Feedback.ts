@@ -1,6 +1,6 @@
 import { BaseComponent } from "./BaseComponent.js";
 // import { Banyakan } from "./banyakan/Banyakan.js";
-import { Game } from "../Game.js";
+import { Game } from "./Game.js";
 
 export class Feedback extends BaseComponent {
 

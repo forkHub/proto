@@ -1,3 +1,11 @@
 ada bar progress
 ada tombol kembali ke main menu saat main
-ada menu soal baru
+
+membandingkan dengan simbol
+mengurutkan
+
+game maze mengurutkan 
+click pada angka 
+karakter bergerak mengikuti angka di klik
+
+lomba mobil

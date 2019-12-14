@@ -1,4 +1,4 @@
-import { BaseComponent } from "./src/BaseComponent.js";
+import { BaseComponent } from "./BaseComponent.js";
 export class TombolMenu extends BaseComponent {
     constructor() {
         super();
@@ -6,8 +6,8 @@ export class TombolMenu extends BaseComponent {
         this.build();
     }
     set onClick(value) {
-        this._elHtml.onclick = () => {
-            value();
+        this._elHtml.onclick = (e) => {
+            value(e);
         };
     }
     set label(value) {

@@ -1,4 +1,4 @@
-import { BaseComponent } from "./src/BaseComponent.js";
+import { BaseComponent } from "./BaseComponent.js";
 
 export class TombolMenu extends BaseComponent {
 	constructor() {
@@ -8,8 +8,8 @@ export class TombolMenu extends BaseComponent {
 	}
 
 	public set onClick(value: Function) {
-		this._elHtml.onclick = () => {
-			value();
+		this._elHtml.onclick = (e: MouseEvent) => {
+			value(e);
 		}
 	}
 

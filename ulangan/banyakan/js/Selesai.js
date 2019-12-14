@@ -1,34 +1,34 @@
-import { Banyakan } from "./banyakan/Banyakan.js";
-import { Dom } from "./Dom.js";
-export class Selesai {
+import { Game } from "./Game.js";
+import { BaseComponent } from "./BaseComponent.js";
+export class Selesai extends BaseComponent {
     constructor() {
-        this._view = null;
+        super();
         this._tombol = null;
+        this._menuTbl = null;
         this.nilaiP = null;
     }
-    tampil(cont) {
-        cont.appendChild(this._view);
-        this.nilaiP.innerHTML = Banyakan.inst.nilai + '';
-    }
     init() {
-        this._view = Banyakan.inst.template.selesai;
-        this._tombol = Dom.getEl(this._view, 'button');
+        this._elHtml = Game.inst.template.selesai;
+        this._tombol = this.getEl('button.mulai');
+        this._menuTbl = this.getEl('button.menu');
+        this.nilaiP = this.getEl('p.nilai');
+    }
+    attach() {
+        super.attach(Game.inst.cont);
+    }
+    set onClick(value) {
         this._tombol.onclick = () => {
-            this._view.parentElement.removeChild(this._view);
-            Banyakan.inst.mulaiLagi();
+            this.detach();
+            value();
         };
-        this.nilaiP = Dom.getEl(this._view, 'p.nilai');
     }
-    get view() {
-        return this._view;
+    set onMenuClick(value) {
+        this._menuTbl.onclick = () => {
+            this.detach();
+            value();
+        };
     }
-    set view(value) {
-        this._view = value;
-    }
-    get tombol() {
-        return this._tombol;
-    }
-    set tombol(value) {
-        this._tombol = value;
+    set nilai(value) {
+        this.nilaiP.innerHTML = value + '';
     }
 }

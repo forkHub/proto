@@ -3,9 +3,9 @@ import { Acak } from "../Acak.js";
 import { Selesai } from "../Selesai.js";
 import { Template } from "../Template.js";
 import { Feedback, FeedbackEnum } from "../Feedback.js";
-// import { Page } from "./Page.js";
-import { Game } from "../../Game.js";
+import { Game } from "../Game.js";
 import { BaseComponent } from "../BaseComponent.js";
+import { Bar } from "../Bar.js";
 
 export class Banyakan extends BaseComponent {
 
@@ -15,6 +15,7 @@ export class Banyakan extends BaseComponent {
 	private acak: Acak = new Acak(10);
 	private soalidx: number = 0;
 	private _cont: HTMLDivElement;
+	private bar: Bar = null;
 
 	private _templateManager: Template = null;
 	private selesai: Selesai = null;
@@ -28,6 +29,7 @@ export class Banyakan extends BaseComponent {
 
 		this._template =
 			`<div class='banyakan'>
+				<div class='bar-cont'></div>
 				<h1 class='perintah'>Mana Yang Lebih Banyak?</h1>
 				<div class='cont'></div>
 			</div>`;
@@ -35,11 +37,18 @@ export class Banyakan extends BaseComponent {
 		this.build();
 
 		this._cont = this.getEl('div.cont') as HTMLDivElement;
+		this.bar = new Bar();
+		this.bar.attach(this.getEl('div.bar-cont'));
 	}
 
 
 	init(): void {
 		this._templateManager = new Template();
+
+		this.bar.onClick = () => {
+			this.detach();
+			Game.inst.menu.attach(Game.inst.cont);
+		}
 
 		this.acak.max = 10;
 		this.acak.acak();
@@ -50,7 +59,6 @@ export class Banyakan extends BaseComponent {
 		this._feedback = Game.inst.feedback;
 
 		this.angkaInit();
-
 		this.resetSoal();
 	}
 
@@ -126,6 +134,7 @@ export class Banyakan extends BaseComponent {
 		// console.log('feed back click');
 		this._feedback.detach();
 		this.soalidx++;
+		this.bar.persen = (this.soalidx / 10) * 100;
 
 		if (this.soalidx >= 10) {
 			// console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);

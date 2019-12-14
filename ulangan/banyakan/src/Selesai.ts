@@ -1,4 +1,4 @@
-import { Game } from "../Game.js";
+import { Game } from "./Game.js";
 import { BaseComponent } from "./BaseComponent.js";
 
 export class Selesai extends BaseComponent {

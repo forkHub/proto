@@ -1,5 +1,5 @@
 import { BaseComponent } from "../BaseComponent.js";
-import { Game } from "../../Game.js";
+import { Game } from "../Game.js";
 import { FeedbackEnum } from "../Feedback.js";
 
 export class Puluhan extends BaseComponent {
@@ -138,19 +138,7 @@ export class Puluhan extends BaseComponent {
 		this.jumlah = Math.floor(Math.random() * 89) + 10;
 		this.puluhan = Math.floor(this.jumlah / 10);
 		this.satuan = this.jumlah % 10;
-
-		// console.log('ambil angka 2');
-		// console.log('puluhan ' + this.puluhan + '/satuan ' + this.satuan + '/jumlah ' + this.jumlah);
 	}
-
-	// ambilAngka(): void {
-	// 	this.puluhan = (Math.floor(Math.random() * (this.max - 1)) + 1) * 10;
-	// 	this.satuan = Math.floor(Math.random() * this.max);
-	// 	this.jumlah = this.puluhan + this.satuan;
-
-	// 	console.log('reset');
-	// 	console.log('puluhan ' + this.puluhan + '/satuan ' + this.satuan + '/jumlah ' + this.jumlah);
-	// }
 
 	resetSoal() {
 		this.ambilAngka2();
@@ -162,8 +150,8 @@ export class Puluhan extends BaseComponent {
 
 	checkBenar(): boolean {
 
-		if (this.puluhanEl.value == '') return false;
-		if (this.satuanEl.value == '') return false;
+		if (this.puluhanEl.value == '') this.puluhanEl.value = '0';
+		if (this.satuanEl.value == '') this.satuanEl.value = '0';
 
 		if (parseInt(this.puluhanEl.value) != this.puluhan) return false;
 		if (parseInt(this.satuanEl.value) != this.satuan) return false;

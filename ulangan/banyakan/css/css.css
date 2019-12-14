@@ -5,7 +5,7 @@ body, div {
 
 body {
 	padding: 8px;
-	width: 360px;
+	/* width: 360px; */
 	max-width: 640px;
 	margin: 0px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -64,7 +64,7 @@ p.nilai {
 /*==========*/
 div.cont 
 div.feedback {
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	top:0px;
@@ -117,9 +117,4 @@ div.angka {
 div.banyakan >
 h1 {
 	text-align: center;
-}
-
-/*menu */
-button.menu {
-	display: block;
 }
