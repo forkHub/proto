@@ -5,6 +5,7 @@ import { Template } from "./Template.js";
 import { Banyakan } from "./banyakan/Banyakan.js";
 import { Puluhan } from "./puluhan/Puluhan.js";
 import { Menu } from "./Menu.js";
+import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
 export class Game {
     constructor() {
         this._dom = null;
@@ -15,6 +16,7 @@ export class Game {
         this._cont = null;
         this._puluhan = null;
         this._menu = null;
+        this._simbol = null;
         Game._inst = this;
         this._template = new Template();
         this._dom = new Dom();
@@ -23,6 +25,7 @@ export class Game {
         this._banyakan = new Banyakan();
         this._puluhan = new Puluhan();
         this._menu = new Menu();
+        this._simbol = new BandingkanTanda();
         window.onload = () => {
             this.init();
         };
@@ -33,10 +36,10 @@ export class Game {
         this._selesai.init();
         this._feedback.init();
         this._puluhan.init();
-        //this._cont.appendChild(this._banyakan.pageCont.elHtml);
+        this._simbol.init();
         this._menu.init();
         this._menu.attach(this._cont);
-        //debug
+        this.debug();
     }
     debug() {
     }
@@ -74,6 +77,12 @@ export class Game {
     }
     get puluhan() {
         return this._puluhan;
+    }
+    get simbol() {
+        return this._simbol;
+    }
+    set simbol(value) {
+        this._simbol = value;
     }
 }
 new Game();

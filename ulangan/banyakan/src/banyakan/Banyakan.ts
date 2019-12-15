@@ -186,6 +186,7 @@ export class Banyakan extends BaseComponent {
 		this.resetSoal();
 		this._nilai = 0;
 		this.soalidx = 0;
+		this.bar.persen = 0;
 	}
 
 	resetSoal(): void {
@@ -203,6 +204,7 @@ export class Banyakan extends BaseComponent {
 		this.angka1.tulis(this._angkaSaja);
 		this.angka2.tulis(this._angkaSaja);
 		this.angka3.tulis(this._angkaSaja);
+		// this.bar.persen = 0;
 	}
 
 	public get angkaSaja(): boolean {

@@ -34,8 +34,18 @@ export class Menu extends BaseComponent {
                 par.appendChild(text);
                 li.appendChild(par);
                 let ul = document.createElement('ul');
+                ul.style.display = 'none';
                 li.appendChild(ul);
                 li.classList.add('label');
+                li.onclick = (e) => {
+                    e.stopPropagation();
+                    if (ul.style.display == 'none') {
+                        ul.style.display = 'block';
+                    }
+                    else {
+                        ul.style.display = 'none';
+                    }
+                };
                 this.renderChild(child.members, ul);
             }
             else {
@@ -99,7 +109,7 @@ export const MenuData = {
                     ]
                 },
                 {
-                    label: 'Tanpa Gambar',
+                    label: 'Dengan Angka',
                     members: [
                         {
                             label: 'Dua Angka',
@@ -129,6 +139,17 @@ export const MenuData = {
                         }
                     ]
                 }
+                // {
+                // 	label: 'Dengan Simbol',
+                // 	members: [],
+                // 	onclick: (e: MouseEvent) => {
+                // 		console.log('banyakan click gambar 3');
+                // 		e.stopPropagation();
+                // 		Game.inst.menu.detach();
+                // 		Game.inst.simbol.attach(Game.inst.cont);
+                // 		Game.inst.simbol.mulai();
+                // 	}
+                // }
             ]
         },
         puluhan

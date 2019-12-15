@@ -5,6 +5,7 @@ import { Template } from "./Template.js";
 import { Banyakan } from "./banyakan/Banyakan.js";
 import { Puluhan } from "./puluhan/Puluhan.js";
 import { Menu } from "./Menu.js";
+import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
 
 
 export class Game {
@@ -16,6 +17,7 @@ export class Game {
 	private _cont: HTMLDivElement = null;
 	private _puluhan: Puluhan = null;
 	private _menu: Menu = null;
+	private _simbol: BandingkanTanda = null;
 
 	private static _inst: Game;
 
@@ -29,6 +31,7 @@ export class Game {
 		this._banyakan = new Banyakan();
 		this._puluhan = new Puluhan();
 		this._menu = new Menu();
+		this._simbol = new BandingkanTanda();
 
 		window.onload = () => {
 			this.init();
@@ -41,16 +44,16 @@ export class Game {
 		this._selesai.init();
 		this._feedback.init();
 		this._puluhan.init();
-		//this._cont.appendChild(this._banyakan.pageCont.elHtml);
+		this._simbol.init();
 
 		this._menu.init();
 		this._menu.attach(this._cont);
 
-		//debug
-
+		this.debug();
 	}
 
 	debug() {
+
 	}
 
 	getStackTrace(): void {
@@ -88,6 +91,12 @@ export class Game {
 	}
 	public get puluhan(): Puluhan {
 		return this._puluhan;
+	}
+	public get simbol(): BandingkanTanda {
+		return this._simbol;
+	}
+	public set simbol(value: BandingkanTanda) {
+		this._simbol = value;
 	}
 }
 
