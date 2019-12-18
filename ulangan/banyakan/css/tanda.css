@@ -1,0 +1,23 @@
+div.banyakan-tanda {
+	width: 100%;
+}
+
+div.banyakan-tanda
+div.soal {
+	display: flex;
+}
+
+div.banyakan-tanda
+div.angka.kiri,
+div.banyakan-tanda
+div.tanda,
+div.banyakan-tanda 
+div.angka.kanan
+{
+	flex-grow: 1;
+	border: 1px solid;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 8px;
+    text-align: center;
+    border-radius: 12px;}

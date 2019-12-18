@@ -75,6 +75,8 @@ export class Menu extends BaseComponent {
 			ulParent.appendChild(li);
 		}
 	}
+
+
 }
 
 export interface ITombol {
@@ -160,19 +162,18 @@ export const MenuData: ITombol = {
 							members: []
 						}
 					]
+				},
+				{
+					label: 'Dengan Simbol',
+					members: [],
+					onclick: (e: MouseEvent) => {
+						console.log('banyakan click gambar 3');
+						e.stopPropagation();
+						Game.inst.menu.detach();
+						Game.inst.simbol.attach(Game.inst.cont);
+						Game.inst.simbol.mulai();
+					}
 				}
-				// {
-				// 	label: 'Dengan Simbol',
-				// 	members: [],
-				// 	onclick: (e: MouseEvent) => {
-				// 		console.log('banyakan click gambar 3');
-				// 		e.stopPropagation();
-				// 		Game.inst.menu.detach();
-				// 		Game.inst.simbol.attach(Game.inst.cont);
-				// 		Game.inst.simbol.mulai();
-				// 	}
-				// }
-
 			]
 		},
 		puluhan
