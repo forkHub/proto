@@ -96,6 +96,18 @@ const puluhan: ITombol = {
 	members: []
 }
 
+export const click = {
+	membandingkan: {
+		simbol: (e: MouseEvent) => {
+			console.log('banyakan click gambar 3');
+			e.stopPropagation();
+			Game.inst.menu.detach();
+			Game.inst.simbol.attach(Game.inst.cont);
+			Game.inst.simbol.mulai();
+		}
+	}
+}
+
 export const MenuData: ITombol = {
 	members: [
 		{
@@ -166,13 +178,7 @@ export const MenuData: ITombol = {
 				{
 					label: 'Dengan Simbol',
 					members: [],
-					onclick: (e: MouseEvent) => {
-						console.log('banyakan click gambar 3');
-						e.stopPropagation();
-						Game.inst.menu.detach();
-						Game.inst.simbol.attach(Game.inst.cont);
-						Game.inst.simbol.mulai();
-					}
+					onclick: click.membandingkan.simbol
 				}
 			]
 		},

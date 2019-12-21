@@ -28,6 +28,9 @@ export class BandingkanTanda extends BaseComponent {
 		this._template = `
 		<div class='banyakan-tanda'>
 			<div class='bar-cont'></div>
+			<p class='judul'>Pilih Tanda Yang Sesuai</judul>
+			<br/>
+			<br/>
 			<div class='soal'>
 				<div class='angka kiri'>
 

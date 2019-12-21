@@ -72,6 +72,17 @@ const puluhan = {
     },
     members: []
 };
+export const click = {
+    membandingkan: {
+        simbol: (e) => {
+            console.log('banyakan click gambar 3');
+            e.stopPropagation();
+            Game.inst.menu.detach();
+            Game.inst.simbol.attach(Game.inst.cont);
+            Game.inst.simbol.mulai();
+        }
+    }
+};
 export const MenuData = {
     members: [
         {
@@ -142,13 +153,7 @@ export const MenuData = {
                 {
                     label: 'Dengan Simbol',
                     members: [],
-                    onclick: (e) => {
-                        console.log('banyakan click gambar 3');
-                        e.stopPropagation();
-                        Game.inst.menu.detach();
-                        Game.inst.simbol.attach(Game.inst.cont);
-                        Game.inst.simbol.mulai();
-                    }
+                    onclick: click.membandingkan.simbol
                 }
             ]
         },

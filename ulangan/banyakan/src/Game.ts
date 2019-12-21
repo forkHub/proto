@@ -6,6 +6,7 @@ import { Banyakan } from "./banyakan/Banyakan.js";
 import { Puluhan } from "./puluhan/Puluhan.js";
 import { Menu } from "./Menu.js";
 import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
+import { Debug } from "./Debug.js";
 
 
 export class Game {
@@ -49,11 +50,11 @@ export class Game {
 		this._menu.init();
 		this._menu.attach(this._cont);
 
-		this.debug();
+		// this.debug();
 	}
 
 	debug() {
-
+		Debug.tanda();
 	}
 
 	getStackTrace(): void {

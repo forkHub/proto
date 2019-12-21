@@ -3,8 +3,30 @@ div.banyakan-tanda {
 }
 
 div.banyakan-tanda
+p.judul {
+	text-align: center;
+	font-size: x-large;
+	font-weight: bold;
+}
+
+div.banyakan-tanda
 div.soal {
 	display: flex;
+}
+
+div.banyakan-tanda div.jawaban {
+	margin-top: 32px;
+    display: flex;
+}
+
+div.banyakan-tanda div.jawaban button {
+    padding: 12px;
+    flex-grow: 1;
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: x-large;
 }
 
 div.banyakan-tanda
@@ -20,4 +42,6 @@ div.angka.kanan
     margin-right: 8px;
     padding: 8px;
     text-align: center;
-    border-radius: 12px;}
+	border-radius: 12px;
+	font-size: x-large;
+}
