@@ -65,6 +65,7 @@ export class BandingkanTanda extends BaseComponent {
     }
     mulai() {
         this.restart();
+        this.soalIdx = 0;
     }
     restart() {
         this.angkas[0] = this.angkaAcak.get();

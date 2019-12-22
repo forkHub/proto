@@ -83,6 +83,7 @@ export class BandingkanTanda extends BaseComponent {
 
 	mulai(): void {
 		this.restart();
+		this.soalIdx = 0;
 	}
 
 	restart(): void {
