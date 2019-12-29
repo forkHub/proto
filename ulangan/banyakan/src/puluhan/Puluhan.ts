@@ -82,9 +82,9 @@ export class Puluhan extends BaseComponent {
 		this.bar.persen = Math.floor((this._soalTerjawab / 10) * 100);
 
 		if (this._soalTerjawab >= this.soalTotal) {
-			Game.inst.selesai.attach();
+			Game.inst.selesai.attach(Game.inst.cont);
 			Game.inst.selesai.nilai = this.jmlBenar;
-			Game.inst.selesai.onClick = () => {
+			Game.inst.selesai.onMulaiClick = () => {
 				// this.detach();
 				this.selesaiMulaiLagiClick();
 			}

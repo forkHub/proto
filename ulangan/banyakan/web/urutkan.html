@@ -1,0 +1,52 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='./css/css.css' rel='stylesheet'>
+	<link href='./css/urutan.css' rel='stylesheet'>
+	<link href='./css/bar.css' rel='stylesheet'>
+	<!-- <script type='module' src='./js/urutkan/Urutkan.js'></script> -->
+
+	<link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
+	<link rel="manifest" href="./site.webmanifest">
+</head>
+
+<body>
+	<div class='nomodule' style='display:none'>
+		Maaf sepertinya browser Anda tidak bisa menjalankan applikasi ini.
+		Silahkan mengupgrade browser Anda
+	</div>
+
+	<div class='cont'>
+		<div class='bar-cont'></div>
+		<p>Urutkan dari yang terkecil</p>
+		<div class='target'></div>
+		<div class='sumber'></div>
+	</div>
+
+	<template>
+		<button class='angka'>
+			<!-- <button class='angka'><span class='angka'></span></div> -->
+		</button>
+	</template>
+
+	<script nomodule>
+		document.querySelector('div.nomodule').style.display = 'block';
+	</script>
+
+	<script type='module'>
+		import { Urutkan } from "./js/urutkan/Urutkan.js";
+
+		window.onload = () => {
+			let urutkan = new Urutkan();
+			urutkan.init();
+			urutkan.mulai();
+		}
+
+	</script>
+
+</body>
+
+</html>

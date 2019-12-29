@@ -1,18 +1,25 @@
 import { BaseComponent } from "./BaseComponent.js";
-// import { Banyakan } from "./banyakan/Banyakan.js";
-import { Game } from "./Game.js";
+// import { Game } from "./Game.js"; 
 export class Feedback extends BaseComponent {
     constructor() {
         super();
         this.labelP = null;
         this.button = null;
-        this._elHtml = Game.inst.template.feedback;
+        this._template = `
+			<div class='feedback'>
+				<div class='cont'>
+					<p class='feedback'>Jawaban kamu benar</p>
+					<button class='normal'>soal berikutnya</button>
+				</div>
+			</div>
+		`;
+        this.build();
         this.button = this.getEl('button');
         this.labelP = this.getEl('p.feedback');
     }
-    tampil() {
-        this.attach(Game.inst.cont);
-    }
+    // tampil(): void {
+    // 	this.attach(Game.inst.cont);
+    // }
     init() {
     }
     get label() {

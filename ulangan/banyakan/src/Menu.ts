@@ -87,13 +87,18 @@ export interface ITombol {
 
 const puluhan: ITombol = {
 	label: "Puluhan Satuan",
-	onclick: (e: MouseEvent) => {
-		e.stopPropagation();
-		Game.inst.menu.detach();
-		Game.inst.puluhan.attach(Game.inst.cont);
-		Game.inst.puluhan.mulaiLagi();
-	},
-	members: []
+	members: [
+		{
+			label: "Puluhan Satuan",
+			onclick: (e: MouseEvent) => {
+				e.stopPropagation();
+				Game.inst.menu.detach();
+				Game.inst.puluhan.attach(Game.inst.cont);
+				Game.inst.puluhan.mulaiLagi();
+			},
+			members: []
+		}
+	]
 }
 
 export const click = {
@@ -114,72 +119,63 @@ export const MenuData: ITombol = {
 			label: 'Membandingkan',
 			members: [
 				{
-					label: "Dengan Gambar",
-					members: [
-						{
-							label: 'Dua Angka',
-							onclick: (e: MouseEvent) => {
-								e.stopPropagation();
-								console.log('banyakan click');
-								Game.inst.menu.detach();
-								Game.inst.banyakan.jmlSoal = 2;
-								Game.inst.banyakan.angkaSaja = false;
-								Game.inst.banyakan.attach(Game.inst.cont);
-								Game.inst.banyakan.mulaiLagi();
-							},
-							members: []
-						},
-						{
-							label: 'Tiga Angka',
-							onclick: (e: MouseEvent) => {
-								e.stopPropagation();
-								console.log('banyakan click gambar 3');
-								Game.inst.menu.detach();
-								Game.inst.banyakan.jmlSoal = 3;
-								Game.inst.banyakan.angkaSaja = false;
-								Game.inst.banyakan.attach(Game.inst.cont);
-								Game.inst.banyakan.mulaiLagi();
-							},
-							members: []
-						}
-					]
+					label: 'Latihan 1',	//dengan gambar dua angka
+					onclick: (e: MouseEvent) => {
+						e.stopPropagation();
+						console.log('banyakan click');
+						Game.inst.menu.detach();
+						Game.inst.banyakan.jmlSoal = 2;
+						Game.inst.banyakan.angkaSaja = false;
+						Game.inst.banyakan.attach(Game.inst.cont);
+						Game.inst.banyakan.mulaiLagi();
+					},
+					members: []
 				},
 				{
-					label: 'Dengan Angka',
-					members: [
-						{
-							label: 'Dua Angka',
-							onclick: (e: MouseEvent) => {
-								console.log('banyakan click angka 2');
-								e.stopPropagation();
-								Game.inst.menu.detach();
-								Game.inst.banyakan.jmlSoal = 2;
-								Game.inst.banyakan.angkaSaja = true;
-								Game.inst.banyakan.attach(Game.inst.cont);
-								Game.inst.banyakan.mulaiLagi();
-							},
-							members: []
-						},
-						{
-							label: 'Tiga Angka',
-							onclick: (e: MouseEvent) => {
-								console.log('banyakan click gambar 3');
-								e.stopPropagation();
-								Game.inst.menu.detach();
-								Game.inst.banyakan.jmlSoal = 3;
-								Game.inst.banyakan.angkaSaja = true;
-								Game.inst.banyakan.attach(Game.inst.cont);
-								Game.inst.banyakan.mulaiLagi();
-							},
-							members: []
-						}
-					]
+					label: 'Latihan 2',	//dengan gambar tiga angka
+					onclick: (e: MouseEvent) => {
+						e.stopPropagation();
+						console.log('banyakan click gambar 3');
+						Game.inst.menu.detach();
+						Game.inst.banyakan.jmlSoal = 3;
+						Game.inst.banyakan.angkaSaja = false;
+						Game.inst.banyakan.attach(Game.inst.cont);
+						Game.inst.banyakan.mulaiLagi();
+					},
+					members: []
 				},
 				{
-					label: 'Dengan Simbol',
+					label: 'Latihan 3', //'Dua Angka',
+					onclick: (e: MouseEvent) => {
+						console.log('banyakan click angka 2');
+						e.stopPropagation();
+						Game.inst.menu.detach();
+						Game.inst.banyakan.jmlSoal = 2;
+						Game.inst.banyakan.angkaSaja = true;
+						Game.inst.banyakan.attach(Game.inst.cont);
+						Game.inst.banyakan.mulaiLagi();
+					},
+					members: []
+				},
+				{
+					label: 'Latihan 4',//'Tiga Angka',
+					onclick: (e: MouseEvent) => {
+						console.log('banyakan click gambar 3');
+						e.stopPropagation();
+						Game.inst.menu.detach();
+						Game.inst.banyakan.jmlSoal = 3;
+						Game.inst.banyakan.angkaSaja = true;
+						Game.inst.banyakan.attach(Game.inst.cont);
+						Game.inst.banyakan.mulaiLagi();
+					},
+					members: []
+				},
+				{
+					label: 'Latihan 5', //'Dengan Simbol',
 					members: [],
 					onclick: click.membandingkan.simbol
 				}
+
 			]
 		},
 		puluhan

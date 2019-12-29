@@ -138,8 +138,8 @@ export class Banyakan extends BaseComponent {
 
 		if (this.soalidx >= 10) {
 			// console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
-			this.selesai.attach();
-			this.selesai.onClick = () => {
+			this.selesai.attach(Game.inst.cont);
+			this.selesai.onMulaiClick = () => {
 				this.selesai.detach();
 				this.mulaiLagi();
 			}

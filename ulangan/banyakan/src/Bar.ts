@@ -17,6 +17,10 @@ export class Bar extends BaseComponent {
 		this.tahapEl.style.width = value + '%';
 	}
 
+	public persen2(value: number, max: number): void {
+		this.persen = Math.floor((value / max) * 100);
+	}
+
 	constructor() {
 		super();
 		this._template = `

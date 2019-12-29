@@ -6,18 +6,17 @@ import { Selesai } from "../Selesai.js";
 
 export class BandingkanTanda extends BaseComponent {
 
-	private kdTbl: HTMLButtonElement = null;
-	private sdTbl: HTMLButtonElement = null;
-	private ldTbl: HTMLButtonElement = null;
-
-	private angkaAcak: Acak = null;
+	private _kdTbl: HTMLButtonElement = null;
+	private _sdTbl: HTMLButtonElement = null;
+	private _ldTbl: HTMLButtonElement = null;
 
 	private kiriEl: HTMLDivElement = null;
 	private tengahEl: HTMLDivElement = null;
 	private kananEl: HTMLDivElement = null;
+
 	private _feedback: Feedback;
 	private selesai: Selesai;
-
+	private angkaAcak: Acak = null;
 	private angkas: Array<number> = [];
 	private jawaban: string = '';
 	private soalIdx: number = 0;
@@ -26,35 +25,35 @@ export class BandingkanTanda extends BaseComponent {
 	constructor() {
 		super();
 		this._template = `
-		<div class='banyakan-tanda'>
-			<div class='bar-cont'></div>
-			<p class='judul'>Pilih Tanda Yang Sesuai</judul>
-			<br/>
-			<br/>
-			<div class='soal'>
-				<div class='angka kiri'>
+			<div class='banyakan-tanda'>
+				<div class='bar-cont'></div>
+				<p class='judul'>Pilih Tanda Yang Sesuai</judul>
+				<br/>
+				<br/>
+				<div class='soal'>
+					<div class='angka kiri'>
 
-				</div>
-				<div class='tanda'>
+					</div>
+					<div class='tanda'>
 
-				</div>
-				<div class='angka kanan'>
+					</div>
+					<div class='angka kanan'>
 
+					</div>
 				</div>
-			</div>
-			<div class='jawaban'>
-				<button class='kiri'>&lt</button>
-				<button class='tengah'>=</button>
-				<button class='kanan'>&gt</button>
-			</div>
-		</div>		
-		`;
+				<div class='jawaban'>
+					<button class='kiri'>&lt</button>
+					<button class='tengah'>=</button>
+					<button class='kanan'>&gt</button>
+				</div>
+			</div>		
+			`;
 
 		this.build();
 
-		this.kdTbl = this.getEl('div.jawaban button.kiri') as HTMLButtonElement;
-		this.sdTbl = this.getEl('div.jawaban button.tengah') as HTMLButtonElement;
-		this.ldTbl = this.getEl('div.jawaban button.kanan') as HTMLButtonElement;
+		this._kdTbl = this.getEl('div.jawaban button.kiri') as HTMLButtonElement;
+		this._sdTbl = this.getEl('div.jawaban button.tengah') as HTMLButtonElement;
+		this._ldTbl = this.getEl('div.jawaban button.kanan') as HTMLButtonElement;
 
 		this.kiriEl = this.getEl('div.soal div.angka.kiri') as HTMLDivElement;
 		this.tengahEl = this.getEl('div.soal div.tanda') as HTMLDivElement;
@@ -66,15 +65,15 @@ export class BandingkanTanda extends BaseComponent {
 	}
 
 	init(): void {
-		this.kdTbl.onclick = () => {
+		this._kdTbl.onclick = () => {
 			this.kdClick();
 		}
 
-		this.sdTbl.onclick = () => {
+		this._sdTbl.onclick = () => {
 			this.sdClick();
 		}
 
-		this.ldTbl.onclick = () => {
+		this._ldTbl.onclick = () => {
 			this.ldClick();
 		}
 
@@ -103,8 +102,8 @@ export class BandingkanTanda extends BaseComponent {
 
 		if (this.soalIdx >= 10) {
 			// console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
-			this.selesai.attach();
-			this.selesai.onClick = () => {
+			this.selesai.attach(Game.inst.cont);
+			this.selesai.onMulaiClick = () => {
 				this.selesai.detach();
 				this.mulai();
 			}
@@ -206,5 +205,16 @@ export class BandingkanTanda extends BaseComponent {
 
 		return true;
 	}
+
+	public get kdTbl(): HTMLButtonElement {
+		return this._kdTbl;
+	}
+	public get sdTbl(): HTMLButtonElement {
+		return this._sdTbl;
+	}
+	public get ldTbl(): HTMLButtonElement {
+		return this._ldTbl;
+	}
+
 
 }

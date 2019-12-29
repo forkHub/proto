@@ -1,8 +1,25 @@
+dalam proses:
+=============
+mengurutkan
+
+selesai:
+========
 ada bar progress
 ada tombol kembali ke main menu saat main
 
 membandingkan dengan simbol
-mengurutkan
+
+jangka panjang:
+===============
+urutkan dari yang terbesar
+
+coba tiga kali baru ganti soal
+
+mengurutkan dengan angka yang jaraknya 1
+
+menu diubah dengan judul latihan 1, 2, 3, dst
+
+automation pakai nodejs (beda project)
 
 game maze mengurutkan 
 click pada angka 

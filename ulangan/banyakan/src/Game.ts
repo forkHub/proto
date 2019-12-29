@@ -37,6 +37,7 @@ export class Game {
 		window.onload = () => {
 			this.init();
 		}
+
 	}
 
 	init(): void {

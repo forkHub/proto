@@ -1,23 +1,35 @@
-import { Game } from "./Game.js";
 import { BaseComponent } from "./BaseComponent.js";
 export class Selesai extends BaseComponent {
     constructor() {
         super();
-        this._tombol = null;
+        this._mulaiTbl = null;
         this._menuTbl = null;
         this.nilaiP = null;
+        this._template = `
+			<div class='selesai'>
+				<h1>&#127942</h1>
+				<h1>Selesai!</h1>
+				<p class='nilai'>
+
+				</p>
+				<button class='selesai mulai normal'>
+					Mulai Lagi
+				</button>
+				<button class='selesai menu normal'>
+					Menu Utama
+				</button>
+			</div>
+		`;
+        this.build();
     }
     init() {
-        this._elHtml = Game.inst.template.selesai;
-        this._tombol = this.getEl('button.mulai');
+        // this._elHtml = Game.inst.template.selesai;
+        this._mulaiTbl = this.getEl('button.mulai');
         this._menuTbl = this.getEl('button.menu');
         this.nilaiP = this.getEl('p.nilai');
     }
-    attach() {
-        super.attach(Game.inst.cont);
-    }
-    set onClick(value) {
-        this._tombol.onclick = () => {
+    set onMulaiClick(value) {
+        this._mulaiTbl.onclick = () => {
             this.detach();
             value();
         };

@@ -1,0 +1,39 @@
+.sumber {
+    display: flex;
+    border: 1px solid;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-top: 16px;
+    border-radius: 10px;
+    justify-content: center;
+    height: 90px;
+}
+
+.angka {
+    text-align: center;
+    border: 1px solid;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-radius: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-size: large;
+    font-weight: bold;
+    padding-left: 24px;
+    padding-right: 24px;
+    align-items: center;
+    height: 55px;
+    box-sizing: border-box;
+}
+
+.target {
+    min-height: 60px;
+    border: 1px solid;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 10px;
+    min-height: 90px; 
+    display: flex;
+    justify-content: center;
+    /* height: 60px; */
+}
