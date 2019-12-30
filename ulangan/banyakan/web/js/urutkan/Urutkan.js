@@ -1,25 +1,27 @@
 import { Angka, AngkaEnum } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
-import { Bar } from "../Bar.js";
+// import { Bar } from "../Bar.js";
 export class Urutkan extends BaseSoal {
     constructor() {
         super();
         this.angkas = [];
         this.acak = new Acak(10);
         this.max = 10;
-        this.jmlAngka = 3;
+        this.jmlAngka = 3; //TODO: angka lebih banyak
         this.cont = null;
+        this._flJarak = Jarak.JARAK_ACAK; //TODO: jarak 1 atau acak
+        this._flArah = Arah.KECIL2BESAR; //TODO: arah ke besar atau ke kecil
         this.angkaSumberEl = null;
         this.angkaTargetEl = null;
-        this._elHtml = document.body.querySelector('div.cont');
-        this.cont = this._elHtml;
+        this._elHtml = document.body.querySelector('div.cont div.urutkan');
+        this.cont = document.body.querySelector('div.cont');
     }
     init() {
         console.log('init');
         super.init();
+        this.bar.attach(this.cont.querySelector('div.bar-cont'));
         this.acak.max = this.max;
-        this.bar = new Bar();
         this.angkaSumberEl = this.getEl('div.sumber');
         this.angkaTargetEl = this.getEl('div.target');
         for (let i = 0; i < this.jmlAngka; i++) {
@@ -95,8 +97,8 @@ export class Urutkan extends BaseSoal {
                 return false;
             }
         }
-        if (this.angkaTargetEl.childElementCount != 3) {
-            console.log('check gagal, jumlah child element != 3');
+        if (this.angkaTargetEl.childElementCount != this.jmlAngka) {
+            console.log('check gagal, jumlah child element != ' + this.jmlAngka);
             console.log('this.angkatargetEl:');
             console.log(this.angkaTargetEl);
             throw new Error();
@@ -176,8 +178,9 @@ export class Urutkan extends BaseSoal {
         }
         let angkas = [];
         angkas = this.getAngka(this.angkaTargetEl);
-        if (angkas.length >= 3) {
+        if (angkas.length >= this.jmlAngka) {
             this.soalIdx++;
+            this.bar.persen2(this.soalIdx, this.jmlSoal);
             if (this.check2()) {
                 //feedback benar
                 this.nilai++;
@@ -199,4 +202,20 @@ export class Urutkan extends BaseSoal {
         this.bar.persen2(this.soalIdx, this.jmlSoal);
         this.reset();
     }
+    get flArah() {
+        return this._flArah;
+    }
+    get flJarak() {
+        return this._flJarak;
+    }
 }
+var Jarak;
+(function (Jarak) {
+    Jarak[Jarak["JARAK_SATU"] = 0] = "JARAK_SATU";
+    Jarak[Jarak["JARAK_ACAK"] = 1] = "JARAK_ACAK";
+})(Jarak || (Jarak = {}));
+var Arah;
+(function (Arah) {
+    Arah[Arah["KECIL2BESAR"] = 0] = "KECIL2BESAR";
+    Arah[Arah["BESAR2KECIL"] = 1] = "BESAR2KECIL";
+})(Arah || (Arah = {}));

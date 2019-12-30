@@ -3,7 +3,7 @@ import { Bar } from "./Bar.js";
 import { Feedback, FeedbackEnum } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
 
-export class BaseSoal extends BaseComponent {
+export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected jmlSoal: number = 10;
 	protected bar: Bar = null;
 	protected _feedback: Feedback = null;
@@ -20,6 +20,8 @@ export class BaseSoal extends BaseComponent {
 		this.getUrl();
 		console.log('query');
 		console.log(this.query);
+
+		this.bar = new Bar();
 	}
 
 	getUrl(): void {
@@ -54,12 +56,16 @@ export class BaseSoal extends BaseComponent {
 	}
 
 	init(): void {
+		this.bar.onClick = () => {
+			window.location.href = './index.html';
+		}
+
 		this.selesai.init();
 		this.selesai.onMulaiClick = () => {
 			this.mulai();
 		}
 		this.selesai.onMenuClick = () => {
-			window.location.href = './index2.html';
+			window.location.href = './index.html';
 		}
 
 		this._feedback.init();
@@ -128,4 +134,13 @@ export class Query {
 		this._key = key;
 		this._value = value;
 	}
+}
+
+export interface IBaseSoal {
+	init(): void;
+	reset(): void;
+	mulai(): void;
+	feedbackClick(cont: HTMLDivElement): void;
+	feedbackBenarShow(cont: HTMLDivElement): void;
+	feedbackSalahShow(cont: HTMLDivElement): void
 }

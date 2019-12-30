@@ -1,4 +1,5 @@
 import { BaseComponent } from "./BaseComponent.js";
+import { Bar } from "./Bar.js";
 import { Feedback, FeedbackEnum } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
 export class BaseSoal extends BaseComponent {
@@ -17,6 +18,7 @@ export class BaseSoal extends BaseComponent {
         this.getUrl();
         console.log('query');
         console.log(this.query);
+        this.bar = new Bar();
     }
     getUrl() {
         let url = window.location.search.slice(1);
@@ -43,12 +45,15 @@ export class BaseSoal extends BaseComponent {
         }
     }
     init() {
+        this.bar.onClick = () => {
+            window.location.href = './index.html';
+        };
         this.selesai.init();
         this.selesai.onMulaiClick = () => {
             this.mulai();
         };
         this.selesai.onMenuClick = () => {
-            window.location.href = './index2.html';
+            window.location.href = './index.html';
         };
         this._feedback.init();
     }

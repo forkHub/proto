@@ -38,7 +38,8 @@ export class Menu extends BaseComponent {
 
 			if (child.members.length > 0) {
 				let text: Text = null;
-				let par: HTMLParagraphElement = document.createElement('p');
+				// let par: HTMLParagraphElement = document.createElement('p');
+				let par: HTMLButtonElement = document.createElement('button');
 
 				text = document.createTextNode(child.label);
 				par.appendChild(text);
@@ -89,12 +90,25 @@ const puluhan: ITombol = {
 	label: "Puluhan Satuan",
 	members: [
 		{
-			label: "Puluhan Satuan",
+			label: "Latihan 1",
 			onclick: (e: MouseEvent) => {
 				e.stopPropagation();
 				Game.inst.menu.detach();
 				Game.inst.puluhan.attach(Game.inst.cont);
 				Game.inst.puluhan.mulaiLagi();
+			},
+			members: []
+		}
+	]
+}
+
+const urutkan: ITombol = {
+	label: "Mengurutkan",
+	members: [
+		{
+			label: "Latihan 1",
+			onclick: () => {
+				window.location.href = "./urutkan.html"
 			},
 			members: []
 		}
@@ -178,6 +192,7 @@ export const MenuData: ITombol = {
 
 			]
 		},
-		puluhan
+		puluhan,
+		urutkan
 	]
 }

@@ -19,7 +19,7 @@ div.menu ul li button.menu{
 	margin-bottom: 0px;
 }
 
-div.menu ul li.label > p {
+div.menu ul li.label > button {
 	display: inline-flex;
     border-radius: 10px;
     padding: 8px;
@@ -29,4 +29,9 @@ div.menu ul li.label > p {
 	box-shadow: 0px 2px 0px 0px grey;
 	font-size: large;
 	margin: auto;
+}
+
+div.menu ul li.label > button:active {
+	box-shadow: none;
+	margin-top: 3px;
 }

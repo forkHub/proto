@@ -36,11 +36,19 @@ button.normal {
 	font-size: large;
 	margin: auto;
 	margin-bottom: 16px;
+	position: relative;
+	top:0px;
 }
 
 button.normal:hover {
     background-color: darkgreen;
 }
+
+button.normal:active {
+	top:3px;
+	box-shadow: none;
+}
+
 
 /*Selesai*/
 /*=======*/

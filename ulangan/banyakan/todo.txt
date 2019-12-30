@@ -1,10 +1,10 @@
 dalam proses:
 =============
-mengurutkan
+ada bar progress
+
 
 selesai:
 ========
-ada bar progress
 ada tombol kembali ke main menu saat main
 
 membandingkan dengan simbol
@@ -17,8 +17,6 @@ coba tiga kali baru ganti soal
 
 mengurutkan dengan angka yang jaraknya 1
 
-menu diubah dengan judul latihan 1, 2, 3, dst
-
 automation pakai nodejs (beda project)
 
 game maze mengurutkan 
@@ -26,3 +24,7 @@ click pada angka
 karakter bergerak mengikuti angka di klik
 
 lomba mobil
+
+soal ulangan dengan soal di acak
+
+css aktive button

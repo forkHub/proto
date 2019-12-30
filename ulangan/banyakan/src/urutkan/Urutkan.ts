@@ -1,30 +1,35 @@
 import { Angka, AngkaEnum } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
-import { Bar } from "../Bar.js";
+// import { Bar } from "../Bar.js";
 
 export class Urutkan extends BaseSoal {
 	private angkas: Array<Angka> = [];
 	private acak: Acak = new Acak(10);
 	private max: number = 10;
-	private jmlAngka: number = 3;
+	private jmlAngka: number = 3;	//TODO: angka lebih banyak
 	private cont: HTMLDivElement = null;
+
+	private _flJarak: Jarak = Jarak.JARAK_ACAK;	//TODO: jarak 1 atau acak
+
+	private _flArah: Arah = Arah.KECIL2BESAR;	//TODO: arah ke besar atau ke kecil
 
 	private angkaSumberEl: HTMLDivElement = null;
 	private angkaTargetEl: HTMLDivElement = null;
 
 	constructor() {
 		super();
-		this._elHtml = document.body.querySelector('div.cont') as HTMLDivElement;
-		this.cont = this._elHtml as HTMLDivElement;
+		this._elHtml = document.body.querySelector('div.cont div.urutkan') as HTMLDivElement;
+		this.cont = document.body.querySelector('div.cont') as HTMLDivElement;
 	}
 
 	init(): void {
 		console.log('init');
 		super.init();
 
+		this.bar.attach(this.cont.querySelector('div.bar-cont') as HTMLDivElement);
+
 		this.acak.max = this.max;
-		this.bar = new Bar();
 
 		this.angkaSumberEl = this.getEl('div.sumber') as HTMLDivElement;
 		this.angkaTargetEl = this.getEl('div.target') as HTMLDivElement;
@@ -116,8 +121,8 @@ export class Urutkan extends BaseSoal {
 			}
 		}
 
-		if (this.angkaTargetEl.childElementCount != 3) {
-			console.log('check gagal, jumlah child element != 3');
+		if (this.angkaTargetEl.childElementCount != this.jmlAngka) {
+			console.log('check gagal, jumlah child element != ' + this.jmlAngka);
 			console.log('this.angkatargetEl:');
 			console.log(this.angkaTargetEl);
 			throw new Error();
@@ -207,8 +212,9 @@ export class Urutkan extends BaseSoal {
 
 		let angkas: Array<number> = [];
 		angkas = this.getAngka(this.angkaTargetEl);
-		if (angkas.length >= 3) {
+		if (angkas.length >= this.jmlAngka) {
 			this.soalIdx++;
+			this.bar.persen2(this.soalIdx, this.jmlSoal);
 
 			if (this.check2()) {
 				//feedback benar
@@ -232,4 +238,23 @@ export class Urutkan extends BaseSoal {
 		this.bar.persen2(this.soalIdx, this.jmlSoal);
 		this.reset();
 	}
+
+	public get flArah(): Arah {
+		return this._flArah;
+	}
+	public get flJarak(): Jarak {
+		return this._flJarak;
+	}
+
+
+}
+
+enum Jarak {
+	JARAK_SATU,
+	JARAK_ACAK
+}
+
+enum Arah {
+	KECIL2BESAR,
+	BESAR2KECIL
 }

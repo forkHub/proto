@@ -29,7 +29,8 @@ export class Menu extends BaseComponent {
             let child = childs[i];
             if (child.members.length > 0) {
                 let text = null;
-                let par = document.createElement('p');
+                // let par: HTMLParagraphElement = document.createElement('p');
+                let par = document.createElement('button');
                 text = document.createTextNode(child.label);
                 par.appendChild(text);
                 li.appendChild(par);
@@ -66,12 +67,24 @@ const puluhan = {
     label: "Puluhan Satuan",
     members: [
         {
-            label: "Puluhan Satuan",
+            label: "Latihan 1",
             onclick: (e) => {
                 e.stopPropagation();
                 Game.inst.menu.detach();
                 Game.inst.puluhan.attach(Game.inst.cont);
                 Game.inst.puluhan.mulaiLagi();
+            },
+            members: []
+        }
+    ]
+};
+const urutkan = {
+    label: "Mengurutkan",
+    members: [
+        {
+            label: "Latihan 1",
+            onclick: () => {
+                window.location.href = "./urutkan.html";
             },
             members: []
         }
@@ -152,6 +165,7 @@ export const MenuData = {
                 }
             ]
         },
-        puluhan
+        puluhan,
+        urutkan
     ]
 };
