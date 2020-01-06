@@ -29,9 +29,12 @@ div.menu ul li.label > button {
 	box-shadow: 0px 2px 0px 0px grey;
 	font-size: large;
 	margin: auto;
+	position: relative;
+	top:0px;
 }
 
 div.menu ul li.label > button:active {
 	box-shadow: none;
-	margin-top: 3px;
+	top: 3px;
+	position: relative;
 }
