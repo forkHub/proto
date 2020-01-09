@@ -6,13 +6,17 @@ export class BaseSoal extends BaseComponent {
     constructor() {
         super();
         this.jmlSoal = 10;
+        this.soalIdx = 0;
+        this.nilai = 0;
+        this.gambar = true;
+        this.angkaMulai = 1;
+        this.jmlKotak = 3;
+        this.cont = null;
+        this.onSelesai = null;
+        this.query = [];
         this.bar = null;
         this._feedback = null;
         this.selesai = null;
-        this.soalIdx = 0;
-        this.nilai = 0;
-        this.onSelesai = null;
-        this.query = [];
         this.selesai = new Selesai();
         this._feedback = new Feedback();
         this.getUrl();
@@ -56,6 +60,17 @@ export class BaseSoal extends BaseComponent {
             window.location.href = './index.html';
         };
         this._feedback.init();
+    }
+    setConfig(config) {
+        if (config.angkaMulai) {
+            this.angkaMulai = config.angkaMulai;
+        }
+        if (config.gambar) {
+            this.gambar = config.gambar;
+        }
+        if (config.jmlAngka) {
+            this.jmlKotak = config.jmlAngka;
+        }
     }
     reset() {
     }

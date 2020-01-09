@@ -1,8 +1,12 @@
-import { BaseComponent } from "../BaseComponent.js";
-import { Acak } from "../Acak.js";
-import { FeedbackEnum } from "../Feedback.js";
+// import { BaseComponent } from "../BaseComponent.js";
+// import { Feedback, FeedbackEnum } from "../Feedback.js";
+// import { Selesai } from "../Selesai.js";
+// import { IBaseSoal, BaseSoal } from "../BaseSoal.js";
+// import { Bar } from "../Bar.js";
 import { Game } from "../Game.js";
-export class BandingkanTanda extends BaseComponent {
+import { Acak } from "../Acak.js";
+import { BaseSoal } from "../BaseSoal.js";
+export class BandingkanTanda extends BaseSoal {
     constructor() {
         super();
         this._kdTbl = null;
@@ -14,8 +18,6 @@ export class BandingkanTanda extends BaseComponent {
         this.angkaAcak = null;
         this.angkas = [];
         this.jawaban = '';
-        this.soalIdx = 0;
-        this._nilai = 0;
         this._template = `
 			<div class='banyakan-tanda'>
 				<div class='bar-cont'></div>
@@ -50,8 +52,10 @@ export class BandingkanTanda extends BaseComponent {
         this.angkaAcak = new Acak(10);
         this._feedback = Game.inst.feedback;
         this.selesai = Game.inst.selesai;
+        this.bar.attach(this.getEl("div.banyakan-tanda div.bar-cont"));
     }
     init() {
+        this.cont = Game.inst.cont;
         this._kdTbl.onclick = () => {
             this.kdClick();
         };
@@ -64,10 +68,10 @@ export class BandingkanTanda extends BaseComponent {
         this.mulai();
     }
     mulai() {
-        this.restart();
+        this.reset();
         this.soalIdx = 0;
     }
-    restart() {
+    reset() {
         this.angkas[0] = this.angkaAcak.get();
         this.angkas[1] = this.angkaAcak.get();
         this.kiriEl.innerHTML = this.angkas[0] + '';
@@ -75,12 +79,9 @@ export class BandingkanTanda extends BaseComponent {
         this.tengahEl.innerHTML = '';
     }
     feedbackClick() {
-        // console.log('feed back click');
         this._feedback.detach();
         this.soalIdx++;
-        // this.bar.persen = (this.soalIdx / 10) * 100;
         if (this.soalIdx >= 10) {
-            // console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
             this.selesai.attach(Game.inst.cont);
             this.selesai.onMulaiClick = () => {
                 this.selesai.detach();
@@ -88,73 +89,74 @@ export class BandingkanTanda extends BaseComponent {
             };
             this.selesai.onMenuClick = () => {
                 this.detach();
-                // this.selesai.detach();
                 Game.inst.menu.attach(Game.inst.cont);
             };
-            this.selesai.nilai = this._nilai;
+            this.selesai.nilai = this.nilai;
         }
         else {
-            this.restart();
+            this.reset();
         }
     }
-    feedbackSalahShow() {
-        this._feedback.attach(Game.inst.cont);
-        this._feedback.label = "Jawaban Salah";
-        this._feedback.type = FeedbackEnum.SALAH;
-        this._feedback.onClick = () => {
-            this.feedbackClick();
-        };
-    }
-    feedbackBenarShow() {
-        this._feedback.attach(Game.inst.cont);
-        this._feedback.label = 'Jawaban Benar';
-        this._feedback.type = FeedbackEnum.BENAR;
-        this._feedback.onClick = () => {
-            this.feedbackClick();
-        };
-    }
-    userJawab(jawab) {
-        this.jawaban = jawab;
-        this.tengahEl.innerHTML = this.jawaban;
-        if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow();
-        }
-        else {
-            this.feedbackSalahShow();
-        }
-    }
+    // feedbackSalahShow(): void {
+    // super.feedbackSalahShow(this.cont)
+    // this._feedback.attach(Game.inst.cont);
+    // this._feedback.label = "Jawaban Salah";
+    // this._feedback.type = FeedbackEnum.SALAH;
+    // this._feedback.onClick = () => {
+    // 	this.feedbackClick();
+    // }
+    // }
+    // feedbackBenarShow(): void {
+    // 	this._feedback.attach(Game.inst.cont);
+    // this._feedback.label = 'Jawaban Benar';
+    // this._feedback.type = FeedbackEnum.BENAR;
+    // this._feedback.onClick = () => {
+    // 	this.feedbackClick();
+    // }
+    // }
+    // userJawab(jawab: string): void {
+    // 	this.jawaban = jawab;
+    // 	this.tengahEl.innerHTML = this.jawaban;
+    // 	if (this.check()) {
+    // 		this._nilai++;
+    // 		this.feedbackBenarShow();
+    // 	}
+    // 	else {
+    // 		this.feedbackSalahShow();
+    // 	}
+    // }
     kdClick() {
         this.jawaban = '<';
         this.tengahEl.innerHTML = this.jawaban;
+        this.bar.persen2(this.soalIdx, 10);
         if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow();
+            this.nilai++;
+            this.feedbackBenarShow(this.cont);
         }
         else {
-            this.feedbackSalahShow();
+            this.feedbackSalahShow(this.cont);
         }
     }
     sdClick() {
         this.jawaban = '=';
         this.tengahEl.innerHTML = this.jawaban;
         if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow();
+            this.nilai++;
+            this.feedbackBenarShow(this.cont);
         }
         else {
-            this.feedbackSalahShow();
+            this.feedbackSalahShow(this.cont);
         }
     }
     ldClick() {
         this.jawaban = '>';
         this.tengahEl.innerHTML = this.jawaban;
         if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow();
+            this.nilai++;
+            this.feedbackBenarShow(this.cont);
         }
         else {
-            this.feedbackSalahShow();
+            this.feedbackSalahShow(this.cont);
         }
     }
     check() {

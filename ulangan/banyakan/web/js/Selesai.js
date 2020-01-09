@@ -36,7 +36,7 @@ export class Selesai extends BaseComponent {
     }
     set onMenuClick(value) {
         this._menuTbl.onclick = () => {
-            this.detach();
+            // this.detach();
             value();
         };
     }

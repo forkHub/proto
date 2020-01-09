@@ -46,6 +46,7 @@ export class Game {
 		this._selesai.init();
 		this._feedback.init();
 		this._puluhan.init();
+
 		this._simbol.init();
 
 		this._menu.init();

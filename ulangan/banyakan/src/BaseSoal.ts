@@ -5,13 +5,18 @@ import { Selesai } from "./Selesai.js";
 
 export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected jmlSoal: number = 10;
+	protected soalIdx: number = 0;
+	protected nilai: number = 0;
+	protected gambar: boolean = true;
+	protected angkaMulai: number = 1;
+	protected jmlKotak: number = 3;
+
+	protected cont: HTMLDivElement = null;
+	protected onSelesai: Function = null;
+	protected query: Array<Query> = [];
 	protected bar: Bar = null;
 	protected _feedback: Feedback = null;
 	protected selesai: Selesai = null;
-	protected soalIdx: number = 0;
-	protected nilai: number = 0;
-	protected onSelesai: Function = null;
-	protected query: Array<Query> = [];
 
 	constructor() {
 		super();
@@ -71,6 +76,20 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 		this._feedback.init();
 	}
 
+	setConfig(config: IConfig): void {
+		if (config.angkaMulai) {
+			this.angkaMulai = config.angkaMulai;
+		}
+
+		if (config.gambar) {
+			this.gambar = config.gambar;
+		}
+
+		if (config.jmlAngka) {
+			this.jmlKotak = config.jmlAngka;
+		}
+	}
+
 	reset(): void {
 
 	}
@@ -119,6 +138,12 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	}
 }
 
+interface IConfig {
+	jmlAngka?: number;
+	gambar?: boolean;
+	angkaMulai?: number;
+}
+
 export class Query {
 	private _key: string = '';
 	public get key(): string {
@@ -142,5 +167,6 @@ export interface IBaseSoal {
 	mulai(): void;
 	feedbackClick(cont: HTMLDivElement): void;
 	feedbackBenarShow(cont: HTMLDivElement): void;
-	feedbackSalahShow(cont: HTMLDivElement): void
+	feedbackSalahShow(cont: HTMLDivElement): void;
+	setConfig(config: IConfig): void;
 }

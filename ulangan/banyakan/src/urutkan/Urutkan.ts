@@ -1,14 +1,13 @@
 import { Angka, AngkaEnum } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
-// import { Bar } from "../Bar.js";
 
 export class Urutkan extends BaseSoal {
+
 	private angkas: Array<Angka> = [];
 	private acak: Acak = new Acak(10);
 	private max: number = 10;
-	private jmlAngka: number = 3;	//TODO: angka lebih banyak
-	private cont: HTMLDivElement = null;
+	// protected jmlKotak: number = 3;	//TODO: angka lebih banyak
 
 	private _flJarak: Jarak = Jarak.JARAK_ACAK;	//TODO: jarak 1 atau acak
 
@@ -21,6 +20,7 @@ export class Urutkan extends BaseSoal {
 		super();
 		this._elHtml = document.body.querySelector('div.cont div.urutkan') as HTMLDivElement;
 		this.cont = document.body.querySelector('div.cont') as HTMLDivElement;
+		this.jmlKotak = 3;
 	}
 
 	init(): void {
@@ -34,7 +34,7 @@ export class Urutkan extends BaseSoal {
 		this.angkaSumberEl = this.getEl('div.sumber') as HTMLDivElement;
 		this.angkaTargetEl = this.getEl('div.target') as HTMLDivElement;
 
-		for (let i: number = 0; i < this.jmlAngka; i++) {
+		for (let i: number = 0; i < this.jmlKotak; i++) {
 			let angkaN: number = this.buatAngka();
 			let angka: Angka = new Angka(angkaN);
 			angka.angkaClick = (angkaP: Angka) => {
@@ -121,8 +121,8 @@ export class Urutkan extends BaseSoal {
 			}
 		}
 
-		if (this.angkaTargetEl.childElementCount != this.jmlAngka) {
-			console.log('check gagal, jumlah child element != ' + this.jmlAngka);
+		if (this.angkaTargetEl.childElementCount != this.jmlKotak) {
+			console.log('check gagal, jumlah child element != ' + this.jmlKotak);
 			console.log('this.angkatargetEl:');
 			console.log(this.angkaTargetEl);
 			throw new Error();
@@ -137,7 +137,7 @@ export class Urutkan extends BaseSoal {
 			// angkas.push(parseInt(this.angkaTargetEl.children[i].innerHTML));
 		}
 
-		if (angkas.length != this.jmlAngka) {
+		if (angkas.length != this.jmlKotak) {
 			console.log(angkas);
 			throw new Error('jumlah angka tidak cocok');
 		}
@@ -193,7 +193,7 @@ export class Urutkan extends BaseSoal {
 		let target: Array<number> = [];
 
 		target = this.getAngka(this.angkaTargetEl);
-		if (target.length < this.jmlAngka) return false;
+		if (target.length < this.jmlKotak) return false;
 
 		return this.urut(target);
 	}
@@ -212,7 +212,7 @@ export class Urutkan extends BaseSoal {
 
 		let angkas: Array<number> = [];
 		angkas = this.getAngka(this.angkaTargetEl);
-		if (angkas.length >= this.jmlAngka) {
+		if (angkas.length >= this.jmlKotak) {
 			this.soalIdx++;
 			this.bar.persen2(this.soalIdx, this.jmlSoal);
 

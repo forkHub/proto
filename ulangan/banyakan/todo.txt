@@ -11,6 +11,10 @@ membandingkan dengan simbol
 
 jangka panjang:
 ===============
+angka mulai dari 1
+
+mengenal angka 0
+
 urutkan dari yang terbesar
 
 coba tiga kali baru ganti soal

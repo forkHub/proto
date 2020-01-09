@@ -1,21 +1,20 @@
 import { Angka, AngkaEnum } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
-// import { Bar } from "../Bar.js";
 export class Urutkan extends BaseSoal {
     constructor() {
         super();
         this.angkas = [];
         this.acak = new Acak(10);
         this.max = 10;
-        this.jmlAngka = 3; //TODO: angka lebih banyak
-        this.cont = null;
+        // protected jmlKotak: number = 3;	//TODO: angka lebih banyak
         this._flJarak = Jarak.JARAK_ACAK; //TODO: jarak 1 atau acak
         this._flArah = Arah.KECIL2BESAR; //TODO: arah ke besar atau ke kecil
         this.angkaSumberEl = null;
         this.angkaTargetEl = null;
         this._elHtml = document.body.querySelector('div.cont div.urutkan');
         this.cont = document.body.querySelector('div.cont');
+        this.jmlKotak = 3;
     }
     init() {
         console.log('init');
@@ -24,7 +23,7 @@ export class Urutkan extends BaseSoal {
         this.acak.max = this.max;
         this.angkaSumberEl = this.getEl('div.sumber');
         this.angkaTargetEl = this.getEl('div.target');
-        for (let i = 0; i < this.jmlAngka; i++) {
+        for (let i = 0; i < this.jmlKotak; i++) {
             let angkaN = this.buatAngka();
             let angka = new Angka(angkaN);
             angka.angkaClick = (angkaP) => {
@@ -97,8 +96,8 @@ export class Urutkan extends BaseSoal {
                 return false;
             }
         }
-        if (this.angkaTargetEl.childElementCount != this.jmlAngka) {
-            console.log('check gagal, jumlah child element != ' + this.jmlAngka);
+        if (this.angkaTargetEl.childElementCount != this.jmlKotak) {
+            console.log('check gagal, jumlah child element != ' + this.jmlKotak);
             console.log('this.angkatargetEl:');
             console.log(this.angkaTargetEl);
             throw new Error();
@@ -111,7 +110,7 @@ export class Urutkan extends BaseSoal {
             }
             // angkas.push(parseInt(this.angkaTargetEl.children[i].innerHTML));
         }
-        if (angkas.length != this.jmlAngka) {
+        if (angkas.length != this.jmlKotak) {
             console.log(angkas);
             throw new Error('jumlah angka tidak cocok');
         }
@@ -160,7 +159,7 @@ export class Urutkan extends BaseSoal {
     check2() {
         let target = [];
         target = this.getAngka(this.angkaTargetEl);
-        if (target.length < this.jmlAngka)
+        if (target.length < this.jmlKotak)
             return false;
         return this.urut(target);
     }
@@ -178,7 +177,7 @@ export class Urutkan extends BaseSoal {
         }
         let angkas = [];
         angkas = this.getAngka(this.angkaTargetEl);
-        if (angkas.length >= this.jmlAngka) {
+        if (angkas.length >= this.jmlKotak) {
             this.soalIdx++;
             this.bar.persen2(this.soalIdx, this.jmlSoal);
             if (this.check2()) {

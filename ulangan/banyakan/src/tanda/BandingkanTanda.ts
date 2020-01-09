@@ -1,10 +1,14 @@
-import { BaseComponent } from "../BaseComponent.js";
-import { Acak } from "../Acak.js";
-import { Feedback, FeedbackEnum } from "../Feedback.js";
-import { Game } from "../Game.js";
-import { Selesai } from "../Selesai.js";
+// import { BaseComponent } from "../BaseComponent.js";
+// import { Feedback, FeedbackEnum } from "../Feedback.js";
+// import { Selesai } from "../Selesai.js";
+// import { IBaseSoal, BaseSoal } from "../BaseSoal.js";
+// import { Bar } from "../Bar.js";
 
-export class BandingkanTanda extends BaseComponent {
+import { Game } from "../Game.js";
+import { Acak } from "../Acak.js";
+import { BaseSoal } from "../BaseSoal.js";
+
+export class BandingkanTanda extends BaseSoal {
 
 	private _kdTbl: HTMLButtonElement = null;
 	private _sdTbl: HTMLButtonElement = null;
@@ -14,13 +18,9 @@ export class BandingkanTanda extends BaseComponent {
 	private tengahEl: HTMLDivElement = null;
 	private kananEl: HTMLDivElement = null;
 
-	private _feedback: Feedback;
-	private selesai: Selesai;
 	private angkaAcak: Acak = null;
 	private angkas: Array<number> = [];
 	private jawaban: string = '';
-	private soalIdx: number = 0;
-	private _nilai: number = 0;
 
 	constructor() {
 		super();
@@ -62,9 +62,13 @@ export class BandingkanTanda extends BaseComponent {
 		this.angkaAcak = new Acak(10);
 		this._feedback = Game.inst.feedback;
 		this.selesai = Game.inst.selesai;
+
+		this.bar.attach(this.getEl("div.banyakan-tanda div.bar-cont") as HTMLDivElement);
 	}
 
 	init(): void {
+		this.cont = Game.inst.cont;
+
 		this._kdTbl.onclick = () => {
 			this.kdClick();
 		}
@@ -81,11 +85,11 @@ export class BandingkanTanda extends BaseComponent {
 	}
 
 	mulai(): void {
-		this.restart();
+		this.reset();
 		this.soalIdx = 0;
 	}
 
-	restart(): void {
+	reset(): void {
 		this.angkas[0] = this.angkaAcak.get();
 		this.angkas[1] = this.angkaAcak.get();
 
@@ -95,13 +99,10 @@ export class BandingkanTanda extends BaseComponent {
 	}
 
 	feedbackClick(): void {
-		// console.log('feed back click');
 		this._feedback.detach();
 		this.soalIdx++;
-		// this.bar.persen = (this.soalIdx / 10) * 100;
 
 		if (this.soalIdx >= 10) {
-			// console.log('feedback click ' + this.soalidx + '/nilai ' + this._nilai);
 			this.selesai.attach(Game.inst.cont);
 			this.selesai.onMulaiClick = () => {
 				this.selesai.detach();
@@ -109,55 +110,56 @@ export class BandingkanTanda extends BaseComponent {
 			}
 			this.selesai.onMenuClick = () => {
 				this.detach();
-				// this.selesai.detach();
 				Game.inst.menu.attach(Game.inst.cont);
 			}
-			this.selesai.nilai = this._nilai;
+			this.selesai.nilai = this.nilai;
 		}
 		else {
-			this.restart();
+			this.reset();
 		}
 	}
 
-	feedbackSalahShow(): void {
-		this._feedback.attach(Game.inst.cont);
-		this._feedback.label = "Jawaban Salah";
-		this._feedback.type = FeedbackEnum.SALAH;
-		this._feedback.onClick = () => {
-			this.feedbackClick();
-		}
-	}
+	// feedbackSalahShow(): void {
+	// super.feedbackSalahShow(this.cont)
+	// this._feedback.attach(Game.inst.cont);
+	// this._feedback.label = "Jawaban Salah";
+	// this._feedback.type = FeedbackEnum.SALAH;
+	// this._feedback.onClick = () => {
+	// 	this.feedbackClick();
+	// }
+	// }
 
-	feedbackBenarShow(): void {
-		this._feedback.attach(Game.inst.cont);
-		this._feedback.label = 'Jawaban Benar';
-		this._feedback.type = FeedbackEnum.BENAR;
-		this._feedback.onClick = () => {
-			this.feedbackClick();
-		}
-	}
+	// feedbackBenarShow(): void {
+	// 	this._feedback.attach(Game.inst.cont);
+	// this._feedback.label = 'Jawaban Benar';
+	// this._feedback.type = FeedbackEnum.BENAR;
+	// this._feedback.onClick = () => {
+	// 	this.feedbackClick();
+	// }
+	// }
 
-	userJawab(jawab: string): void {
-		this.jawaban = jawab;
-		this.tengahEl.innerHTML = this.jawaban;
-		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow();
-		}
-		else {
-			this.feedbackSalahShow();
-		}
-	}
+	// userJawab(jawab: string): void {
+	// 	this.jawaban = jawab;
+	// 	this.tengahEl.innerHTML = this.jawaban;
+	// 	if (this.check()) {
+	// 		this._nilai++;
+	// 		this.feedbackBenarShow();
+	// 	}
+	// 	else {
+	// 		this.feedbackSalahShow();
+	// 	}
+	// }
 
 	kdClick(): void {
 		this.jawaban = '<';
 		this.tengahEl.innerHTML = this.jawaban;
+		this.bar.persen2(this.soalIdx, 10);
 		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow();
+			this.nilai++;
+			this.feedbackBenarShow(this.cont);
 		}
 		else {
-			this.feedbackSalahShow();
+			this.feedbackSalahShow(this.cont);
 		}
 	}
 
@@ -165,11 +167,11 @@ export class BandingkanTanda extends BaseComponent {
 		this.jawaban = '=';
 		this.tengahEl.innerHTML = this.jawaban;
 		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow();
+			this.nilai++;
+			this.feedbackBenarShow(this.cont);
 		}
 		else {
-			this.feedbackSalahShow();
+			this.feedbackSalahShow(this.cont);
 		}
 	}
 
@@ -177,11 +179,11 @@ export class BandingkanTanda extends BaseComponent {
 		this.jawaban = '>';
 		this.tengahEl.innerHTML = this.jawaban;
 		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow();
+			this.nilai++;
+			this.feedbackBenarShow(this.cont);
 		}
 		else {
-			this.feedbackSalahShow();
+			this.feedbackSalahShow(this.cont);
 		}
 	}
 
