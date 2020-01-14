@@ -10,6 +10,7 @@ export class BaseSoal extends BaseComponent {
         this.nilai = 0;
         this.gambar = true;
         this.angkaMulai = 1;
+        this.angkaMax = 10;
         this.jmlKotak = 3;
         this.cont = null;
         this.onSelesai = null;

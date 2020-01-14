@@ -9,6 +9,7 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected nilai: number = 0;
 	protected gambar: boolean = true;
 	protected angkaMulai: number = 1;
+	protected angkaMax: number = 10;
 	protected jmlKotak: number = 3;
 
 	protected cont: HTMLDivElement = null;

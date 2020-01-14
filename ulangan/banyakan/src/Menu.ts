@@ -83,6 +83,7 @@ export class Menu extends BaseComponent {
 export interface ITombol {
 	label?: string;
 	onclick?: Function;
+	description?: string;	//TODO: implement
 	members: Array<ITombol>
 }
 
@@ -91,6 +92,7 @@ const puluhan: ITombol = {
 	members: [
 		{
 			label: "Latihan 1",
+			description: "Mengisi nilai puluhan dan satuan",
 			onclick: (e: MouseEvent) => {
 				e.stopPropagation();
 				Game.inst.menu.detach();
@@ -107,10 +109,31 @@ const urutkan: ITombol = {
 	members: [
 		{
 			label: "Latihan 1",
-			onclick: () => {
+			description: "Mengurutkan angka 0 - 10",
+			onclick: (e: MouseEvent) => {
+				e.stopPropagation();
 				window.location.href = "./urutkan.html"
 			},
 			members: []
+		}
+	]
+}
+
+const jumlahBenda: ITombol = {
+	label: 'Menghitung jumlah Benda I',
+	members: [
+		{
+			label: "Latihan 1",
+			description: "Menghitung jumlah benda dengan memilih jawaban yang benar",
+			onclick: (e: MouseEvent) => {
+				e.stopPropagation();
+				Game.inst.jumlahPilih.mulai();
+				Game.inst.jumlahPilih.reset();
+				Game.inst.jumlahPilih.attach(Game.inst.cont);
+			},
+			members: [
+
+			]
 		}
 	]
 }
@@ -186,6 +209,7 @@ export const MenuData: ITombol = {
 				},
 				{
 					label: 'Latihan 5', //'Dengan Simbol',
+					description: "Menggunakan simbol < > dan =",
 					members: [],
 					onclick: click.membandingkan.simbol
 				}
@@ -193,6 +217,7 @@ export const MenuData: ITombol = {
 			]
 		},
 		puluhan,
-		urutkan
+		urutkan,
+		jumlahBenda
 	]
 }

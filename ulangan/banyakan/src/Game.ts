@@ -7,6 +7,8 @@ import { Puluhan } from "./puluhan/Puluhan.js";
 import { Menu } from "./Menu.js";
 import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
 import { Debug } from "./Debug.js";
+import { Acak } from "./Acak.js";
+import { JumlahPilih } from "./jumlah/Jumlah.js";
 
 
 export class Game {
@@ -19,6 +21,7 @@ export class Game {
 	private _puluhan: Puluhan = null;
 	private _menu: Menu = null;
 	private _simbol: BandingkanTanda = null;
+	private _jumlahPilih: JumlahPilih = null;
 
 	private static _inst: Game;
 
@@ -33,6 +36,7 @@ export class Game {
 		this._puluhan = new Puluhan();
 		this._menu = new Menu();
 		this._simbol = new BandingkanTanda();
+		this._jumlahPilih = new JumlahPilih();
 
 		window.onload = () => {
 			this.init();
@@ -51,8 +55,16 @@ export class Game {
 
 		this._menu.init();
 		this._menu.attach(this._cont);
+		this._jumlahPilih.init();
 
 		// this.debug();
+		this.test();
+	}
+
+	test(): void {
+		//test acak
+		let acak: Acak = new Acak(10);
+		acak.test();
 	}
 
 	debug() {
@@ -100,6 +112,12 @@ export class Game {
 	}
 	public set simbol(value: BandingkanTanda) {
 		this._simbol = value;
+	}
+	public get jumlahPilih(): JumlahPilih {
+		return this._jumlahPilih;
+	}
+	public set jumlahPilih(value: JumlahPilih) {
+		this._jumlahPilih = value;
 	}
 }
 

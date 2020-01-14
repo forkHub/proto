@@ -68,6 +68,7 @@ const puluhan = {
     members: [
         {
             label: "Latihan 1",
+            description: "Mengisi nilai puluhan dan satuan",
             onclick: (e) => {
                 e.stopPropagation();
                 Game.inst.menu.detach();
@@ -83,8 +84,26 @@ const urutkan = {
     members: [
         {
             label: "Latihan 1",
-            onclick: () => {
+            description: "Mengurutkan angka 0 - 10",
+            onclick: (e) => {
+                e.stopPropagation();
                 window.location.href = "./urutkan.html";
+            },
+            members: []
+        }
+    ]
+};
+const jumlahBenda = {
+    label: 'Menghitung jumlah Benda I',
+    members: [
+        {
+            label: "Latihan 1",
+            description: "Menghitung jumlah benda dengan memilih jawaban yang benar",
+            onclick: (e) => {
+                e.stopPropagation();
+                Game.inst.jumlahPilih.mulai();
+                Game.inst.jumlahPilih.reset();
+                Game.inst.jumlahPilih.attach(Game.inst.cont);
             },
             members: []
         }
@@ -160,12 +179,14 @@ export const MenuData = {
                 },
                 {
                     label: 'Latihan 5',
+                    description: "Menggunakan simbol < > dan =",
                     members: [],
                     onclick: click.membandingkan.simbol
                 }
             ]
         },
         puluhan,
-        urutkan
+        urutkan,
+        jumlahBenda
     ]
 };
