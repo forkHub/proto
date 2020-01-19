@@ -1,0 +1,133 @@
+import { BaseComponent } from "./BaseComponent.js";
+import { Bar } from "./Bar.js";
+import { Feedback, FeedbackEnum } from "./Feedback.js";
+import { Selesai } from "./Selesai.js";
+// import { Game } from "./Game.js";
+export class BaseSoal extends BaseComponent {
+    constructor() {
+        super();
+        this.jmlSoal = 10;
+        this.soalIdx = 0;
+        this.nilai = 0;
+        this.gambar = true;
+        this.angkaMulai = 1;
+        this.angkaMax = 10;
+        this.jmlKotak = 3;
+        this._cont = null;
+        this.onSelesai = null;
+        this.query = [];
+        this.bar = null;
+        this._feedback = null;
+        this.selesai = null;
+        this.selesai = new Selesai();
+        this._feedback = new Feedback();
+        this.getUrl();
+        console.log('query');
+        console.log(this.query);
+        this.bar = new Bar();
+    }
+    getUrl() {
+        let url = window.location.search.slice(1);
+        let kv = [];
+        let kv2 = [];
+        console.log('url ' + url);
+        if (url && url.length > 0) {
+            kv = url.split('&');
+            console.log('kv');
+            console.log(kv);
+            if (kv && kv.length > 0) {
+                for (let i = 0; i < kv.length; i++) {
+                    kv2 = kv[i].split('=');
+                    console.log('kv[i]');
+                    console.log(kv[i]);
+                    console.log('kv2');
+                    console.log(kv2);
+                    console.log('');
+                    if (2 == kv2.length) {
+                        this.query.push(new Query(kv2[0], kv2[1]));
+                    }
+                }
+            }
+        }
+    }
+    init() {
+        this.selesai.init();
+        this.selesai.onMulaiClick = () => {
+            this.mulai();
+        };
+        this.selesai.onMenuClick = () => {
+            window.location.href = './index.html';
+        };
+        this._feedback.init();
+    }
+    setConfig(config) {
+        if (config.angkaMulai) {
+            this.angkaMulai = config.angkaMulai;
+        }
+        if (config.gambar) {
+            this.gambar = config.gambar;
+        }
+        if (config.jmlAngka) {
+            this.jmlKotak = config.jmlAngka;
+        }
+    }
+    reset() {
+    }
+    mulai() {
+        this.nilai = 0;
+        this.soalIdx = 0;
+        this.bar.persen = 0;
+    }
+    check() {
+        return true;
+    }
+    userJawab() {
+    }
+    feedbackClick(cont) {
+        console.log('feedback click, nilai ' + this.nilai);
+        this._feedback.detach();
+        if (this.soalIdx >= this.jmlSoal) {
+            this.selesai.attach(cont);
+            this.selesai.nilai = this.nilai;
+        }
+        else {
+            this.reset();
+        }
+    }
+    feedbackSalahShow(cont) {
+        this._feedback.attach(cont);
+        this._feedback.label = "Jawaban Salah";
+        this._feedback.type = FeedbackEnum.SALAH;
+        this._feedback.onClick = () => {
+            this.feedbackClick(cont);
+        };
+    }
+    feedbackBenarShow(cont) {
+        this._feedback.attach(cont);
+        this._feedback.label = 'Jawaban Benar';
+        this._feedback.type = FeedbackEnum.BENAR;
+        this._feedback.onClick = () => {
+            this.feedbackClick(cont);
+        };
+    }
+    get cont() {
+        return this._cont;
+    }
+    set cont(value) {
+        this._cont = value;
+    }
+}
+export class Query {
+    constructor(key, value) {
+        this._key = '';
+        this._value = '';
+        this._key = key;
+        this._value = value;
+    }
+    get key() {
+        return this._key;
+    }
+    get value() {
+        return this._value;
+    }
+}
