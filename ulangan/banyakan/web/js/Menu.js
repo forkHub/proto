@@ -1,9 +1,11 @@
 import { TombolMenu } from "./Tombol.js";
 import { Game } from "./Game.js";
 import { BaseComponent } from "./BaseComponent.js";
+import { JenisSoal } from "./EnumSoal.js";
 export class Menu extends BaseComponent {
     constructor() {
         super();
+        this._list = [];
         this._template = `
 			<div class='menu'>
 				<p>Belajar Matematika Dasar</p>
@@ -20,20 +22,20 @@ export class Menu extends BaseComponent {
         let rootUl = document.createElement('ul');
         rootDiv.appendChild(rootUl);
         rootDiv.classList.add('menu-ul');
-        this.renderChild(data.members, rootUl);
+        if (data.members)
+            this.renderChild(data.members, rootUl);
         return rootDiv;
     }
     renderChild(childs, ulParent) {
         for (let i = 0; i < childs.length; i++) {
             let li = document.createElement('li');
             let child = childs[i];
-            if (child.members.length > 0) {
+            if (child.members && child.members.length > 0) {
                 let text = null;
-                // let par: HTMLParagraphElement = document.createElement('p');
-                let par = document.createElement('button');
+                let tbl = document.createElement('button');
                 text = document.createTextNode(child.label);
-                par.appendChild(text);
-                li.appendChild(par);
+                tbl.appendChild(text);
+                li.appendChild(tbl);
                 let ul = document.createElement('ul');
                 ul.style.display = 'none';
                 li.appendChild(ul);
@@ -47,22 +49,63 @@ export class Menu extends BaseComponent {
                         ul.style.display = 'none';
                     }
                 };
-                this.renderChild(child.members, ul);
+                if (child.members)
+                    this.renderChild(child.members, ul);
             }
             else {
                 let tombol = new TombolMenu();
                 tombol.label = child.label;
+                if (child.description) {
+                    tombol.desc = child.description;
+                }
                 if (child.onclick) {
                     tombol.onClick = (e) => {
                         child.onclick(e);
                     };
                 }
                 tombol.attach(li);
+                if (child.idx) {
+                    tombol.idx = child.idx;
+                    this._list.push(tombol);
+                }
             }
             ulParent.appendChild(li);
         }
     }
+    get list() {
+        return this._list;
+    }
 }
+export const click = {
+    membandingkan: {
+        simbol: (e) => {
+            console.log('banyakan click gambar 3');
+            e.stopPropagation();
+            Game.inst.menu.detach();
+            Game.inst.simbol.attach(Game.inst.cont);
+            Game.inst.simbol.mulai();
+        }
+    }
+};
+const jumlah = {
+    label: 'Menghitung jumlah Benda I',
+    members: [
+        {
+            label: "Latihan 1",
+            description: "Menghitung jumlah benda dengan memilih jawaban yang benar",
+            idx: JenisSoal.JUMLAH_TOMBOL,
+            onclick: (e) => {
+                e.stopPropagation();
+                console.log(e);
+                Game.inst.menu.detach();
+                Game.inst.jumlahPilih.mulai();
+                Game.inst.jumlahPilih.reset();
+                Game.inst.jumlahPilih.cont = Game.inst.cont;
+                Game.inst.jumlahPilih.attach(Game.inst.cont);
+            },
+        }
+    ]
+};
 const puluhan = {
     label: "Puluhan Satuan",
     members: [
@@ -93,100 +136,74 @@ const urutkan = {
         }
     ]
 };
-const jumlahBenda = {
-    label: 'Menghitung jumlah Benda I',
+const membandingkan = {
+    label: 'Membandingkan',
     members: [
         {
-            label: "Latihan 1",
-            description: "Menghitung jumlah benda dengan memilih jawaban yang benar",
+            label: 'Latihan 1',
             onclick: (e) => {
                 e.stopPropagation();
-                Game.inst.jumlahPilih.mulai();
-                Game.inst.jumlahPilih.reset();
-                Game.inst.jumlahPilih.attach(Game.inst.cont);
+                console.log('banyakan click');
+                Game.inst.menu.detach();
+                Game.inst.banyakan.jmlSoal = 2;
+                Game.inst.banyakan.angkaSaja = false;
+                Game.inst.banyakan.attach(Game.inst.cont);
+                Game.inst.banyakan.mulaiLagi();
             },
             members: []
+        },
+        {
+            label: 'Latihan 2',
+            onclick: (e) => {
+                e.stopPropagation();
+                console.log('banyakan click gambar 3');
+                Game.inst.menu.detach();
+                Game.inst.banyakan.jmlSoal = 3;
+                Game.inst.banyakan.angkaSaja = false;
+                Game.inst.banyakan.attach(Game.inst.cont);
+                Game.inst.banyakan.mulaiLagi();
+            },
+            members: []
+        },
+        {
+            label: 'Latihan 3',
+            onclick: (e) => {
+                console.log('banyakan click angka 2');
+                e.stopPropagation();
+                Game.inst.menu.detach();
+                Game.inst.banyakan.jmlSoal = 2;
+                Game.inst.banyakan.angkaSaja = true;
+                Game.inst.banyakan.attach(Game.inst.cont);
+                Game.inst.banyakan.mulaiLagi();
+            },
+            members: []
+        },
+        {
+            label: 'Latihan 4',
+            onclick: (e) => {
+                console.log('banyakan click gambar 3');
+                e.stopPropagation();
+                Game.inst.menu.detach();
+                Game.inst.banyakan.jmlSoal = 3;
+                Game.inst.banyakan.angkaSaja = true;
+                Game.inst.banyakan.attach(Game.inst.cont);
+                Game.inst.banyakan.mulaiLagi();
+            },
+            members: []
+        },
+        {
+            label: 'Latihan 5',
+            description: "Menggunakan simbol < > dan =",
+            members: [],
+            onclick: click.membandingkan.simbol
         }
     ]
 };
-export const click = {
-    membandingkan: {
-        simbol: (e) => {
-            console.log('banyakan click gambar 3');
-            e.stopPropagation();
-            Game.inst.menu.detach();
-            Game.inst.simbol.attach(Game.inst.cont);
-            Game.inst.simbol.mulai();
-        }
-    }
-};
 export const MenuData = {
     members: [
-        {
-            label: 'Membandingkan',
-            members: [
-                {
-                    label: 'Latihan 1',
-                    onclick: (e) => {
-                        e.stopPropagation();
-                        console.log('banyakan click');
-                        Game.inst.menu.detach();
-                        Game.inst.banyakan.jmlSoal = 2;
-                        Game.inst.banyakan.angkaSaja = false;
-                        Game.inst.banyakan.attach(Game.inst.cont);
-                        Game.inst.banyakan.mulaiLagi();
-                    },
-                    members: []
-                },
-                {
-                    label: 'Latihan 2',
-                    onclick: (e) => {
-                        e.stopPropagation();
-                        console.log('banyakan click gambar 3');
-                        Game.inst.menu.detach();
-                        Game.inst.banyakan.jmlSoal = 3;
-                        Game.inst.banyakan.angkaSaja = false;
-                        Game.inst.banyakan.attach(Game.inst.cont);
-                        Game.inst.banyakan.mulaiLagi();
-                    },
-                    members: []
-                },
-                {
-                    label: 'Latihan 3',
-                    onclick: (e) => {
-                        console.log('banyakan click angka 2');
-                        e.stopPropagation();
-                        Game.inst.menu.detach();
-                        Game.inst.banyakan.jmlSoal = 2;
-                        Game.inst.banyakan.angkaSaja = true;
-                        Game.inst.banyakan.attach(Game.inst.cont);
-                        Game.inst.banyakan.mulaiLagi();
-                    },
-                    members: []
-                },
-                {
-                    label: 'Latihan 4',
-                    onclick: (e) => {
-                        console.log('banyakan click gambar 3');
-                        e.stopPropagation();
-                        Game.inst.menu.detach();
-                        Game.inst.banyakan.jmlSoal = 3;
-                        Game.inst.banyakan.angkaSaja = true;
-                        Game.inst.banyakan.attach(Game.inst.cont);
-                        Game.inst.banyakan.mulaiLagi();
-                    },
-                    members: []
-                },
-                {
-                    label: 'Latihan 5',
-                    description: "Menggunakan simbol < > dan =",
-                    members: [],
-                    onclick: click.membandingkan.simbol
-                }
-            ]
-        },
+        jumlah,
+        membandingkan,
         puluhan,
-        urutkan,
-        jumlahBenda
+        urutkan
     ]
 };

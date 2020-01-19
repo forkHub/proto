@@ -1,0 +1,17 @@
+/*Selesai*/
+/*=======*/
+div.selesai {
+	position: absolute;
+	left:0px;
+	top:0px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: white;
+}
+
+div.selesai 
+p.nilai {
+	font-size: xx-large;
+	font-weight: bolder;
+}

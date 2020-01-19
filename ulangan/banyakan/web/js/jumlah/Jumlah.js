@@ -1,85 +1,123 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Acak } from "../Acak.js";
+import { iconBuah } from "../Buah.js";
+import { Game } from "../Game.js";
 export class JumlahPilih extends BaseSoal {
-    // private jawabans: Array<number> = [];
     constructor() {
         super();
-        this.jawab1Tbl = null;
-        this.jawab2Tbl = null;
-        this.jawab3Tbl = null;
         this.tblAr = [];
+        this.soalKotak = null;
+        this.jawabCont = null;
         this.angkaSoal = 0;
         this.acakAngkaSoal = null;
         this._template = `
-			<div class='jumlah'>
-				<div class='soal'></div>
+			<div class='jumlah-benda'>
+				<div class='bar-cont'></div>
+				<p class='judul-soal'>Berapa Jumlahnya</p> 
+				<div class='soal'>
+					<div class='soal1'></div>
+					<div class='soal2'/></div>
+				</div>
 				<div class='jawaban'>
-					<button class='jawab satu'></button>
-					<button class='jawab dua'></button>
-					<button class='jawab tiga'></button>
+					<button class='jawab satu putih'></button>
+					<button class='jawab dua putih'></button>
+					<button class='jawab tiga putih'></button>
 				</div>
 			</div>
 		`;
         this.build();
-        //TODO: hapus diganti generic ke tblAr
-        this.jawab1Tbl = this.getEl('button.jawab.satu');
-        this.jawab2Tbl = this.getEl('button.jawab.dua');
-        this.jawab3Tbl = this.getEl('button.jawab.tiga');
+        this.bar.attach(this.getEl('div.bar-cont'));
+        this.soalKotak = this.getEl('div.soal div.soal1');
+        this.jawabCont = this.getEl('div.jawaban');
         this.tblAr = [];
-        this.setTombol(this.jawab1Tbl);
-        this.setTombol(this.jawab2Tbl);
-        this.setTombol(this.jawab3Tbl);
-        this.jawab1Tbl.onclick = (e) => {
-            e.stopPropagation();
-            this.tombolClick(0);
-        };
-        this.jawab2Tbl.onclick = () => {
-            this.tombolClick(1);
-        };
-        this.jawab3Tbl.onclick = () => {
-            this.tombolClick(2);
-        };
+        this.setTombol(this.getEl('button.jawab.satu'));
+        this.setTombol(this.getEl('button.jawab.dua'));
+        this.setTombol(this.getEl('button.jawab.tiga'));
         this.acakAngkaSoal = new Acak(this.angkaMax);
+    }
+    init() {
+        super.init();
+        this.bar.onClick = () => {
+            this.detach();
+            Game.inst.menu.attach(Game.inst.cont);
+        };
+        this.selesai.onMenuClick = () => {
+            this.detach();
+            this.selesai.detach();
+            Game.inst.menu.attach(Game.inst.cont);
+        };
     }
     setTombol(tblView) {
         let tbl = new Tombol();
         tbl.view = tblView;
         this.tblAr.push(tbl);
+        tbl.onClick = this.tombolClick.bind(this);
     }
     tombolClick(idx) {
-        if (idx == this.angkaSoal) {
-            this.feedbackBenarShow(this.cont);
+        console.log('tombol click ' + idx.angka + '/' + this.angkaSoal);
+        this.soalIdx++;
+        this.bar.persen2(this.soalIdx, this.jmlSoal);
+        if (idx.angka == this.angkaSoal) {
+            this.nilai++;
+            this.feedbackBenarShow(this._cont);
         }
         else {
-            this.feedbackSalahShow(this.cont);
+            this.feedbackSalahShow(this._cont);
         }
     }
-    debug() {
-        console.log(this.jawab1Tbl);
-        console.log(this.jawab2Tbl);
-        console.log(this.jawab3Tbl);
-    }
-    init() {
+    debug() { }
+    // init(): void {
+    // 	super.init();
+    // }
+    mulai() {
+        console.log('Jumlah: mulai');
+        super.mulai();
     }
     reset() {
+        console.log('Jumlah: reset');
         super.reset();
-        let geser = 0;
-        //TODO: test edge case
         this.angkaSoal = this.acakAngkaSoal.get() + 1;
-        if (this.angkaSoal <= 1)
-            geser = 1;
-        if (this.angkaSoal >= this.angkaMax - 1)
-            geser = -1;
-        //default
-        for (let i = 0; i < 3; i++) {
-            this.tblAr[i].angka = this.angkaSoal - (i + 1) + geser;
-            this.tblAr[i].tulis();
+        this.tblAr[0].angka = this.angkaSoal;
+        this.tblAr[1].angka = this.acakAngkaSoal.get2([this.tblAr[0].angka]);
+        this.tblAr[2].angka = this.acakAngkaSoal.get2([this.tblAr[0].angka, this.tblAr[1].angka]);
+        this.tblAr[0].tulis();
+        this.tblAr[1].tulis();
+        this.tblAr[2].tulis();
+        for (let i = 0; i < 1000; i++) {
+            this.acakSoal();
         }
+        for (let i = 0; i < 3; i++) {
+            this.tblAr[i].view.parentElement.removeChild(this.tblAr[i].view);
+        }
+        for (let i = 0; i < 3; i++) {
+            this.jawabCont.appendChild(this.tblAr[i].view);
+        }
+        let str = '';
+        let iconIdx = Math.floor(Math.random() * iconBuah.length);
+        for (let i = 0; i < this.angkaSoal; i++) {
+            str += iconBuah[iconIdx];
+        }
+        this.soalKotak.innerHTML = str;
+    }
+    acakSoal() {
+        let a = Math.floor(Math.random() * 3);
+        let b = Math.floor(Math.random() * 3);
+        if (a == b)
+            return;
+        let angka = new Tombol();
+        angka = this.tblAr[a];
+        this.tblAr[a] = this.tblAr[b];
+        this.tblAr[b] = angka;
     }
 }
 class Tombol {
     constructor() {
         this._angka = 0;
+    }
+    set onClick(value) {
+        this._view.onclick = () => {
+            value(this);
+        };
     }
     get angka() {
         return this._angka;
@@ -95,5 +133,13 @@ class Tombol {
     }
     tulis() {
         this._view.innerText = this._angka + '';
+    }
+    copy(angka2) {
+        angka2.angka = this._angka;
+        angka2.view = this._view;
+    }
+    copyFrom(angka) {
+        this._angka = angka.angka;
+        this._view = angka.view;
     }
 }

@@ -33,6 +33,20 @@ div.menu ul li.label > button {
 	top:0px;
 }
 
+div.menu ul li button.menu p.label {
+	/* font-size: small; */
+	padding: 0px;
+	margin: 0px;
+}
+
+
+div.menu ul li button.menu p.description {
+	font-size: small;
+	padding: 0px;
+	margin: 0px;
+	font-weight: normal;
+}
+
 div.menu ul li.label > button:active {
 	box-shadow: none;
 	top: 3px;

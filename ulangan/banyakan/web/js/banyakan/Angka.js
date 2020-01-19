@@ -2,6 +2,7 @@ export class Angka {
     constructor() {
         this._angka = 0;
         this._view = null;
+        //TODO: pakai sharing resource
         this.icons = [
             "&#127799", "&#127800", "&#127801", "&#127802", "&#127803",
             "&#127804", "&#127805", "&#127806", "&#127807", "&#127808",

@@ -37,7 +37,7 @@ export class Puluhan extends BaseComponent {
     }
     detach() {
         super.detach();
-        Game.inst.getStackTrace();
+        // Game.inst.getStackTrace();
     }
     init() {
         console.log('init');
@@ -51,6 +51,7 @@ export class Puluhan extends BaseComponent {
         this.satuanEl.tabIndex = 1;
         this.bar.attach(this.barCont);
         this.bar.persen = 0;
+        //TODO: taruh behaviour di base soal
         this.bar.onClick = () => {
             this.detach();
             Game.inst.menu.attach(Game.inst.cont);
@@ -60,6 +61,7 @@ export class Puluhan extends BaseComponent {
             this.kirimClick();
         };
     }
+    //TODO: refactor masukin ke base class
     feedbackOnClick() {
         Game.inst.feedback.detach();
         this._soalTerjawab++;
@@ -87,6 +89,7 @@ export class Puluhan extends BaseComponent {
     }
     selesaiMenuClick() {
         this.detach();
+        Game.inst.selesai.detach();
         Game.inst.menu.attach(Game.inst.cont);
     }
     kirimClick() {

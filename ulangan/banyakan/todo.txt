@@ -1,7 +1,9 @@
-dalam proses:
-=============
-ada bar progress
-
+menu behaviour di seragamkan
+mulai lagi behaviour diseragamkan (soalidx, nilai, bar)
+user jawab behaviour diseragamkan (check soal, feedback)
+chek benar behaviour diseragamkan
+feedback diseragamkan (soal selesai, soal habis, bar)
+automation diaplikasikan (test)
 
 selesai:
 ========

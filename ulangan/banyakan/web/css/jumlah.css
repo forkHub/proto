@@ -1,0 +1,25 @@
+div.jumlah-benda {
+	width: 100%;
+}
+
+div.jumlah-benda div.soal {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    font-size: x-large;
+}
+
+div.jumlah-benda button.jawab {
+    flex-grow: 1;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-top: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+div.jumlah-benda div.jawaban {
+    display: flex;
+    flex-grow: 1;
+}

@@ -23,6 +23,33 @@ button.selesai {
 	display: block;
 }
 
+button.putih {
+    border-radius: 10px;
+    background-color: white;
+    border-color: #333333;
+    padding: 8px;
+    padding-left: 32px;
+    padding-right: 32px;
+    color: #333333;
+    border: 1px solid #333;
+	box-shadow: 0px 2px 0px 0px #333333;
+	font-size: large;
+	margin: auto;
+	margin-bottom: 16px;
+	position: relative;
+	top:0px;
+}
+
+button.putih:hover {
+	background-color:  #666666;
+	color: white;
+}
+
+button.putih:active {
+	top:3px;
+	box-shadow: none;
+}
+
 button.normal {
     border-radius: 10px;
     background-color: rgb(25, 182, 25);
@@ -49,80 +76,8 @@ button.normal:active {
 	box-shadow: none;
 }
 
-
-/*Selesai*/
-/*=======*/
-div.selesai {
-	position: absolute;
-	left:0px;
-	top:0px;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	background-color: white;
-}
-
-div.selesai 
-p.nilai {
-	font-size: xx-large;
-	font-weight: bolder;
-}
-
-/* feedback */
-/*==========*/
-div.cont 
-div.feedback {
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	top:0px;
-	right:0px;
-	background-color: rgba(0,0,0,.1);
-}
-
-div.cont
-div.feedback
-div.cont {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: large;
-	box-sizing: border-box;
-	text-align: center;
-	bottom: 0px;
-	position: absolute;
-	width: 100%;
-	background-color: #b2fa91;
-}
-
-div.cont
-div.feedback
-div.cont
-p {
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: center;
+div.cont p.judul-soal {
 	font-size: x-large;
-}
-
-div.cont
-div.feedback
-div.cont
-button {
-	margin-bottom: 32px;	
-}
-
-/* banyakan mana */
-div.banyakan
-div.angka {
-	width: 100%;
-	position: relative;
-	border-radius: 10px;
-	border: 1px solid gray;
-	padding: 16px;
-	font-size: xx-large;
 	text-align: center;
-	margin-bottom: 16px;
-}
-
-div.banyakan >
-h1 {
-	text-align: center;
+	font-weight: bold;
 }
