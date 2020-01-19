@@ -1,6 +1,8 @@
 export class Angka {
 	private _angka: number = 0;
 	private _view: HTMLDivElement = null;
+
+	//TODO: pakai sharing resource
 	private icons: Array<string> = [
 		"&#127799", "&#127800", "&#127801", "&#127802", "&#127803",
 		"&#127804", "&#127805", "&#127806", "&#127807", "&#127808",
