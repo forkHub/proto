@@ -43,7 +43,7 @@ export class Puluhan extends BaseComponent {
 
 	detach() {
 		super.detach();
-		Game.inst.getStackTrace();
+		// Game.inst.getStackTrace();
 	}
 
 	init(): void {
@@ -62,6 +62,8 @@ export class Puluhan extends BaseComponent {
 
 		this.bar.attach(this.barCont);
 		this.bar.persen = 0;
+
+		//TODO: taruh behaviour di base soal
 		this.bar.onClick = () => {
 			this.detach();
 			Game.inst.menu.attach(Game.inst.cont);
@@ -75,6 +77,7 @@ export class Puluhan extends BaseComponent {
 
 	}
 
+	//TODO: refactor masukin ke base class
 	feedbackOnClick(): void {
 		Game.inst.feedback.detach();
 
@@ -84,6 +87,7 @@ export class Puluhan extends BaseComponent {
 		if (this._soalTerjawab >= this.soalTotal) {
 			Game.inst.selesai.attach(Game.inst.cont);
 			Game.inst.selesai.nilai = this.jmlBenar;
+
 			Game.inst.selesai.onMulaiClick = () => {
 				// this.detach();
 				this.selesaiMulaiLagiClick();
@@ -107,6 +111,7 @@ export class Puluhan extends BaseComponent {
 
 	selesaiMenuClick(): void {
 		this.detach();
+		Game.inst.selesai.detach();
 		Game.inst.menu.attach(Game.inst.cont);
 	}
 
