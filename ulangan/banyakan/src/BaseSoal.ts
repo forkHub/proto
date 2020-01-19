@@ -2,6 +2,7 @@ import { BaseComponent } from "./BaseComponent.js";
 import { Bar } from "./Bar.js";
 import { Feedback, FeedbackEnum } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
+// import { Game } from "./Game.js";
 
 export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected jmlSoal: number = 10;
@@ -12,7 +13,7 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected angkaMax: number = 10;
 	protected jmlKotak: number = 3;
 
-	protected cont: HTMLDivElement = null;
+	protected _cont: HTMLDivElement = null;
 	protected onSelesai: Function = null;
 	protected query: Array<Query> = [];
 	protected bar: Bar = null;
@@ -62,10 +63,6 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	}
 
 	init(): void {
-		this.bar.onClick = () => {
-			window.location.href = './index.html';
-		}
-
 		this.selesai.init();
 		this.selesai.onMulaiClick = () => {
 			this.mulai();
@@ -96,7 +93,9 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	}
 
 	mulai(): void {
-
+		this.nilai = 0;
+		this.soalIdx = 0;
+		this.bar.persen = 0;
 	}
 
 	check(): boolean {
@@ -108,7 +107,7 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	}
 
 	feedbackClick(cont: HTMLDivElement): void {
-		console.log('feedback click');
+		console.log('feedback click, nilai ' + this.nilai);
 		this._feedback.detach();
 
 		if (this.soalIdx >= this.jmlSoal) {
@@ -136,6 +135,13 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 		this._feedback.onClick = () => {
 			this.feedbackClick(cont);
 		}
+	}
+
+	public get cont(): HTMLDivElement {
+		return this._cont;
+	}
+	public set cont(value: HTMLDivElement) {
+		this._cont = value;
 	}
 }
 
