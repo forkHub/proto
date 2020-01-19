@@ -13,13 +13,13 @@ export class Urutkan extends BaseSoal {
         this.angkaSumberEl = null;
         this.angkaTargetEl = null;
         this._elHtml = document.body.querySelector('div.cont div.urutkan');
-        this.cont = document.body.querySelector('div.cont');
+        this._cont = document.body.querySelector('div.cont');
         this.jmlKotak = 3;
     }
     init() {
         console.log('init');
         super.init();
-        this.bar.attach(this.cont.querySelector('div.bar-cont'));
+        this.bar.attach(this._cont.querySelector('div.bar-cont'));
         this.acak.max = this.max;
         this.angkaSumberEl = this.getEl('div.sumber');
         this.angkaTargetEl = this.getEl('div.target');
@@ -183,11 +183,11 @@ export class Urutkan extends BaseSoal {
             if (this.check2()) {
                 //feedback benar
                 this.nilai++;
-                this.feedbackBenarShow(this.cont);
+                this.feedbackBenarShow(this._cont);
             }
             else {
                 //feedback salah
-                this.feedbackSalahShow(this.cont);
+                this.feedbackSalahShow(this._cont);
             }
         }
         else {
