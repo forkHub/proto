@@ -67,7 +67,7 @@ export class BandingkanTanda extends BaseSoal {
 	}
 
 	init(): void {
-		this.cont = Game.inst.cont;
+		this._cont = Game.inst.cont;
 
 		this._kdTbl.onclick = () => {
 			this.kdClick();
@@ -156,10 +156,10 @@ export class BandingkanTanda extends BaseSoal {
 		this.bar.persen2(this.soalIdx, 10);
 		if (this.check()) {
 			this.nilai++;
-			this.feedbackBenarShow(this.cont);
+			this.feedbackBenarShow(this._cont);
 		}
 		else {
-			this.feedbackSalahShow(this.cont);
+			this.feedbackSalahShow(this._cont);
 		}
 	}
 
@@ -168,10 +168,10 @@ export class BandingkanTanda extends BaseSoal {
 		this.tengahEl.innerHTML = this.jawaban;
 		if (this.check()) {
 			this.nilai++;
-			this.feedbackBenarShow(this.cont);
+			this.feedbackBenarShow(this._cont);
 		}
 		else {
-			this.feedbackSalahShow(this.cont);
+			this.feedbackSalahShow(this._cont);
 		}
 	}
 
@@ -180,10 +180,10 @@ export class BandingkanTanda extends BaseSoal {
 		this.tengahEl.innerHTML = this.jawaban;
 		if (this.check()) {
 			this.nilai++;
-			this.feedbackBenarShow(this.cont);
+			this.feedbackBenarShow(this._cont);
 		}
 		else {
-			this.feedbackSalahShow(this.cont);
+			this.feedbackSalahShow(this._cont);
 		}
 	}
 
