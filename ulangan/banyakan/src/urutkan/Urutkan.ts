@@ -19,7 +19,7 @@ export class Urutkan extends BaseSoal {
 	constructor() {
 		super();
 		this._elHtml = document.body.querySelector('div.cont div.urutkan') as HTMLDivElement;
-		this.cont = document.body.querySelector('div.cont') as HTMLDivElement;
+		this._cont = document.body.querySelector('div.cont') as HTMLDivElement;
 		this.jmlKotak = 3;
 	}
 
@@ -27,7 +27,7 @@ export class Urutkan extends BaseSoal {
 		console.log('init');
 		super.init();
 
-		this.bar.attach(this.cont.querySelector('div.bar-cont') as HTMLDivElement);
+		this.bar.attach(this._cont.querySelector('div.bar-cont') as HTMLDivElement);
 
 		this.acak.max = this.max;
 
@@ -219,11 +219,11 @@ export class Urutkan extends BaseSoal {
 			if (this.check2()) {
 				//feedback benar
 				this.nilai++;
-				this.feedbackBenarShow(this.cont);
+				this.feedbackBenarShow(this._cont);
 			}
 			else {
 				//feedback salah
-				this.feedbackSalahShow(this.cont)
+				this.feedbackSalahShow(this._cont)
 			}
 		}
 		else {
