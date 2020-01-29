@@ -1,4 +1,4 @@
-import { Angka, AngkaEnum } from "./Angka.js";
+import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
 
@@ -7,10 +7,8 @@ export class Urutkan extends BaseSoal {
 	private angkas: Array<Angka> = [];
 	private acak: Acak = new Acak(10);
 	private max: number = 10;
-	// protected jmlKotak: number = 3;	//TODO: angka lebih banyak
 
 	private _flJarak: Jarak = Jarak.JARAK_ACAK;	//TODO: jarak 1 atau acak
-
 	private _flArah: Arah = Arah.KECIL2BESAR;	//TODO: arah ke besar atau ke kecil
 
 	private angkaSumberEl: HTMLDivElement = null;
@@ -18,8 +16,16 @@ export class Urutkan extends BaseSoal {
 
 	constructor() {
 		super();
-		this._elHtml = document.body.querySelector('div.cont div.urutkan') as HTMLDivElement;
-		this._cont = document.body.querySelector('div.cont') as HTMLDivElement;
+		this._template = `
+			<div class='urutkan'>
+				<div class='bar-cont'></div>
+
+				<p class='judul-soal'>Urutkan dari yang terkecil</p c>
+				<div class='target'></div>
+				<div class='sumber'></div>
+			</div>`;
+
+		this.build();
 		this.jmlKotak = 3;
 	}
 
@@ -27,7 +33,7 @@ export class Urutkan extends BaseSoal {
 		console.log('init');
 		super.init();
 
-		this.bar.attach(this._cont.querySelector('div.bar-cont') as HTMLDivElement);
+		this.bar.attach(this.getEl('div.bar-cont') as HTMLDivElement);
 
 		this.acak.max = this.max;
 
@@ -81,7 +87,7 @@ export class Urutkan extends BaseSoal {
 	resetAngka(): void {
 		console.log('reset angka');
 		for (let i: number = 0; i < this.angkas.length; i++) {
-			this.angkas[i].tempat = AngkaEnum.SUMBER;
+			// this.angkas[i].tempat = AngkaEnum.SUMBER;
 			this.angkas[i].angka = -1;
 			this.angkas[i].attach(this.angkaSumberEl);
 		}
@@ -97,8 +103,6 @@ export class Urutkan extends BaseSoal {
 		console.log('soal idx ' + this.soalIdx);
 		super.reset();
 		this.resetAngka();
-
-		// this.render();
 	}
 
 	checkAdaAngkaDiSumber(angka: Angka): boolean {

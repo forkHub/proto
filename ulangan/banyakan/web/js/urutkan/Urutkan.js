@@ -1,4 +1,4 @@
-import { Angka, AngkaEnum } from "./Angka.js";
+import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
 export class Urutkan extends BaseSoal {
@@ -7,19 +7,25 @@ export class Urutkan extends BaseSoal {
         this.angkas = [];
         this.acak = new Acak(10);
         this.max = 10;
-        // protected jmlKotak: number = 3;	//TODO: angka lebih banyak
         this._flJarak = Jarak.JARAK_ACAK; //TODO: jarak 1 atau acak
         this._flArah = Arah.KECIL2BESAR; //TODO: arah ke besar atau ke kecil
         this.angkaSumberEl = null;
         this.angkaTargetEl = null;
-        this._elHtml = document.body.querySelector('div.cont div.urutkan');
-        this._cont = document.body.querySelector('div.cont');
+        this._template = `
+			<div class='urutkan'>
+				<div class='bar-cont'></div>
+
+				<p class='judul-soal'>Urutkan dari yang terkecil</p c>
+				<div class='target'></div>
+				<div class='sumber'></div>
+			</div>`;
+        this.build();
         this.jmlKotak = 3;
     }
     init() {
         console.log('init');
         super.init();
-        this.bar.attach(this._cont.querySelector('div.bar-cont'));
+        this.bar.attach(this.getEl('div.bar-cont'));
         this.acak.max = this.max;
         this.angkaSumberEl = this.getEl('div.sumber');
         this.angkaTargetEl = this.getEl('div.target');
@@ -64,7 +70,7 @@ export class Urutkan extends BaseSoal {
     resetAngka() {
         console.log('reset angka');
         for (let i = 0; i < this.angkas.length; i++) {
-            this.angkas[i].tempat = AngkaEnum.SUMBER;
+            // this.angkas[i].tempat = AngkaEnum.SUMBER;
             this.angkas[i].angka = -1;
             this.angkas[i].attach(this.angkaSumberEl);
         }
@@ -77,7 +83,6 @@ export class Urutkan extends BaseSoal {
         console.log('soal idx ' + this.soalIdx);
         super.reset();
         this.resetAngka();
-        // this.render();
     }
     checkAdaAngkaDiSumber(angka) {
         return (this.angkaSumberEl.contains(angka.elHtml));

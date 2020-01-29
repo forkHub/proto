@@ -9,6 +9,7 @@ import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
 import { Debug } from "./Debug.js";
 import { Acak } from "./Acak.js";
 import { JumlahPilih } from "./jumlah/Jumlah.js";
+import { JenisSoal } from "./EnumSoal.js";
 
 
 export class Game {
@@ -57,12 +58,13 @@ export class Game {
 		this._menu.attach(this._cont);
 		this._jumlahPilih.init();
 
-		// this.debug();
 		this.test();
+
+		//short cut
+		this._menu.click(JenisSoal.BILANGAN_20);
 	}
 
 	test(): void {
-		//test acak
 		let acak: Acak = new Acak(10);
 		acak.test();
 	}

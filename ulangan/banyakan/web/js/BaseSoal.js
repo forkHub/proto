@@ -2,28 +2,30 @@ import { BaseComponent } from "./BaseComponent.js";
 import { Bar } from "./Bar.js";
 import { Feedback, FeedbackEnum } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
+import { Game } from "./Game.js";
 // import { Game } from "./Game.js";
 export class BaseSoal extends BaseComponent {
     constructor() {
         super();
-        this.jmlSoal = 10;
-        this.soalIdx = 0;
-        this.nilai = 0;
-        this.gambar = true;
-        this.angkaMulai = 1;
-        this.angkaMax = 10;
-        this.jmlKotak = 3;
+        this.jmlSoal = 10; //jumlah soal satu sesi
+        this.soalIdx = 0; //soal aktif sekarang
+        this.nilai = 0; //nilai
+        this.gambar = true; //pakai gambar
+        this.angkaMulai = 1; //angka minimum untuk soal
+        this.angkaMax = 10; //angka maximum untuk soal
+        this.jmlKotak = 3; //jumlah kotak untuk pilihan jawaban
         this._cont = null;
         this.onSelesai = null;
         this.query = [];
         this.bar = null;
         this._feedback = null;
         this.selesai = null;
+        this.barCont = null; //container bar, TODO: propagate
         this.selesai = new Selesai();
         this._feedback = new Feedback();
-        this.getUrl();
-        console.log('query');
-        console.log(this.query);
+        // this.getUrl();
+        // console.log('query');
+        // console.log(this.query);
         this.bar = new Bar();
     }
     getUrl() {
@@ -51,12 +53,19 @@ export class BaseSoal extends BaseComponent {
         }
     }
     init() {
+        this.barCont = this.getEl('div.bar-cont');
+        this.bar.attach(this.barCont);
+        this.bar.onClick = () => {
+            this.detach();
+            Game.inst.menu.attach(Game.inst.cont);
+        };
         this.selesai.init();
         this.selesai.onMulaiClick = () => {
             this.mulai();
         };
         this.selesai.onMenuClick = () => {
-            window.location.href = './index.html';
+            this.detach();
+            Game.inst.menu.attach(Game.inst.cont);
         };
         this._feedback.init();
     }
@@ -77,11 +86,14 @@ export class BaseSoal extends BaseComponent {
         this.nilai = 0;
         this.soalIdx = 0;
         this.bar.persen = 0;
+        // this.reset(); //TODO: apply
     }
     check() {
         return true;
     }
     userJawab() {
+        this.soalIdx++;
+        this.bar.persen2(this.soalIdx, this.jmlSoal);
     }
     feedbackClick(cont) {
         console.log('feedback click, nilai ' + this.nilai);

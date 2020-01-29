@@ -35,4 +35,5 @@ export class Angka extends BaseComponent {
 		this._angkaClick = value;
 	}
 
+
 }

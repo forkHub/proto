@@ -2,16 +2,17 @@ import { BaseComponent } from "./BaseComponent.js";
 import { Bar } from "./Bar.js";
 import { Feedback, FeedbackEnum } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
+import { Game } from "./Game.js";
 // import { Game } from "./Game.js";
 
 export class BaseSoal extends BaseComponent implements IBaseSoal {
-	protected jmlSoal: number = 10;
-	protected soalIdx: number = 0;
-	protected nilai: number = 0;
-	protected gambar: boolean = true;
-	protected angkaMulai: number = 1;
-	protected angkaMax: number = 10;
-	protected jmlKotak: number = 3;
+	protected jmlSoal: number = 10;			//jumlah soal satu sesi
+	protected soalIdx: number = 0;			//soal aktif sekarang
+	protected nilai: number = 0;			//nilai
+	protected gambar: boolean = true;		//pakai gambar
+	protected angkaMulai: number = 1;		//angka minimum untuk soal
+	protected angkaMax: number = 10;		//angka maximum untuk soal
+	protected jmlKotak: number = 3;			//jumlah kotak untuk pilihan jawaban
 
 	protected _cont: HTMLDivElement = null;
 	protected onSelesai: Function = null;
@@ -19,14 +20,15 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected bar: Bar = null;
 	protected _feedback: Feedback = null;
 	protected selesai: Selesai = null;
+	protected barCont: HTMLDivElement = null	//container bar, TODO: propagate
 
 	constructor() {
 		super();
 		this.selesai = new Selesai();
 		this._feedback = new Feedback();
-		this.getUrl();
-		console.log('query');
-		console.log(this.query);
+		// this.getUrl();
+		// console.log('query');
+		// console.log(this.query);
 
 		this.bar = new Bar();
 	}
@@ -63,12 +65,21 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	}
 
 	init(): void {
+		this.barCont = this.getEl('div.bar-cont') as HTMLDivElement;
+		this.bar.attach(this.barCont);
+		this.bar.onClick = () => {
+			this.detach();
+			Game.inst.menu.attach(Game.inst.cont);
+		}
+
 		this.selesai.init();
 		this.selesai.onMulaiClick = () => {
 			this.mulai();
 		}
+
 		this.selesai.onMenuClick = () => {
-			window.location.href = './index.html';
+			this.detach();
+			Game.inst.menu.attach(Game.inst.cont);
 		}
 
 		this._feedback.init();
@@ -96,6 +107,7 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 		this.nilai = 0;
 		this.soalIdx = 0;
 		this.bar.persen = 0;
+		// this.reset(); //TODO: apply
 	}
 
 	check(): boolean {
@@ -103,7 +115,8 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	}
 
 	userJawab(): void {
-
+		this.soalIdx++;
+		this.bar.persen2(this.soalIdx, this.jmlSoal);
 	}
 
 	feedbackClick(cont: HTMLDivElement): void {

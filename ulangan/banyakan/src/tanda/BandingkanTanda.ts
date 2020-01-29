@@ -1,9 +1,3 @@
-// import { BaseComponent } from "../BaseComponent.js";
-// import { Feedback, FeedbackEnum } from "../Feedback.js";
-// import { Selesai } from "../Selesai.js";
-// import { IBaseSoal, BaseSoal } from "../BaseSoal.js";
-// import { Bar } from "../Bar.js";
-
 import { Game } from "../Game.js";
 import { Acak } from "../Acak.js";
 import { BaseSoal } from "../BaseSoal.js";
@@ -67,6 +61,8 @@ export class BandingkanTanda extends BaseSoal {
 	}
 
 	init(): void {
+		super.init();
+
 		this._cont = Game.inst.cont;
 
 		this._kdTbl.onclick = () => {
@@ -118,37 +114,6 @@ export class BandingkanTanda extends BaseSoal {
 			this.reset();
 		}
 	}
-
-	// feedbackSalahShow(): void {
-	// super.feedbackSalahShow(this.cont)
-	// this._feedback.attach(Game.inst.cont);
-	// this._feedback.label = "Jawaban Salah";
-	// this._feedback.type = FeedbackEnum.SALAH;
-	// this._feedback.onClick = () => {
-	// 	this.feedbackClick();
-	// }
-	// }
-
-	// feedbackBenarShow(): void {
-	// 	this._feedback.attach(Game.inst.cont);
-	// this._feedback.label = 'Jawaban Benar';
-	// this._feedback.type = FeedbackEnum.BENAR;
-	// this._feedback.onClick = () => {
-	// 	this.feedbackClick();
-	// }
-	// }
-
-	// userJawab(jawab: string): void {
-	// 	this.jawaban = jawab;
-	// 	this.tengahEl.innerHTML = this.jawaban;
-	// 	if (this.check()) {
-	// 		this._nilai++;
-	// 		this.feedbackBenarShow();
-	// 	}
-	// 	else {
-	// 		this.feedbackSalahShow();
-	// 	}
-	// }
 
 	kdClick(): void {
 		this.jawaban = '<';

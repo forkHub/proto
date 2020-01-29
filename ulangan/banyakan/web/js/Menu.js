@@ -2,6 +2,8 @@ import { TombolMenu } from "./Tombol.js";
 import { Game } from "./Game.js";
 import { BaseComponent } from "./BaseComponent.js";
 import { JenisSoal } from "./EnumSoal.js";
+import { Urutkan } from "./urutkan/Urutkan.js";
+import { Bilangan } from "./bilangan/Bilangan.js";
 export class Menu extends BaseComponent {
     constructor() {
         super();
@@ -72,6 +74,20 @@ export class Menu extends BaseComponent {
             ulParent.appendChild(li);
         }
     }
+    click(id) {
+        for (let i = 0; i < this._list.length; i++) {
+            if (id == this._list[i].idx) {
+                console.log(this._list[i]);
+                console.log("on click:");
+                console.log(this._list[i].onClick);
+                console.log("idx:");
+                console.log(this._list[i].idx);
+                console.log("inner text:");
+                console.log(this._list[i].elHtml.innerText);
+                this._list[i].elHtml.click();
+            }
+        }
+    }
     get list() {
         return this._list;
     }
@@ -86,6 +102,25 @@ export const click = {
             Game.inst.simbol.mulai();
         }
     }
+};
+const bilangan = {
+    label: 'Mengenal jenis bilangan: asli, cacah, ganjil, genap',
+    members: [
+        {
+            label: "Latihan 1",
+            description: 'Menyebutkan bilangan < 20',
+            idx: JenisSoal.BILANGAN_20,
+            onclick: (e) => {
+                e.stopPropagation();
+                // console.log(e);
+                let soal = new Bilangan();
+                Game.inst.menu.detach();
+                soal.init();
+                soal.mulai();
+                soal.attach(Game.inst.cont);
+            },
+        }
+    ]
 };
 const jumlah = {
     label: 'Menghitung jumlah Benda I',
@@ -130,7 +165,13 @@ const urutkan = {
             description: "Mengurutkan angka 0 - 10",
             onclick: (e) => {
                 e.stopPropagation();
-                window.location.href = "./urutkan.html";
+                Game.inst.menu.detach();
+                let urutkan;
+                urutkan = new Urutkan();
+                urutkan.cont = Game.inst.cont;
+                urutkan.init();
+                urutkan.attach(urutkan.cont);
+                urutkan.mulai();
             },
             members: []
         }
@@ -204,6 +245,7 @@ export const MenuData = {
         jumlah,
         membandingkan,
         puluhan,
-        urutkan
+        urutkan,
+        bilangan
     ]
 };

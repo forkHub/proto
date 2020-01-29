@@ -2,6 +2,8 @@ import { TombolMenu } from "./Tombol.js";
 import { Game } from "./Game.js";
 import { BaseComponent } from "./BaseComponent.js";
 import { JenisSoal } from "./EnumSoal.js";
+import { Urutkan } from "./urutkan/Urutkan.js";
+import { Bilangan } from "./bilangan/Bilangan.js";
 
 export class Menu extends BaseComponent {
 	private _list: Array<TombolMenu> = [];
@@ -88,6 +90,22 @@ export class Menu extends BaseComponent {
 		}
 	}
 
+	click(id: number): void {
+		for (let i: number = 0; i < this._list.length; i++) {
+			if (id == this._list[i].idx) {
+				console.log(this._list[i]);
+				console.log("on click:");
+				console.log(this._list[i].onClick);
+				console.log("idx:")
+				console.log(this._list[i].idx);
+				console.log("inner text:")
+				console.log(this._list[i].elHtml.innerText);
+
+				this._list[i].elHtml.click();
+			}
+		}
+	}
+
 	public get list(): Array<TombolMenu> {
 		return this._list;
 	}
@@ -112,6 +130,26 @@ export const click = {
 			Game.inst.simbol.mulai();
 		}
 	}
+}
+
+const bilangan: ITombol = {
+	label: 'Mengenal jenis bilangan: asli, cacah, ganjil, genap',
+	members: [
+		{
+			label: "Latihan 1",
+			description: 'Menyebutkan bilangan < 20',
+			idx: JenisSoal.BILANGAN_20,
+			onclick: (e: MouseEvent) => {
+				e.stopPropagation();
+				// console.log(e);
+				let soal: Bilangan = new Bilangan();
+				Game.inst.menu.detach();
+				soal.init();
+				soal.mulai();
+				soal.attach(Game.inst.cont);
+			},
+		}
+	]
 }
 
 const jumlah: ITombol = {
@@ -160,7 +198,13 @@ const urutkan: ITombol = {
 			description: "Mengurutkan angka 0 - 10",
 			onclick: (e: MouseEvent) => {
 				e.stopPropagation();
-				window.location.href = "./urutkan.html"
+				Game.inst.menu.detach();
+				let urutkan: Urutkan;
+				urutkan = new Urutkan();
+				urutkan.cont = Game.inst.cont;
+				urutkan.init();
+				urutkan.attach(urutkan.cont);
+				urutkan.mulai();
 			},
 			members: []
 		}
@@ -237,6 +281,7 @@ export const MenuData: ITombol = {
 		jumlah,
 		membandingkan,
 		puluhan,
-		urutkan
+		urutkan,
+		bilangan
 	]
 }

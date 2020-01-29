@@ -1,7 +1,7 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Acak } from "../Acak.js";
 import { iconBuah } from "../Buah.js";
-import { Game } from "../Game.js";
+// import { Game } from "../Game.js";
 export class JumlahPilih extends BaseSoal {
     constructor() {
         super();
@@ -37,15 +37,6 @@ export class JumlahPilih extends BaseSoal {
     }
     init() {
         super.init();
-        this.bar.onClick = () => {
-            this.detach();
-            Game.inst.menu.attach(Game.inst.cont);
-        };
-        this.selesai.onMenuClick = () => {
-            this.detach();
-            this.selesai.detach();
-            Game.inst.menu.attach(Game.inst.cont);
-        };
     }
     setTombol(tblView) {
         let tbl = new Tombol();
