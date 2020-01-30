@@ -108,7 +108,7 @@ export class BandingkanTanda extends BaseSoal {
 				this.detach();
 				Game.inst.menu.attach(Game.inst.cont);
 			}
-			this.selesai.nilai = this.nilai;
+			this.selesai.nilai = this._nilai;
 		}
 		else {
 			this.reset();
@@ -120,7 +120,7 @@ export class BandingkanTanda extends BaseSoal {
 		this.tengahEl.innerHTML = this.jawaban;
 		this.bar.persen2(this.soalIdx, 10);
 		if (this.check()) {
-			this.nilai++;
+			this._nilai++;
 			this.feedbackBenarShow(this._cont);
 		}
 		else {
@@ -132,7 +132,7 @@ export class BandingkanTanda extends BaseSoal {
 		this.jawaban = '=';
 		this.tengahEl.innerHTML = this.jawaban;
 		if (this.check()) {
-			this.nilai++;
+			this._nilai++;
 			this.feedbackBenarShow(this._cont);
 		}
 		else {
@@ -144,7 +144,7 @@ export class BandingkanTanda extends BaseSoal {
 		this.jawaban = '>';
 		this.tengahEl.innerHTML = this.jawaban;
 		if (this.check()) {
-			this.nilai++;
+			this._nilai++;
 			this.feedbackBenarShow(this._cont);
 		}
 		else {

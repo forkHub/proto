@@ -62,7 +62,7 @@ export class JumlahPilih extends BaseSoal {
 		this.bar.persen2(this.soalIdx, this.jmlSoal);
 
 		if (idx.angka == this.angkaSoal) {
-			this.nilai++;
+			this._nilai++;
 			this.feedbackBenarShow(this._cont);
 		}
 		else {

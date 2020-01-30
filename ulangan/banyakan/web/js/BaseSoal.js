@@ -9,7 +9,7 @@ export class BaseSoal extends BaseComponent {
         super();
         this.jmlSoal = 10; //jumlah soal satu sesi
         this.soalIdx = 0; //soal aktif sekarang
-        this.nilai = 0; //nilai
+        this._nilai = 0; //nilai
         this.gambar = true; //pakai gambar
         this.angkaMulai = 1; //angka minimum untuk soal
         this.angkaMax = 10; //angka maximum untuk soal
@@ -127,6 +127,18 @@ export class BaseSoal extends BaseComponent {
     }
     set cont(value) {
         this._cont = value;
+    }
+    get nilai() {
+        return this._nilai;
+    }
+    set nilai(value) {
+        this._nilai = value;
+        // try {
+        // 	throw new Error();
+        // }
+        // catch (e) {
+        // 	console.log(e.getStackTrace());
+        // }
     }
 }
 export class Query {

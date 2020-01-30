@@ -82,7 +82,7 @@ export class Bilangan extends BaseSoal {
 		console.log("check, batas atas: " + this.batasAtas);
 		for (let i: number = 0; i < this.batasAtas; i++) {
 			let ada: boolean = this.angkaAda(i);
-			console.log("angka ada " + i + '/hasil ' + ada);
+			// console.log("angka ada " + i + '/hasil ' + ada);
 			if (false == ada) {
 				return false;
 			}
@@ -94,10 +94,12 @@ export class Bilangan extends BaseSoal {
 		return true;
 	}
 
+	//TODO: refactor ke base soal
 	userJawab(): void {
 		super.userJawab();
 
 		if (this.check()) {
+			this.nilai++;
 			this.feedbackBenarShow(Game.inst.cont);
 		}
 		else {
@@ -124,7 +126,15 @@ export class Bilangan extends BaseSoal {
 	}
 
 	angkaClick(angka: Angka): void {
-		angka.attach(this.jawabCont);
+		if (angka.elHtml.parentElement == this.jawabCont) {
+			angka.attach(this.angkaCont);
+		}
+		else if (angka.elHtml.parentElement == this.angkaCont) {
+			angka.attach(this.jawabCont);
+		}
+		else {
+			throw new Error('');
+		}
 	}
 
 	mulai(): void {
@@ -139,7 +149,6 @@ export class Bilangan extends BaseSoal {
 		}
 
 		this.batasAtas = this.acakBatasAtas.get() + this.batasBawah;
-		// this.batasAtas = 5;/
 		this.batasSpan.innerText = this.batasAtas + '';
 		console.log('reset');
 	}

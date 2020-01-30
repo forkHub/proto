@@ -187,7 +187,7 @@ export class Urutkan extends BaseSoal {
             this.bar.persen2(this.soalIdx, this.jmlSoal);
             if (this.check2()) {
                 //feedback benar
-                this.nilai++;
+                this._nilai++;
                 this.feedbackBenarShow(this._cont);
             }
             else {
@@ -202,7 +202,7 @@ export class Urutkan extends BaseSoal {
     mulai() {
         super.mulai();
         this.soalIdx = 0;
-        this.nilai = 0;
+        this._nilai = 0;
         this.bar.persen2(this.soalIdx, this.jmlSoal);
         this.reset();
     }

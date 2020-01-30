@@ -8,7 +8,7 @@ import { Game } from "./Game.js";
 export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected jmlSoal: number = 10;			//jumlah soal satu sesi
 	protected soalIdx: number = 0;			//soal aktif sekarang
-	protected nilai: number = 0;			//nilai
+	protected _nilai: number = 0;			//nilai
 	protected gambar: boolean = true;		//pakai gambar
 	protected angkaMulai: number = 1;		//angka minimum untuk soal
 	protected angkaMax: number = 10;		//angka maximum untuk soal
@@ -156,6 +156,20 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	public set cont(value: HTMLDivElement) {
 		this._cont = value;
 	}
+
+	protected get nilai(): number {
+		return this._nilai;
+	}
+	protected set nilai(value: number) {
+		this._nilai = value;
+		// try {
+		// 	throw new Error();
+		// }
+		// catch (e) {
+		// 	console.log(e.getStackTrace());
+		// }
+	}
+
 }
 
 interface IConfig {
