@@ -235,13 +235,13 @@ export class Urutkan extends BaseSoal {
 		}
 	}
 
-	mulai(): void {
-		super.mulai();
-		this.soalIdx = 0;
-		this._nilai = 0;
-		this.bar.persen2(this.soalIdx, this.jmlSoal);
-		this.reset();
-	}
+	// mulai(): void {
+	// 	super.mulai();
+	// 	this.soalIdx = 0;
+	// 	this._nilai = 0;
+	// 	this.bar.persen2(this.soalIdx, this.jmlSoal);
+	// 	this.reset();
+	// }
 
 	public get flArah(): Arah {
 		return this._flArah;

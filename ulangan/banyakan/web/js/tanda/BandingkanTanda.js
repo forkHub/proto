@@ -63,11 +63,12 @@ export class BandingkanTanda extends BaseSoal {
         };
         this.mulai();
     }
-    mulai() {
-        this.reset();
-        this.soalIdx = 0;
-    }
+    // mulai(): void {
+    // 	this.reset();
+    // 	this.soalIdx = 0;
+    // }
     reset() {
+        super.reset();
         this.angkas[0] = this.angkaAcak.get();
         this.angkas[1] = this.angkaAcak.get();
         this.kiriEl.innerHTML = this.angkas[0] + '';

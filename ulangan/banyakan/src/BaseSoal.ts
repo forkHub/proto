@@ -107,7 +107,7 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 		this.nilai = 0;
 		this.soalIdx = 0;
 		this.bar.persen = 0;
-		// this.reset(); //TODO: apply
+		this.reset();
 	}
 
 	check(): boolean {
@@ -117,6 +117,13 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	userJawab(): void {
 		this.soalIdx++;
 		this.bar.persen2(this.soalIdx, this.jmlSoal);
+		if (this.check()) {
+			this.nilai++;
+			this.feedbackBenarShow(Game.inst.cont);
+		}
+		else {
+			this.feedbackSalahShow(Game.inst.cont);
+		}
 	}
 
 	feedbackClick(cont: HTMLDivElement): void {

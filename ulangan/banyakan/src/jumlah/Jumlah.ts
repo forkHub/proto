@@ -76,10 +76,10 @@ export class JumlahPilih extends BaseSoal {
 	// 	super.init();
 	// }
 
-	mulai(): void {
-		console.log('Jumlah: mulai');
-		super.mulai();
-	}
+	// mulai(): void {
+	// console.log('Jumlah: mulai');
+	// super.mulai();
+	// }
 
 	reset() {
 		console.log('Jumlah: reset');

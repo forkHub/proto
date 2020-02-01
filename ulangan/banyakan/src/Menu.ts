@@ -93,13 +93,13 @@ export class Menu extends BaseComponent {
 	click(id: number): void {
 		for (let i: number = 0; i < this._list.length; i++) {
 			if (id == this._list[i].idx) {
-				console.log(this._list[i]);
-				console.log("on click:");
-				console.log(this._list[i].onClick);
-				console.log("idx:")
-				console.log(this._list[i].idx);
-				console.log("inner text:")
-				console.log(this._list[i].elHtml.innerText);
+				// console.log(this._list[i]);
+				// console.log("on click:");
+				// console.log(this._list[i].onClick);
+				// console.log("idx:")
+				// console.log(this._list[i].idx);
+				// console.log("inner text:")
+				// console.log(this._list[i].elHtml.innerText);
 
 				this._list[i].elHtml.click();
 			}
@@ -133,15 +133,14 @@ export const click = {
 }
 
 const bilangan: ITombol = {
-	label: 'Mengenal jenis bilangan: asli, cacah, ganjil, genap',
+	label: 'Bilangan',
 	members: [
 		{
 			label: "Latihan 1",
-			description: 'Menyebutkan bilangan < 20',
-			idx: JenisSoal.BILANGAN_20,
+			description: 'Bilangan cacah < 10',
+			idx: JenisSoal.BILANGAN_10,
 			onclick: (e: MouseEvent) => {
 				e.stopPropagation();
-				// console.log(e);
 				let soal: Bilangan = new Bilangan();
 				Game.inst.menu.detach();
 				soal.init();

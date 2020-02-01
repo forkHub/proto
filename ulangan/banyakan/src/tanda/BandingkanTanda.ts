@@ -80,12 +80,13 @@ export class BandingkanTanda extends BaseSoal {
 		this.mulai();
 	}
 
-	mulai(): void {
-		this.reset();
-		this.soalIdx = 0;
-	}
+	// mulai(): void {
+	// 	this.reset();
+	// 	this.soalIdx = 0;
+	// }
 
 	reset(): void {
+		super.reset();
 		this.angkas[0] = this.angkaAcak.get();
 		this.angkas[1] = this.angkaAcak.get();
 

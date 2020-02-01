@@ -1,20 +1,20 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
-import { Game } from "../Game.js";
+// import { Game } from "../Game.js";
 export class Bilangan extends BaseSoal {
     constructor() {
         super();
         this.angkaAr = [];
         this.batasAtas = 10;
         this.batasBawah = 5;
-        this.acakBatasAtas = null;
+        this.acak = null;
         this.jawabCont = null;
         this.angkaCont = null;
         this.batasSpan = null;
         this.kirimTbl = null;
         this._template = `
-			<div class='cont'>
+			<div class='bilangan cacah'>
 				<div class='bar-cont'></div>
 
 				<p class='judul-soal'>Sebutkan bilangan cacah kurang dari <span class='batas'>10</span></p c>
@@ -32,11 +32,9 @@ export class Bilangan extends BaseSoal {
         this.batasSpan = this.getEl('p.judul-soal span.batas');
         this.kirimTbl = this.getEl('button.normal');
         this.kirimTbl.onclick = () => {
-            this.kirimClick();
+            this.kirimOnClick();
         };
-        this.acakBatasAtas = new Acak(this.batasAtas - this.batasBawah);
-        console.log(this.angkaCont);
-        console.log(this.jawabCont);
+        this.acak = new Acak(this.batasAtas - this.batasBawah);
     }
     angkaAda(angkaP) {
         for (let i = 0; i < this.angkaAr.length; i++) {
@@ -66,32 +64,21 @@ export class Bilangan extends BaseSoal {
         console.log("check, batas atas: " + this.batasAtas);
         for (let i = 0; i < this.batasAtas; i++) {
             let ada = this.angkaAda(i);
-            // console.log("angka ada " + i + '/hasil ' + ada);
             if (false == ada) {
                 return false;
-            }
-            else {
             }
         }
         return true;
     }
-    //TODO: refactor ke base soal
-    userJawab() {
-        super.userJawab();
-        if (this.check()) {
-            this.nilai++;
-            this.feedbackBenarShow(Game.inst.cont);
-        }
-        else {
-            this.feedbackSalahShow(Game.inst.cont);
-        }
-    }
-    kirimClick() {
+    // userJawab(): void {
+    // 	super.userJawab();
+    // }
+    kirimOnClick() {
         this.userJawab();
     }
     init() {
         super.init();
-        for (let i = 0; i <= 20; i++) {
+        for (let i = 0; i <= 10; i++) {
             let angka = new Angka();
             angka.angka = i;
             angka.attach(this.angkaCont);
@@ -112,17 +99,12 @@ export class Bilangan extends BaseSoal {
             throw new Error('');
         }
     }
-    mulai() {
-        super.mulai();
-        this.reset();
-    }
     reset() {
         super.reset();
         for (let i = 0; i < this.angkaAr.length; i++) {
             this.angkaAr[i].attach(this.angkaCont);
         }
-        this.batasAtas = this.acakBatasAtas.get() + this.batasBawah;
+        this.batasAtas = this.acak.get() + this.batasBawah;
         this.batasSpan.innerText = this.batasAtas + '';
-        console.log('reset');
     }
 }
