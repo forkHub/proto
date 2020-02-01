@@ -1,0 +1,13 @@
+div.bilangan button.angka,
+div.bilangan.cacah button.angka,
+div.bilangan.ganjil button.angka,
+div.bilangan.genap button.angka {
+	margin-right: 4px;
+	margin-left: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+div.bilangan div.jawab-cont {
+	min-height: 120px;
+}

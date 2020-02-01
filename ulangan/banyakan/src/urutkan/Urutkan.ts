@@ -33,7 +33,7 @@ export class Urutkan extends BaseSoal {
 		console.log('init');
 		super.init();
 
-		this.bar.attach(this.getEl('div.bar-cont') as HTMLDivElement);
+		// this.bar.attach(this.getEl('div.bar-cont') as HTMLDivElement);
 
 		this.acak.max = this.max;
 
@@ -61,14 +61,10 @@ export class Urutkan extends BaseSoal {
 
 	buatAngka(): number {
 		let angka: number = 0;
-		// console.log('buat angka');
-		// this.debugAngka();
 
 		while (true) {
 			angka = this.acak.get();
 			if (!this.checkDouble(angka)) {
-				// console.log('hasil ' + angka);
-				// this.debugAngka();
 				return angka;
 			}
 		}
@@ -105,77 +101,6 @@ export class Urutkan extends BaseSoal {
 		this.resetAngka();
 	}
 
-	checkAdaAngkaDiSumber(angka: Angka): boolean {
-		return (this.angkaSumberEl.contains(angka.elHtml));
-	}
-
-	//TODO: test
-	check(): boolean {
-		let angkas: Array<number> = [];
-
-		for (let i: number = 0; i < this.angkas.length; i++) {
-			let angka: Angka;
-			if (this.angkaTargetEl.contains(angka.elHtml)) {
-				console.log('check failed, target tidak lengkap');
-				console.log('angka tidak ada:');
-				console.log(angka);
-				console.log('angkatargetel:')
-				console.log(this.angkaTargetEl);
-				return false;
-			}
-		}
-
-		if (this.angkaTargetEl.childElementCount != this.jmlKotak) {
-			console.log('check gagal, jumlah child element != ' + this.jmlKotak);
-			console.log('this.angkatargetEl:');
-			console.log(this.angkaTargetEl);
-			throw new Error();
-		}
-
-		for (let i: number = 0; i < this.angkaTargetEl.childElementCount; i++) {
-			for (let j: number = 0; j < this.angkas.length; j++) {
-				if (this.angkaTargetEl.children[i] == this.angkas[j].elHtml) {
-					angkas.push(this.angkas[j].angka);
-				}
-			}
-			// angkas.push(parseInt(this.angkaTargetEl.children[i].innerHTML));
-		}
-
-		if (angkas.length != this.jmlKotak) {
-			console.log(angkas);
-			throw new Error('jumlah angka tidak cocok');
-		}
-
-		//check angka
-		for (let i: number = 0; i < angkas.length; i++) {
-			if (angkas[i] == 0) throw new Error(JSON.stringify(angkas));
-			if (isNaN(angkas[i])) throw new Error(JSON.stringify(angkas));
-		}
-
-		//check urutan
-		for (let i: number = 0; i < angkas.length - 1; i++) {
-			if (angkas[i] < angkas[i + 1]) return false;
-		}
-
-		return true;
-	}
-
-	// render(): void {
-	// 	for (let i: number = 0; i < this.angkas.length; i++) {
-	// 		let angka: Angka = this.angkas[i];
-
-	// 		if (angka.tempat == AngkaEnum.SUMBER) {
-	// 			angka.attach(this.angkaSumberEl);
-	// 		}
-	// 		else if (angka.tempat == AngkaEnum.TARGET) {
-	// 			angka.attach(this.angkaTargetEl);
-	// 		}
-	// 		else {
-	// 			throw new Error();
-	// 		}
-	// 	}
-	// }
-
 	getAngka(el: HTMLDivElement): Array<number> {
 		let ar: Array<number> = [];
 
@@ -186,20 +111,20 @@ export class Urutkan extends BaseSoal {
 		return ar;
 	}
 
-	urut(ar: Array<number>): boolean {
+	checkUrut(ar: Array<number>): boolean {
 		for (let i: number = 0; i < ar.length - 1; i++) {
 			if (ar[i] >= ar[i + 1]) return false;
 		}
 		return true;
 	}
 
-	check2(): boolean {
+	check(): boolean {
 		let target: Array<number> = [];
 
 		target = this.getAngka(this.angkaTargetEl);
 		if (target.length < this.jmlKotak) return false;
 
-		return this.urut(target);
+		return this.checkUrut(target);
 	}
 
 	angkaClick(angka: Angka): void {
@@ -220,28 +145,15 @@ export class Urutkan extends BaseSoal {
 			this.soalIdx++;
 			this.bar.persen2(this.soalIdx, this.jmlSoal);
 
-			if (this.check2()) {
-				//feedback benar
+			if (this.check()) {
 				this._nilai++;
 				this.feedbackBenarShow(this._cont);
 			}
 			else {
-				//feedback salah
 				this.feedbackSalahShow(this._cont)
 			}
 		}
-		else {
-			//belum selesai
-		}
 	}
-
-	// mulai(): void {
-	// 	super.mulai();
-	// 	this.soalIdx = 0;
-	// 	this._nilai = 0;
-	// 	this.bar.persen2(this.soalIdx, this.jmlSoal);
-	// 	this.reset();
-	// }
 
 	public get flArah(): Arah {
 		return this._flArah;
@@ -249,8 +161,6 @@ export class Urutkan extends BaseSoal {
 	public get flJarak(): Jarak {
 		return this._flJarak;
 	}
-
-
 }
 
 enum Jarak {

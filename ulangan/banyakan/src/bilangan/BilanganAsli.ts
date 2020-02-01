@@ -3,7 +3,7 @@ import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 // import { Game } from "../Game.js";
 
-export class Bilangan extends BaseSoal {
+export class BilanganAsli extends BaseSoal {
 	private angkaAr: Array<Angka> = [];
 	private batasAtas: number = 10;
 	private batasBawah: number = 5;
@@ -18,9 +18,9 @@ export class Bilangan extends BaseSoal {
 		super();
 
 		this._template = `
-			<div class='bilangan cacah'>
+			<div class='bilangan asli'>
 				<div class='bar-cont'></div>
-				<p class='judul-soal'>Sebutkan bilangan cacah kurang dari <span class='batas'>10</span></p>
+				<p class='judul-soal'>Sebutkan bilangan asli kurang dari <span class='batas'>10</span></p>
 				<div class='jawab-cont'>
 				</div>
 				<hr/>
@@ -59,22 +59,22 @@ export class Bilangan extends BaseSoal {
 
 
 	check(): boolean {
-		//check jumlah
 		let jml: number = 0;
 		for (let i: number = 0; i < this.angkaAr.length; i++) {
 			let angka: Angka = this.angkaAr[i];
 			if (angka.elHtml.parentElement == this.jawabCont) {
 				jml++;
+				// console.log('jml ' + jml + '/angka ' + angka.angka);
 			}
 		}
 
-		if (jml != (this.batasAtas)) {
-			console.log("jml " + jml + '/batas atas ' + this.batasAtas);
+		if (jml != (this.batasAtas - 1)) {
+			// console.log("jumlah beda, jml " + jml + '/batas atas ' + this.batasAtas);
 			return false;
 		}
 
-		console.log("check, batas atas: " + this.batasAtas);
-		for (let i: number = 0; i < this.batasAtas; i++) {
+		// console.log("check, batas atas: " + this.batasAtas + '/jml ' + jml);
+		for (let i: number = 1; i < this.batasAtas; i++) {
 			let ada: boolean = this.angkaAda(i);
 			if (false == ada) {
 				return false;

@@ -25,7 +25,7 @@ export class Urutkan extends BaseSoal {
     init() {
         console.log('init');
         super.init();
-        this.bar.attach(this.getEl('div.bar-cont'));
+        // this.bar.attach(this.getEl('div.bar-cont') as HTMLDivElement);
         this.acak.max = this.max;
         this.angkaSumberEl = this.getEl('div.sumber');
         this.angkaTargetEl = this.getEl('div.target');
@@ -48,13 +48,9 @@ export class Urutkan extends BaseSoal {
     }
     buatAngka() {
         let angka = 0;
-        // console.log('buat angka');
-        // this.debugAngka();
         while (true) {
             angka = this.acak.get();
             if (!this.checkDouble(angka)) {
-                // console.log('hasil ' + angka);
-                // this.debugAngka();
                 return angka;
             }
         }
@@ -84,69 +80,6 @@ export class Urutkan extends BaseSoal {
         super.reset();
         this.resetAngka();
     }
-    checkAdaAngkaDiSumber(angka) {
-        return (this.angkaSumberEl.contains(angka.elHtml));
-    }
-    //TODO: test
-    check() {
-        let angkas = [];
-        for (let i = 0; i < this.angkas.length; i++) {
-            let angka;
-            if (this.angkaTargetEl.contains(angka.elHtml)) {
-                console.log('check failed, target tidak lengkap');
-                console.log('angka tidak ada:');
-                console.log(angka);
-                console.log('angkatargetel:');
-                console.log(this.angkaTargetEl);
-                return false;
-            }
-        }
-        if (this.angkaTargetEl.childElementCount != this.jmlKotak) {
-            console.log('check gagal, jumlah child element != ' + this.jmlKotak);
-            console.log('this.angkatargetEl:');
-            console.log(this.angkaTargetEl);
-            throw new Error();
-        }
-        for (let i = 0; i < this.angkaTargetEl.childElementCount; i++) {
-            for (let j = 0; j < this.angkas.length; j++) {
-                if (this.angkaTargetEl.children[i] == this.angkas[j].elHtml) {
-                    angkas.push(this.angkas[j].angka);
-                }
-            }
-            // angkas.push(parseInt(this.angkaTargetEl.children[i].innerHTML));
-        }
-        if (angkas.length != this.jmlKotak) {
-            console.log(angkas);
-            throw new Error('jumlah angka tidak cocok');
-        }
-        //check angka
-        for (let i = 0; i < angkas.length; i++) {
-            if (angkas[i] == 0)
-                throw new Error(JSON.stringify(angkas));
-            if (isNaN(angkas[i]))
-                throw new Error(JSON.stringify(angkas));
-        }
-        //check urutan
-        for (let i = 0; i < angkas.length - 1; i++) {
-            if (angkas[i] < angkas[i + 1])
-                return false;
-        }
-        return true;
-    }
-    // render(): void {
-    // 	for (let i: number = 0; i < this.angkas.length; i++) {
-    // 		let angka: Angka = this.angkas[i];
-    // 		if (angka.tempat == AngkaEnum.SUMBER) {
-    // 			angka.attach(this.angkaSumberEl);
-    // 		}
-    // 		else if (angka.tempat == AngkaEnum.TARGET) {
-    // 			angka.attach(this.angkaTargetEl);
-    // 		}
-    // 		else {
-    // 			throw new Error();
-    // 		}
-    // 	}
-    // }
     getAngka(el) {
         let ar = [];
         el.querySelectorAll('button.angka').forEach((item) => {
@@ -154,19 +87,19 @@ export class Urutkan extends BaseSoal {
         });
         return ar;
     }
-    urut(ar) {
+    checkUrut(ar) {
         for (let i = 0; i < ar.length - 1; i++) {
             if (ar[i] >= ar[i + 1])
                 return false;
         }
         return true;
     }
-    check2() {
+    check() {
         let target = [];
         target = this.getAngka(this.angkaTargetEl);
         if (target.length < this.jmlKotak)
             return false;
-        return this.urut(target);
+        return this.checkUrut(target);
     }
     angkaClick(angka) {
         if (this.angkaSumberEl.contains(angka.elHtml)) {
@@ -185,27 +118,15 @@ export class Urutkan extends BaseSoal {
         if (angkas.length >= this.jmlKotak) {
             this.soalIdx++;
             this.bar.persen2(this.soalIdx, this.jmlSoal);
-            if (this.check2()) {
-                //feedback benar
+            if (this.check()) {
                 this._nilai++;
                 this.feedbackBenarShow(this._cont);
             }
             else {
-                //feedback salah
                 this.feedbackSalahShow(this._cont);
             }
         }
-        else {
-            //belum selesai
-        }
     }
-    // mulai(): void {
-    // 	super.mulai();
-    // 	this.soalIdx = 0;
-    // 	this._nilai = 0;
-    // 	this.bar.persen2(this.soalIdx, this.jmlSoal);
-    // 	this.reset();
-    // }
     get flArah() {
         return this._flArah;
     }

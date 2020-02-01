@@ -1,9 +1,8 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
-// import { Game } from "../Game.js";
 
-export class Bilangan extends BaseSoal {
+export class BilanganGanjil extends BaseSoal {
 	private angkaAr: Array<Angka> = [];
 	private batasAtas: number = 10;
 	private batasBawah: number = 5;
@@ -18,9 +17,9 @@ export class Bilangan extends BaseSoal {
 		super();
 
 		this._template = `
-			<div class='bilangan cacah'>
+			<div class='bilangan ganjil'>
 				<div class='bar-cont'></div>
-				<p class='judul-soal'>Sebutkan bilangan cacah kurang dari <span class='batas'>10</span></p>
+				<p class='judul-soal'>Sebutkan bilangan ganjil kurang dari <span class='batas'>10</span></p>
 				<div class='jawab-cont'>
 				</div>
 				<hr/>
@@ -41,59 +40,6 @@ export class Bilangan extends BaseSoal {
 		}
 
 		this.acak = new Acak(this.batasAtas - this.batasBawah);
-	}
-
-	angkaAda(angkaP: number): boolean {
-		for (let i: number = 0; i < this.angkaAr.length; i++) {
-			let angka: Angka;
-			angka = this.angkaAr[i];
-			if (angka.elHtml.parentElement == this.jawabCont) {
-				if (angka.angka == angkaP) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-
-	check(): boolean {
-		//check jumlah
-		let jml: number = 0;
-		for (let i: number = 0; i < this.angkaAr.length; i++) {
-			let angka: Angka = this.angkaAr[i];
-			if (angka.elHtml.parentElement == this.jawabCont) {
-				jml++;
-			}
-		}
-
-		if (jml != (this.batasAtas)) {
-			console.log("jml " + jml + '/batas atas ' + this.batasAtas);
-			return false;
-		}
-
-		console.log("check, batas atas: " + this.batasAtas);
-		for (let i: number = 0; i < this.batasAtas; i++) {
-			let ada: boolean = this.angkaAda(i);
-			if (false == ada) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	// userJawab(): void {
-	// 	super.userJawab();
-	// }
-
-	kirimOnClick(): void {
-		this.userJawab();
-	}
-
-	init(): void {
-		super.init();
 
 		for (let i: number = 0; i <= 10; i++) {
 			let angka: Angka = new Angka();
@@ -104,6 +50,66 @@ export class Bilangan extends BaseSoal {
 			}
 			this.angkaAr.push(angka);
 		}
+	}
+
+	angkaAda(angkaP: number): boolean {
+		for (let i: number = 0; i < this.angkaAr.length; i++) {
+			let angka: Angka;
+			angka = this.angkaAr[i];
+			if (angka.elHtml.parentElement == this.jawabCont) {
+				if (angka.angka == angkaP) {
+					console.log('angka ada ' + angkaP + '/true');
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	jmlJawaban(): number {
+		let hsl: number = 0;
+
+		console.log('jumlah jawaban');
+
+		for (let i: number = 0; i < this.batasAtas; i++) {
+			if (i % 2) {
+				hsl++;
+				console.log('hasil ' + hsl + '/angka ' + i);
+			}
+		}
+		return hsl;
+	}
+
+	check(): boolean {
+		let jml: number = 0;
+		for (let i: number = 0; i < this.angkaAr.length; i++) {
+			let angka: Angka = this.angkaAr[i];
+			if (angka.elHtml.parentElement == this.jawabCont) {
+				jml++;
+			}
+		}
+
+		if (jml != this.jmlJawaban()) {
+			console.log("jml " + jml + '/batas atas ' + this.batasAtas);
+			return false;
+		}
+
+		console.log("check, batas atas: " + this.batasAtas);
+		for (let i: number = 0; i < this.batasAtas; i++) {
+			if (1 == (i % 2)) {
+				let ada: boolean = this.angkaAda(i);
+				if (false == ada) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	kirimOnClick(): void {
+		this.userJawab();
 	}
 
 	angkaClick(angka: Angka): void {

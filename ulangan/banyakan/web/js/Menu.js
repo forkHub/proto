@@ -4,6 +4,9 @@ import { BaseComponent } from "./BaseComponent.js";
 import { JenisSoal } from "./EnumSoal.js";
 import { Urutkan } from "./urutkan/Urutkan.js";
 import { Bilangan } from "./bilangan/Bilangan.js";
+import { BilanganGanjil } from "./bilangan/BilanganGanjil.js";
+import { BilanganGenap } from "./bilangan/BilanganGenap.js";
+import { BilanganAsli } from "./bilangan/BilanganAsli.js";
 export class Menu extends BaseComponent {
     constructor() {
         super();
@@ -117,7 +120,46 @@ const bilangan = {
                 soal.init();
                 soal.mulai();
                 soal.attach(Game.inst.cont);
-            },
+            }
+        },
+        {
+            label: "Latihan 2",
+            description: 'Bilangan asli < 10',
+            idx: JenisSoal.BILANGAN_10,
+            onclick: (e) => {
+                e.stopPropagation();
+                let soal = new BilanganAsli();
+                Game.inst.menu.detach();
+                soal.init();
+                soal.mulai();
+                soal.attach(Game.inst.cont);
+            }
+        },
+        {
+            label: "Latihan 3",
+            description: 'Bilangan ganjil < 10',
+            idx: JenisSoal.BILANGAN_10,
+            onclick: (e) => {
+                e.stopPropagation();
+                let soal = new BilanganGanjil();
+                Game.inst.menu.detach();
+                soal.init();
+                soal.mulai();
+                soal.attach(Game.inst.cont);
+            }
+        },
+        {
+            label: "Latihan 4",
+            description: 'Bilangan genap < 10',
+            idx: JenisSoal.BILANGAN_10,
+            onclick: (e) => {
+                e.stopPropagation();
+                let soal = new BilanganGenap();
+                Game.inst.menu.detach();
+                soal.init();
+                soal.mulai();
+                soal.attach(Game.inst.cont);
+            }
         }
     ]
 };

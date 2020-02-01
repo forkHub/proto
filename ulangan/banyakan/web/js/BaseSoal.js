@@ -23,9 +23,6 @@ export class BaseSoal extends BaseComponent {
         this.barCont = null; //container bar, TODO: propagate
         this.selesai = new Selesai();
         this._feedback = new Feedback();
-        // this.getUrl();
-        // console.log('query');
-        // console.log(this.query);
         this.bar = new Bar();
     }
     getUrl() {
