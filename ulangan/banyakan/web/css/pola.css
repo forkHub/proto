@@ -1,0 +1,21 @@
+div.pola {
+	text-align:  center;
+}
+
+div.pola
+input.angka {
+    width: 60px;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding: 8px;
+    text-align: center;
+    font-size: large;
+    border: 1px solid #333;
+    box-shadow: 3px 3px #333;
+}
+
+div.pola div.angka-cont {
+	text-align: center;
+	margin-bottom: 16px;
+}
+

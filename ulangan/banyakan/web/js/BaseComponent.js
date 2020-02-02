@@ -52,6 +52,18 @@ export class BaseComponent {
         this._elHtml = el;
         this.onBuild();
     }
+    getEl2(query, idx = 0) {
+        let el;
+        el = this._elHtml.querySelectorAll(query);
+        if (el) {
+            return el[idx];
+        }
+        else {
+            console.log(this._elHtml);
+            console.log(query);
+            throw new Error('query not found ');
+        }
+    }
     getEl(query) {
         let el;
         el = this._elHtml.querySelector(query);

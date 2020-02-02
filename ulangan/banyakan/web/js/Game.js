@@ -9,6 +9,7 @@ import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
 import { Debug } from "./Debug.js";
 import { Acak } from "./Acak.js";
 import { JumlahPilih } from "./jumlah/Jumlah.js";
+import { Pola } from "./pola/Pola.js";
 // import { JenisSoal } from "./EnumSoal.js";
 export class Game {
     constructor() {
@@ -22,6 +23,7 @@ export class Game {
         this._menu = null;
         this._simbol = null;
         this._jumlahPilih = null;
+        this._pola = null;
         Game._inst = this;
         this._template = new Template();
         this._dom = new Dom();
@@ -103,6 +105,12 @@ export class Game {
     }
     set jumlahPilih(value) {
         this._jumlahPilih = value;
+    }
+    get pola() {
+        if (null == this._pola) {
+            this._pola = new Pola();
+        }
+        return this._pola;
     }
 }
 new Game();

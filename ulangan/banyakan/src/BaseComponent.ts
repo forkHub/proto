@@ -77,6 +77,21 @@ export class BaseComponent {
 		this.onBuild();
 	}
 
+	getEl2(query: string, idx: number = 0): HTMLElement {
+		let el: NodeListOf<HTMLElement>;
+
+		el = this._elHtml.querySelectorAll(query);
+
+		if (el) {
+			return el[idx];
+		} else {
+			console.log(this._elHtml);
+			console.log(query);
+			throw new Error('query not found ');
+		}
+
+	}
+
 	getEl(query: string): HTMLElement {
 		let el: HTMLElement;
 

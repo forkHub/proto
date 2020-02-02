@@ -1,0 +1,17 @@
+div.penjumlahan {
+	font-size: large;
+	text-align: center;
+}
+
+div.penjumlahan input.angka {
+    text-align: center;
+    width: 70px;
+    padding: 8px;
+    border: 1px solid #333;
+    box-shadow: 3px 3px #333;
+    font-size: large;	
+}
+
+div.penjumlahan div.soal-cont {
+	text-align: center;
+}
