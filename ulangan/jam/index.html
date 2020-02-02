@@ -1,0 +1,22 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href='./css/css.css'>
+	<script type='module' src='./js/jam.js'></script>
+</head>
+
+<body>
+	<canvas id='canvas' width="240" height="240"></canvas>
+	<script type="module">
+		import { Jam } from "./js/jam.js";
+
+		let jam = new Jam();
+		jam.canvas = document.querySelector('canvas#canvas');
+		jam.init();
+		jam.gambar(3, 15);
+
+		console.log(jam);
+	</script>
+</body>
+
+</html>
