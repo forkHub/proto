@@ -12,7 +12,7 @@ export class Pola extends BaseSoal {
 	private _isiDiTengah: boolean = false;
 	private acak: Acak = null;
 	private acakPos: Acak = null;
-	private kirimTbl: HTMLButtonElement = null;
+	// private kirimTbl: HTMLButtonElement = null;
 
 	constructor() {
 		super();
@@ -31,11 +31,7 @@ export class Pola extends BaseSoal {
 		// this.judulP = this.getEl('p.judul-soal') as HTMLParagraphElement;
 		this.angkaCont = this.getEl('div.angka-cont') as HTMLDivElement;
 		this.acak = new Acak(this._batasAtas);
-		this.acakPos = new Acak(2);
-		this.kirimTbl = this.getEl('button.normal.kirim') as HTMLButtonElement;
-		this.kirimTbl.onclick = () => {
-			this.kirimClick();
-		}
+		this.acakPos = new Acak(4);
 	}
 
 	check(): boolean {
@@ -49,9 +45,6 @@ export class Pola extends BaseSoal {
 		return true;
 	}
 
-	kirimClick(): void {
-		this.userJawab();
-	}
 
 	init(): void {
 		super.init();
@@ -90,7 +83,7 @@ export class Pola extends BaseSoal {
 				angka.value = angka.angka + '';
 			}
 
-			let posAngkaKosong: number = this.acakPos.get() + 1;
+			let posAngkaKosong: number = this.acakPos.get();
 			this.angkaAr[posAngkaKosong].readonly = false;
 			this.angkaAr[posAngkaKosong].elHtml.focus();
 			this.angkaAr[posAngkaKosong].value = '';

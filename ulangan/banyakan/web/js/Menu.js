@@ -289,7 +289,7 @@ const membandingkan = {
     ]
 };
 const pola = {
-    label: 'Pola',
+    label: 'Bilangan Loncat',
     members: [
         {
             label: 'Latihan 1',

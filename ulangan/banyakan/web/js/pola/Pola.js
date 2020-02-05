@@ -2,6 +2,7 @@ import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 export class Pola extends BaseSoal {
+    // private kirimTbl: HTMLButtonElement = null;
     constructor() {
         super();
         this.angkaAr = [];
@@ -13,7 +14,6 @@ export class Pola extends BaseSoal {
         this._isiDiTengah = false;
         this.acak = null;
         this.acakPos = null;
-        this.kirimTbl = null;
         this._template = `
 			<div class='pola'>
 				<div class='bar-cont'></div>
@@ -29,11 +29,7 @@ export class Pola extends BaseSoal {
         // this.judulP = this.getEl('p.judul-soal') as HTMLParagraphElement;
         this.angkaCont = this.getEl('div.angka-cont');
         this.acak = new Acak(this._batasAtas);
-        this.acakPos = new Acak(2);
-        this.kirimTbl = this.getEl('button.normal.kirim');
-        this.kirimTbl.onclick = () => {
-            this.kirimClick();
-        };
+        this.acakPos = new Acak(4);
     }
     check() {
         for (let i = 0; i < this.angkaAr.length; i++) {
@@ -43,9 +39,6 @@ export class Pola extends BaseSoal {
             }
         }
         return true;
-    }
-    kirimClick() {
-        this.userJawab();
     }
     init() {
         super.init();
@@ -79,7 +72,7 @@ export class Pola extends BaseSoal {
                 angka.readonly = true;
                 angka.value = angka.angka + '';
             }
-            let posAngkaKosong = this.acakPos.get() + 1;
+            let posAngkaKosong = this.acakPos.get();
             this.angkaAr[posAngkaKosong].readonly = false;
             this.angkaAr[posAngkaKosong].elHtml.focus();
             this.angkaAr[posAngkaKosong].value = '';

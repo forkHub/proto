@@ -11,7 +11,7 @@ export class BilanganGanjil extends BaseSoal {
 	private jawabCont: HTMLDivElement = null;
 	private angkaCont: HTMLDivElement = null;
 	private batasSpan: HTMLSpanElement = null;
-	private kirimTbl: HTMLButtonElement = null;
+	// private kirimTbl: HTMLButtonElement = null;
 
 	constructor() {
 		super();
@@ -25,7 +25,9 @@ export class BilanganGanjil extends BaseSoal {
 				<hr/>
 				<div class='angka-cont'>
 				</div>
-				<button class='normal'>Kirim</button>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>
 			</div>
 		`;
 		this.build();
@@ -33,11 +35,11 @@ export class BilanganGanjil extends BaseSoal {
 		this.angkaCont = this.getEl('div.angka-cont') as HTMLDivElement;
 		this.jawabCont = this.getEl('div.jawab-cont') as HTMLDivElement;
 		this.batasSpan = this.getEl('p.judul-soal span.batas') as HTMLSpanElement;
-		this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
+		// this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
 
-		this.kirimTbl.onclick = () => {
-			this.kirimOnClick();
-		}
+		// this.kirimTbl.onclick = () => {
+		// 	this.kirimOnClick();
+		// }
 
 		this.acak = new Acak(this.batasAtas - this.batasBawah);
 
@@ -108,9 +110,9 @@ export class BilanganGanjil extends BaseSoal {
 		return true;
 	}
 
-	kirimOnClick(): void {
-		this.userJawab();
-	}
+	// kirimOnClick(): void {
+	// 	this.userJawab();
+	// }
 
 	angkaClick(angka: Angka): void {
 		if (angka.elHtml.parentElement == this.jawabCont) {

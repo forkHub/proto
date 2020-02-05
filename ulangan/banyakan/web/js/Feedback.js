@@ -20,6 +20,9 @@ export class Feedback extends BaseComponent {
     // tampil(): void {
     // 	this.attach(Game.inst.cont);
     // }
+    onAttach() {
+        this.button.focus();
+    }
     init() {
     }
     get label() {
@@ -33,6 +36,7 @@ export class Feedback extends BaseComponent {
         // console.log('feedbacak set on click ');
         this.button.onclick = () => {
             // console.log('feedback on click');
+            this.button.blur();
             this.detach();
             this._onClick();
         };

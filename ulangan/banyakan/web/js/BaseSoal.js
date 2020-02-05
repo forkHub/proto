@@ -14,6 +14,7 @@ export class BaseSoal extends BaseComponent {
         this.angkaMulai = 1; //angka minimum untuk soal
         this.angkaMax = 10; //angka maximum untuk soal
         this.jmlKotak = 3; //jumlah kotak untuk pilihan jawaban
+        this.kirimTbl = null;
         this._cont = null;
         this.onSelesai = null;
         this.query = [];
@@ -49,13 +50,15 @@ export class BaseSoal extends BaseComponent {
             }
         }
     }
-    init() {
+    onBuild() {
         this.barCont = this.getEl('div.bar-cont');
         this.bar.attach(this.barCont);
         this.bar.onClick = () => {
             this.detach();
             Game.inst.menu.attach(Game.inst.cont);
         };
+    }
+    init() {
         this.selesai.init();
         this.selesai.onMulaiClick = () => {
             this.mulai();
@@ -64,7 +67,15 @@ export class BaseSoal extends BaseComponent {
             this.detach();
             Game.inst.menu.attach(Game.inst.cont);
         };
+        this.kirimTbl = this.getEl('button.normal.kirim');
+        this.kirimTbl.onclick = () => {
+            this.kirimTbl.blur();
+            this.kirimClick();
+        };
         this._feedback.init();
+    }
+    kirimClick() {
+        this.userJawab();
     }
     setConfig(config) {
         if (config.angkaMulai) {

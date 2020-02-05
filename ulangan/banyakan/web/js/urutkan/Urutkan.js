@@ -18,6 +18,9 @@ export class Urutkan extends BaseSoal {
 				<p class='judul-soal'>Urutkan dari yang terkecil</p c>
 				<div class='target'></div>
 				<div class='sumber'></div>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>
 			</div>`;
         this.build();
         this.jmlKotak = 3;
@@ -113,19 +116,19 @@ export class Urutkan extends BaseSoal {
             console.log(this.angkaTargetEl);
             throw new Error();
         }
-        let angkas = [];
-        angkas = this.getAngka(this.angkaTargetEl);
-        if (angkas.length >= this.jmlKotak) {
-            this.soalIdx++;
-            this.bar.persen2(this.soalIdx, this.jmlSoal);
-            if (this.check()) {
-                this._nilai++;
-                this.feedbackBenarShow(this._cont);
-            }
-            else {
-                this.feedbackSalahShow(this._cont);
-            }
-        }
+        // let angkas: Array<number> = [];
+        // angkas = this.getAngka(this.angkaTargetEl);
+        // if (angkas.length >= this.jmlKotak) {
+        // 	this.soalIdx++;
+        // 	this.bar.persen2(this.soalIdx, this.jmlSoal);
+        // 	if (this.check()) {
+        // 		this._nilai++;
+        // 		this.feedbackBenarShow(this._cont);
+        // 	}
+        // 	else {
+        // 		this.feedbackSalahShow(this._cont)
+        // 	}
+        // }
     }
     get flArah() {
         return this._flArah;

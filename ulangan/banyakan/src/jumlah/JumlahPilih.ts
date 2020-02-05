@@ -1,22 +1,22 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Acak } from "../Acak.js";
 import { iconBuah } from "../Buah.js";
-// import { Game } from "../Game.js";
 
 export class JumlahPilih extends BaseSoal {
 
-	private tblAr: Array<Tombol> = [];
-	private soalKotak: HTMLDivElement = null;
-	private jawabCont: HTMLDivElement = null;
+	protected tblAr: Array<Tombol> = [];
+	protected soalKotak: HTMLDivElement = null;
+	protected jawabCont: HTMLDivElement = null;
 
-	private angkaSoal: number = 0;
-	private acakAngkaSoal: Acak = null;
+	protected angkaJawaban: number = 0;
+	protected angkaDipilih: number = 0;
+	protected acakAngkaSoal: Acak = null;
 
 	constructor() {
 		super();
 
 		this._template = `
-			<div class='jumlah-benda'>
+			<div class='jumlah-pilih'>
 				<div class='bar-cont'></div>
 				<p class='judul-soal'>Berapa Jumlahnya</p> 
 				<div class='soal'>
@@ -28,11 +28,12 @@ export class JumlahPilih extends BaseSoal {
 					<button class='jawab dua putih'></button>
 					<button class='jawab tiga putih'></button>
 				</div>
+				<div class='kirim-cont'>
+					<button class='kirim normal'>Kirim</button>
+				</div>
 			</div>
 		`;
 		this.build();
-
-		this.bar.attach(this.getEl('div.bar-cont') as HTMLDivElement);
 
 		this.soalKotak = this.getEl('div.soal div.soal1') as HTMLDivElement;
 		this.jawabCont = this.getEl('div.jawaban') as HTMLDivElement;
@@ -45,29 +46,34 @@ export class JumlahPilih extends BaseSoal {
 		this.acakAngkaSoal = new Acak(this.angkaMax);
 	}
 
-	init(): void {
-		super.init();
-	}
-
 	setTombol(tblView: HTMLButtonElement): void {
 		let tbl: Tombol = new Tombol();
 		tbl.view = tblView;
 		this.tblAr.push(tbl);
-		tbl.onClick = this.tombolClick.bind(this);
+		tbl.onClick = () => {
+			this.tombolClick(tbl);
+		}
 	}
 
-	tombolClick(idx: Tombol): void {
-		console.log('tombol click ' + idx.angka + '/' + this.angkaSoal);
-		this.soalIdx++;
-		this.bar.persen2(this.soalIdx, this.jmlSoal);
+	check(): boolean {
+		if (this.angkaDipilih == this.angkaJawaban) return true;
+		return false;
 
-		if (idx.angka == this.angkaSoal) {
-			this._nilai++;
-			this.feedbackBenarShow(this._cont);
-		}
-		else {
-			this.feedbackSalahShow(this._cont);
-		}
+		// this.soalIdx++;
+		// this.bar.persen2(this.soalIdx, this.jmlSoal);
+
+		// if (idx.angka == this.angkaSoal) {
+		// 	this._nilai++;
+		// 	this.feedbackBenarShow(this._cont);
+		// }
+		// else {
+		// 	this.feedbackSalahShow(this._cont);
+		// }
+	}
+
+	tombolClick(tombol: Tombol): void {
+		console.log('tombol click ' + tombol.angka + '/' + this.angkaJawaban);
+		this.angkaDipilih = tombol.angka;
 	}
 
 	debug(): void { }
@@ -76,9 +82,9 @@ export class JumlahPilih extends BaseSoal {
 		console.log('Jumlah: reset');
 		super.reset();
 
-		this.angkaSoal = this.acakAngkaSoal.get() + 1;
+		this.angkaJawaban = this.acakAngkaSoal.get() + 1;
 
-		this.tblAr[0].angka = this.angkaSoal;
+		this.tblAr[0].angka = this.angkaJawaban;
 		this.tblAr[1].angka = this.acakAngkaSoal.get2([this.tblAr[0].angka]);
 		this.tblAr[2].angka = this.acakAngkaSoal.get2([this.tblAr[0].angka, this.tblAr[1].angka]);
 
@@ -101,7 +107,7 @@ export class JumlahPilih extends BaseSoal {
 
 		let str: string = '';
 		let iconIdx: number = Math.floor(Math.random() * iconBuah.length);
-		for (let i: number = 0; i < this.angkaSoal; i++) {
+		for (let i: number = 0; i < this.angkaJawaban; i++) {
 			str += iconBuah[iconIdx];
 		}
 		this.soalKotak.innerHTML = str;
@@ -122,8 +128,8 @@ export class JumlahPilih extends BaseSoal {
 
 class Tombol {
 
-	private _angka: number = 0;
-	private _view: HTMLButtonElement;
+	protected _angka: number = 0;
+	protected _view: HTMLButtonElement;
 
 	public set onClick(value: Function) {
 		this._view.onclick = () => {

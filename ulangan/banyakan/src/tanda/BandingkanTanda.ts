@@ -40,6 +40,9 @@ export class BandingkanTanda extends BaseSoal {
 					<button class='tengah'>=</button>
 					<button class='kanan'>&gt</button>
 				</div>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>
 			</div>		
 			`;
 
@@ -54,10 +57,6 @@ export class BandingkanTanda extends BaseSoal {
 		this.kananEl = this.getEl('div.soal div.angka.kanan') as HTMLDivElement;
 
 		this.angkaAcak = new Acak(10);
-		this._feedback = Game.inst.feedback;
-		this.selesai = Game.inst.selesai;
-
-		this.bar.attach(this.getEl("div.banyakan-tanda div.bar-cont") as HTMLDivElement);
 	}
 
 	init(): void {
@@ -77,13 +76,8 @@ export class BandingkanTanda extends BaseSoal {
 			this.ldClick();
 		}
 
-		this.mulai();
+		// this.mulai();
 	}
-
-	// mulai(): void {
-	// 	this.reset();
-	// 	this.soalIdx = 0;
-	// }
 
 	reset(): void {
 		super.reset();
@@ -95,62 +89,62 @@ export class BandingkanTanda extends BaseSoal {
 		this.tengahEl.innerHTML = '';
 	}
 
-	feedbackClick(): void {
-		this._feedback.detach();
-		this.soalIdx++;
+	// feedbackClick(): void {
+	// 	this._feedback.detach();
+	// 	this.soalIdx++;
 
-		if (this.soalIdx >= 10) {
-			this.selesai.attach(Game.inst.cont);
-			this.selesai.onMulaiClick = () => {
-				this.selesai.detach();
-				this.mulai();
-			}
-			this.selesai.onMenuClick = () => {
-				this.detach();
-				Game.inst.menu.attach(Game.inst.cont);
-			}
-			this.selesai.nilai = this._nilai;
-		}
-		else {
-			this.reset();
-		}
-	}
+	// 	if (this.soalIdx >= 10) {
+	// 		this.selesai.attach(Game.inst.cont);
+	// 		this.selesai.onMulaiClick = () => {
+	// 			this.selesai.detach();
+	// 			this.mulai();
+	// 		}
+	// 		this.selesai.onMenuClick = () => {
+	// 			this.detach();
+	// 			Game.inst.menu.attach(Game.inst.cont);
+	// 		}
+	// 		this.selesai.nilai = this._nilai;
+	// 	}
+	// 	else {
+	// 		this.reset();
+	// 	}
+	// }
 
 	kdClick(): void {
 		this.jawaban = '<';
 		this.tengahEl.innerHTML = this.jawaban;
-		this.bar.persen2(this.soalIdx, 10);
-		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow(this._cont);
-		}
-		else {
-			this.feedbackSalahShow(this._cont);
-		}
+		// this.bar.persen2(this.soalIdx, 10);
+		// if (this.check()) {
+		// 	this._nilai++;
+		// 	this.feedbackBenarShow(this._cont);
+		// }
+		// else {
+		// 	this.feedbackSalahShow(this._cont);
+		// }
 	}
 
 	sdClick(): void {
 		this.jawaban = '=';
 		this.tengahEl.innerHTML = this.jawaban;
-		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow(this._cont);
-		}
-		else {
-			this.feedbackSalahShow(this._cont);
-		}
+		// if (this.check()) {
+		// 	this._nilai++;
+		// 	this.feedbackBenarShow(this._cont);
+		// }
+		// else {
+		// 	this.feedbackSalahShow(this._cont);
+		// }
 	}
 
 	ldClick(): void {
 		this.jawaban = '>';
 		this.tengahEl.innerHTML = this.jawaban;
-		if (this.check()) {
-			this._nilai++;
-			this.feedbackBenarShow(this._cont);
-		}
-		else {
-			this.feedbackSalahShow(this._cont);
-		}
+		// if (this.check()) {
+		// 	this._nilai++;
+		// 	this.feedbackBenarShow(this._cont);
+		// }
+		// else {
+		// 	this.feedbackSalahShow(this._cont);
+		// }
 	}
 
 	check(): boolean {

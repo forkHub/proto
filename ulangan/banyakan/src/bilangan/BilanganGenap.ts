@@ -11,7 +11,7 @@ export class BilanganGenap extends BaseSoal {
 	private jawabCont: HTMLDivElement = null;
 	private angkaCont: HTMLDivElement = null;
 	private batasSpan: HTMLSpanElement = null;
-	private kirimTbl: HTMLButtonElement = null;
+	// private kirimTbl: HTMLButtonElement = null;
 
 	constructor() {
 		super();
@@ -23,7 +23,9 @@ export class BilanganGenap extends BaseSoal {
 				<div class='jawab-cont'></div>
 				<hr/>
 				<div class='angka-cont'></div>
-				<button class='normal'>Kirim</button>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>				
 			</div>
 		`;
 		this.build();
@@ -33,9 +35,9 @@ export class BilanganGenap extends BaseSoal {
 		this.batasSpan = this.getEl('p.judul-soal span.batas') as HTMLSpanElement;
 		this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
 
-		this.kirimTbl.onclick = () => {
-			this.kirimOnClick();
-		}
+		// this.kirimTbl.onclick = () => {
+		// 	this.kirimOnClick();
+		// }
 
 		this.acak = new Acak(this.batasAtas - this.batasBawah);
 

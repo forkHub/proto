@@ -35,6 +35,9 @@ export class BandingkanTanda extends BaseSoal {
 					<button class='tengah'>=</button>
 					<button class='kanan'>&gt</button>
 				</div>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>
 			</div>		
 			`;
         this.build();
@@ -45,9 +48,6 @@ export class BandingkanTanda extends BaseSoal {
         this.tengahEl = this.getEl('div.soal div.tanda');
         this.kananEl = this.getEl('div.soal div.angka.kanan');
         this.angkaAcak = new Acak(10);
-        this._feedback = Game.inst.feedback;
-        this.selesai = Game.inst.selesai;
-        this.bar.attach(this.getEl("div.banyakan-tanda div.bar-cont"));
     }
     init() {
         super.init();
@@ -61,12 +61,8 @@ export class BandingkanTanda extends BaseSoal {
         this._ldTbl.onclick = () => {
             this.ldClick();
         };
-        this.mulai();
+        // this.mulai();
     }
-    // mulai(): void {
-    // 	this.reset();
-    // 	this.soalIdx = 0;
-    // }
     reset() {
         super.reset();
         this.angkas[0] = this.angkaAcak.get();
@@ -75,58 +71,58 @@ export class BandingkanTanda extends BaseSoal {
         this.kananEl.innerHTML = this.angkas[1] + '';
         this.tengahEl.innerHTML = '';
     }
-    feedbackClick() {
-        this._feedback.detach();
-        this.soalIdx++;
-        if (this.soalIdx >= 10) {
-            this.selesai.attach(Game.inst.cont);
-            this.selesai.onMulaiClick = () => {
-                this.selesai.detach();
-                this.mulai();
-            };
-            this.selesai.onMenuClick = () => {
-                this.detach();
-                Game.inst.menu.attach(Game.inst.cont);
-            };
-            this.selesai.nilai = this._nilai;
-        }
-        else {
-            this.reset();
-        }
-    }
+    // feedbackClick(): void {
+    // 	this._feedback.detach();
+    // 	this.soalIdx++;
+    // 	if (this.soalIdx >= 10) {
+    // 		this.selesai.attach(Game.inst.cont);
+    // 		this.selesai.onMulaiClick = () => {
+    // 			this.selesai.detach();
+    // 			this.mulai();
+    // 		}
+    // 		this.selesai.onMenuClick = () => {
+    // 			this.detach();
+    // 			Game.inst.menu.attach(Game.inst.cont);
+    // 		}
+    // 		this.selesai.nilai = this._nilai;
+    // 	}
+    // 	else {
+    // 		this.reset();
+    // 	}
+    // }
     kdClick() {
         this.jawaban = '<';
         this.tengahEl.innerHTML = this.jawaban;
-        this.bar.persen2(this.soalIdx, 10);
-        if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow(this._cont);
-        }
-        else {
-            this.feedbackSalahShow(this._cont);
-        }
+        // this.bar.persen2(this.soalIdx, 10);
+        // if (this.check()) {
+        // 	this._nilai++;
+        // 	this.feedbackBenarShow(this._cont);
+        // }
+        // else {
+        // 	this.feedbackSalahShow(this._cont);
+        // }
     }
     sdClick() {
         this.jawaban = '=';
         this.tengahEl.innerHTML = this.jawaban;
-        if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow(this._cont);
-        }
-        else {
-            this.feedbackSalahShow(this._cont);
-        }
+        // if (this.check()) {
+        // 	this._nilai++;
+        // 	this.feedbackBenarShow(this._cont);
+        // }
+        // else {
+        // 	this.feedbackSalahShow(this._cont);
+        // }
     }
     ldClick() {
         this.jawaban = '>';
         this.tengahEl.innerHTML = this.jawaban;
-        if (this.check()) {
-            this._nilai++;
-            this.feedbackBenarShow(this._cont);
-        }
-        else {
-            this.feedbackSalahShow(this._cont);
-        }
+        // if (this.check()) {
+        // 	this._nilai++;
+        // 	this.feedbackBenarShow(this._cont);
+        // }
+        // else {
+        // 	this.feedbackSalahShow(this._cont);
+        // }
     }
     check() {
         console.log('check soal');

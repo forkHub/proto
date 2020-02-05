@@ -325,7 +325,7 @@ const membandingkan: ITombol = {
 }
 
 const pola: ITombol = {
-	label: 'Pola',
+	label: 'Bilangan Loncat',
 	members: [
 		{
 			label: 'Latihan 1',

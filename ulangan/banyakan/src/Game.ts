@@ -8,7 +8,7 @@ import { Menu } from "./Menu.js";
 import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
 import { Debug } from "./Debug.js";
 import { Acak } from "./Acak.js";
-import { JumlahPilih } from "./jumlah/Jumlah.js";
+import { JumlahPilih } from "./jumlah/JumlahPilih.js";
 import { Pola } from "./pola/Pola.js";
 // import { JenisSoal } from "./EnumSoal.js";
 

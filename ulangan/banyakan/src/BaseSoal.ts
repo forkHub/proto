@@ -13,6 +13,8 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 	protected angkaMulai: number = 1;		//angka minimum untuk soal
 	protected angkaMax: number = 10;		//angka maximum untuk soal
 	protected jmlKotak: number = 3;			//jumlah kotak untuk pilihan jawaban
+	protected kirimTbl: HTMLButtonElement = null;
+
 
 	protected _cont: HTMLDivElement = null;
 	protected onSelesai: Function = null;
@@ -60,7 +62,7 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 		}
 	}
 
-	init(): void {
+	onBuild(): void {
 		this.barCont = this.getEl('div.bar-cont') as HTMLDivElement;
 		this.bar.attach(this.barCont);
 		this.bar.onClick = () => {
@@ -68,6 +70,9 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 			Game.inst.menu.attach(Game.inst.cont);
 		}
 
+	}
+
+	init(): void {
 		this.selesai.init();
 		this.selesai.onMulaiClick = () => {
 			this.mulai();
@@ -78,8 +83,19 @@ export class BaseSoal extends BaseComponent implements IBaseSoal {
 			Game.inst.menu.attach(Game.inst.cont);
 		}
 
+		this.kirimTbl = this.getEl('button.normal.kirim') as HTMLButtonElement;
+		this.kirimTbl.onclick = () => {
+			this.kirimTbl.blur();
+			this.kirimClick();
+		}
+
 		this._feedback.init();
 	}
+
+	kirimClick(): void {
+		this.userJawab();
+	}
+
 
 	setConfig(config: IConfig): void {
 		if (config.angkaMulai) {

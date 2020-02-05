@@ -6,7 +6,6 @@ export class Penjumlahan extends BaseSoal {
         super();
         this.angkas = [];
         this.acak = null;
-        this.kirimTbl = null;
         this._posisiJawaban = Penjumlahan.J_AKHIR;
         this._batasAtas = 10;
         this._batasBawah = 0;
@@ -40,10 +39,10 @@ export class Penjumlahan extends BaseSoal {
             angka.input.type = 'text';
             this.angkas.push(angka);
         }
-        this.kirimTbl = this.getEl('button.kirim');
-        this.kirimTbl.onclick = () => {
-            this.kirimOnClick();
-        };
+        // this.kirimTbl = this.getEl('button.kirim') as HTMLButtonElement;
+        // this.kirimTbl.onclick = () => {
+        // 	this.kirimOnClick();
+        // }
         this.judulP = this.getEl('p.judul-soal');
         this.operatorSpan = this.getEl('span.operator');
         this.acak = new Acak(10);
@@ -59,9 +58,9 @@ export class Penjumlahan extends BaseSoal {
         }
         return true;
     }
-    kirimOnClick() {
-        this.userJawab();
-    }
+    // kirimOnClick(): void {
+    // 	this.userJawab();
+    // }
     validate() {
         if (this._pengurangan)
             return this.validate2();
@@ -90,13 +89,15 @@ export class Penjumlahan extends BaseSoal {
         this.angkas[2].angka = this.angkas[0].angka + this.angkas[1].angka;
     }
     setAngka() {
+        for (let i = 0; i < 2; i++) {
+            let angka = this.angkas[i];
+            angka.angka = this.acak.get();
+            angka.input.type = 'text';
+            angka.readonly = true;
+        }
         while (true) {
-            for (let i = 0; i < 2; i++) {
-                let angka = this.angkas[i];
-                angka.angka = this.acak.get();
-                angka.input.type = 'text';
-                angka.readonly = true;
-            }
+            let angka = this.angkas[1];
+            angka.angka = this.acak.get();
             this.setJawaban();
             if (this.validate())
                 return;

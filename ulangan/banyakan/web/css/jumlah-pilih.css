@@ -1,8 +1,8 @@
-div.jumlah-benda {
+div.jumlah-pilih {
 	width: 100%;
 }
 
-div.jumlah-benda div.soal {
+div.jumlah-pilih div.soal {
     border: 1px solid;
     border-radius: 10px;
     padding: 16px;
@@ -10,7 +10,7 @@ div.jumlah-benda div.soal {
     font-size: x-large;
 }
 
-div.jumlah-benda button.jawab {
+div.jumlah-pilih button.jawab {
     flex-grow: 1;
     margin-right: 8px;
     margin-left: 8px;
@@ -19,7 +19,7 @@ div.jumlah-benda button.jawab {
     padding-bottom: 16px;
 }
 
-div.jumlah-benda div.jawaban {
+div.jumlah-pilih div.jawaban {
     display: flex;
     flex-grow: 1;
 }

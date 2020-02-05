@@ -26,6 +26,10 @@ export class Feedback extends BaseComponent {
 	// 	this.attach(Game.inst.cont);
 	// }
 
+	onAttach(): void {
+		this.button.focus();
+	}
+
 
 	init(): void {
 
@@ -45,6 +49,7 @@ export class Feedback extends BaseComponent {
 
 		this.button.onclick = () => {
 			// console.log('feedback on click');
+			this.button.blur();
 			this.detach();
 			this._onClick();
 		}

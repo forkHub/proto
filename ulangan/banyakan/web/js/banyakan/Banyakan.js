@@ -5,6 +5,7 @@ import { FeedbackEnum } from "../Feedback.js";
 import { Game } from "../Game.js";
 import { BaseComponent } from "../BaseComponent.js";
 import { Bar } from "../Bar.js";
+//TODO: base soal
 export class Banyakan extends BaseComponent {
     constructor() {
         super();

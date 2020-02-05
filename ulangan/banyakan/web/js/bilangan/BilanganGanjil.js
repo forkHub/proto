@@ -2,6 +2,7 @@ import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 export class BilanganGanjil extends BaseSoal {
+    // private kirimTbl: HTMLButtonElement = null;
     constructor() {
         super();
         this.angkaAr = [];
@@ -11,7 +12,6 @@ export class BilanganGanjil extends BaseSoal {
         this.jawabCont = null;
         this.angkaCont = null;
         this.batasSpan = null;
-        this.kirimTbl = null;
         this._template = `
 			<div class='bilangan ganjil'>
 				<div class='bar-cont'></div>
@@ -21,17 +21,19 @@ export class BilanganGanjil extends BaseSoal {
 				<hr/>
 				<div class='angka-cont'>
 				</div>
-				<button class='normal'>Kirim</button>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>
 			</div>
 		`;
         this.build();
         this.angkaCont = this.getEl('div.angka-cont');
         this.jawabCont = this.getEl('div.jawab-cont');
         this.batasSpan = this.getEl('p.judul-soal span.batas');
-        this.kirimTbl = this.getEl('button.normal');
-        this.kirimTbl.onclick = () => {
-            this.kirimOnClick();
-        };
+        // this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
+        // this.kirimTbl.onclick = () => {
+        // 	this.kirimOnClick();
+        // }
         this.acak = new Acak(this.batasAtas - this.batasBawah);
         for (let i = 0; i <= 10; i++) {
             let angka = new Angka();
@@ -90,9 +92,9 @@ export class BilanganGanjil extends BaseSoal {
         }
         return true;
     }
-    kirimOnClick() {
-        this.userJawab();
-    }
+    // kirimOnClick(): void {
+    // 	this.userJawab();
+    // }
     angkaClick(angka) {
         if (angka.elHtml.parentElement == this.jawabCont) {
             angka.attach(this.angkaCont);
