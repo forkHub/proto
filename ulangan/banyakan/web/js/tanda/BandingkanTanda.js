@@ -47,7 +47,7 @@ export class BandingkanTanda extends BaseSoal {
         this.kiriEl = this.getEl('div.soal div.angka.kiri');
         this.tengahEl = this.getEl('div.soal div.tanda');
         this.kananEl = this.getEl('div.soal div.angka.kanan');
-        this.angkaAcak = new Acak(10);
+        this.angkaAcak = new Acak(20);
     }
     init() {
         super.init();
@@ -61,74 +61,34 @@ export class BandingkanTanda extends BaseSoal {
         this._ldTbl.onclick = () => {
             this.ldClick();
         };
-        // this.mulai();
     }
     reset() {
         super.reset();
         this.angkas[0] = this.angkaAcak.get();
         this.angkas[1] = this.angkaAcak.get();
+        if (this.angkas[0] > 10) {
+            this.angkas[0] -= 10;
+        }
+        if (this.angkas[1] > 10) {
+            this.angkas[1] -= 10;
+        }
         this.kiriEl.innerHTML = this.angkas[0] + '';
         this.kananEl.innerHTML = this.angkas[1] + '';
         this.tengahEl.innerHTML = '';
     }
-    // feedbackClick(): void {
-    // 	this._feedback.detach();
-    // 	this.soalIdx++;
-    // 	if (this.soalIdx >= 10) {
-    // 		this.selesai.attach(Game.inst.cont);
-    // 		this.selesai.onMulaiClick = () => {
-    // 			this.selesai.detach();
-    // 			this.mulai();
-    // 		}
-    // 		this.selesai.onMenuClick = () => {
-    // 			this.detach();
-    // 			Game.inst.menu.attach(Game.inst.cont);
-    // 		}
-    // 		this.selesai.nilai = this._nilai;
-    // 	}
-    // 	else {
-    // 		this.reset();
-    // 	}
-    // }
     kdClick() {
         this.jawaban = '<';
         this.tengahEl.innerHTML = this.jawaban;
-        // this.bar.persen2(this.soalIdx, 10);
-        // if (this.check()) {
-        // 	this._nilai++;
-        // 	this.feedbackBenarShow(this._cont);
-        // }
-        // else {
-        // 	this.feedbackSalahShow(this._cont);
-        // }
     }
     sdClick() {
         this.jawaban = '=';
         this.tengahEl.innerHTML = this.jawaban;
-        // if (this.check()) {
-        // 	this._nilai++;
-        // 	this.feedbackBenarShow(this._cont);
-        // }
-        // else {
-        // 	this.feedbackSalahShow(this._cont);
-        // }
     }
     ldClick() {
         this.jawaban = '>';
         this.tengahEl.innerHTML = this.jawaban;
-        // if (this.check()) {
-        // 	this._nilai++;
-        // 	this.feedbackBenarShow(this._cont);
-        // }
-        // else {
-        // 	this.feedbackSalahShow(this._cont);
-        // }
     }
     check() {
-        console.log('check soal');
-        console.log('jawaban ' + this.jawaban);
-        console.log('angka 1 ' + this.angkas[0]);
-        console.log('angka 2 ' + this.angkas[1]);
         if (this.angkas[0] > this.angkas[1]) {
             if (this.jawaban != '>')
                 return false;
