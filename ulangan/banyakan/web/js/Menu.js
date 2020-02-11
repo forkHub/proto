@@ -9,11 +9,11 @@ import { BilanganGenap } from "./bilangan/BilanganGenap.js";
 import { BilanganAsli } from "./bilangan/BilanganAsli.js";
 import { Pola } from "./pola/Pola.js";
 import { Penjumlahan } from "./penjumlahan/Penjumlahan.js";
-// import { Pola } from "./pola/Pola.js";
 export class Menu extends BaseComponent {
     constructor() {
         super();
         this._list = [];
+        this.jumlah = 0;
         this._template = `
 			<div class='menu'>
 				<p>Belajar Matematika Dasar</p>
@@ -30,8 +30,10 @@ export class Menu extends BaseComponent {
         let rootUl = document.createElement('ul');
         rootDiv.appendChild(rootUl);
         rootDiv.classList.add('menu-ul');
+        this.jumlah = 0;
         if (data.members)
             this.renderChild(data.members, rootUl);
+        console.log('render menu, jumlah ' + this.jumlah);
         return rootDiv;
     }
     renderChild(childs, ulParent) {
@@ -63,6 +65,7 @@ export class Menu extends BaseComponent {
             else {
                 let tombol = new TombolMenu();
                 tombol.label = child.label;
+                this.jumlah++;
                 if (child.description) {
                     tombol.desc = child.description;
                 }
