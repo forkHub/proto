@@ -234,10 +234,10 @@ const membandingkan = {
                 e.stopPropagation();
                 console.log('banyakan click');
                 Game.inst.menu.detach();
-                Game.inst.banyakan.jmlSoal = 2;
+                Game.inst.banyakan.jmlAngka = 2;
                 Game.inst.banyakan.angkaSaja = false;
                 Game.inst.banyakan.attach(Game.inst.cont);
-                Game.inst.banyakan.mulaiLagi();
+                Game.inst.banyakan.mulai();
             },
             members: []
         },
@@ -248,10 +248,10 @@ const membandingkan = {
                 e.stopPropagation();
                 console.log('banyakan click gambar 3');
                 Game.inst.menu.detach();
-                Game.inst.banyakan.jmlSoal = 3;
+                Game.inst.banyakan.jmlAngka = 3;
                 Game.inst.banyakan.angkaSaja = false;
                 Game.inst.banyakan.attach(Game.inst.cont);
-                Game.inst.banyakan.mulaiLagi();
+                Game.inst.banyakan.mulai();
             },
             members: []
         },
@@ -262,10 +262,10 @@ const membandingkan = {
                 console.log('banyakan click angka 2');
                 e.stopPropagation();
                 Game.inst.menu.detach();
-                Game.inst.banyakan.jmlSoal = 2;
+                Game.inst.banyakan.jmlAngka = 2;
                 Game.inst.banyakan.angkaSaja = true;
                 Game.inst.banyakan.attach(Game.inst.cont);
-                Game.inst.banyakan.mulaiLagi();
+                Game.inst.banyakan.mulai();
             },
             members: []
         },
@@ -276,10 +276,10 @@ const membandingkan = {
                 console.log('banyakan click gambar 3');
                 e.stopPropagation();
                 Game.inst.menu.detach();
-                Game.inst.banyakan.jmlSoal = 3;
+                Game.inst.banyakan.jmlAngka = 3;
                 Game.inst.banyakan.angkaSaja = true;
                 Game.inst.banyakan.attach(Game.inst.cont);
-                Game.inst.banyakan.mulaiLagi();
+                Game.inst.banyakan.mulai();
             },
             members: []
         },

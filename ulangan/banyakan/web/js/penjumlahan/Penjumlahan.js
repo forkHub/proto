@@ -6,11 +6,11 @@ export class Penjumlahan extends BaseSoal {
         super();
         this.angkas = [];
         this.acak = null;
+        this.acakPos2 = null;
         this._posisiJawaban = Penjumlahan.J_AKHIR;
         this._batasAtas = 10;
         this._batasBawah = 0;
         this._acakPos = false;
-        this.acakPos2 = null;
         this.judulP = null;
         this.operatorSpan = null;
         this._pengurangan = false;
@@ -48,6 +48,16 @@ export class Penjumlahan extends BaseSoal {
         this.acak = new Acak(10);
         this.acakPos2 = new Acak(3);
     }
+    jawabanBenar() {
+        for (let i = 0; i < 3; i++) {
+            let angka;
+            angka = this.angkas[i];
+            if (angka.readonly == false) {
+                return "Jawaban benar: " + angka.angka;
+            }
+        }
+        return "";
+    }
     check() {
         for (let i = 0; i < 3; i++) {
             let angka;
@@ -58,12 +68,9 @@ export class Penjumlahan extends BaseSoal {
         }
         return true;
     }
-    // kirimOnClick(): void {
-    // 	this.userJawab();
-    // }
     validate() {
         if (this._pengurangan)
-            return this.validate2();
+            return this.validasiPengurangan();
         if (this.angkas[2].angka <= this._batasAtas) {
             if (this.angkas[2].angka >= this._batasBawah) {
                 return true;
@@ -71,7 +78,7 @@ export class Penjumlahan extends BaseSoal {
         }
         return false;
     }
-    validate2() {
+    validasiPengurangan() {
         if (this.angkas[0].angka < this.batasBawah)
             return false;
         if (this.angkas[1].angka < this.batasBawah)
@@ -91,13 +98,13 @@ export class Penjumlahan extends BaseSoal {
     setAngka() {
         for (let i = 0; i < 2; i++) {
             let angka = this.angkas[i];
-            angka.angka = this.acak.get();
+            angka.angka = angka.acak.get();
             angka.input.type = 'text';
             angka.readonly = true;
         }
         while (true) {
             let angka = this.angkas[1];
-            angka.angka = this.acak.get();
+            angka.angka = angka.acak.get();
             this.setJawaban();
             if (this.validate())
                 return;
@@ -117,6 +124,9 @@ export class Penjumlahan extends BaseSoal {
     reset() {
         super.reset();
         this.acak.max = this._batasAtas;
+        this.angkas[0].acak.max = this._batasAtas;
+        this.angkas[1].acak.max = this._batasAtas;
+        this.angkas[2].acak.max = this._batasAtas;
         this.setAngka();
         this.setPosisiJawaban();
         if (this._posisiJawaban != 2) {

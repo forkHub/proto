@@ -1,5 +1,7 @@
-export class Angka {
+import { BaseComponent } from "../BaseComponent.js";
+export class Angka extends BaseComponent {
     constructor() {
+        super();
         this._angka = 0;
         this._view = null;
         //TODO: pakai sharing resource
@@ -12,6 +14,9 @@ export class Angka {
             "&#127824", "&#127825", "&#127826", "&#127827", "&#127828",
             "&#127829", "&#127830"
         ];
+        this._template = `<button class='angka putih'></button>`;
+        this.build();
+        this._view = this._elHtml;
     }
     tulis(angkaSaja) {
         let str = '';

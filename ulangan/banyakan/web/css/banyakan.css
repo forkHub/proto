@@ -1,6 +1,7 @@
 /* banyakan mana */
 div.banyakan
-div.angka {
+
+button.angka {
 	width: 100%;
 	position: relative;
 	border-radius: 10px;
@@ -9,6 +10,10 @@ div.angka {
 	font-size: xx-large;
 	text-align: center;
 	margin-bottom: 16px;
+}
+
+button.angka.dipilih {
+	background-color: lightgray;
 }
 
 div.banyakan >

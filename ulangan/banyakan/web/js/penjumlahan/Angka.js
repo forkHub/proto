@@ -1,4 +1,5 @@
 import { BaseComponent } from "../BaseComponent.js";
+import { Acak } from "../Acak.js";
 export class Angka extends BaseComponent {
     constructor(html) {
         super();
@@ -6,9 +7,7 @@ export class Angka extends BaseComponent {
         this._input = null;
         this._elHtml = html;
         this._input = this._elHtml;
-    }
-    get input() {
-        return this._input;
+        this._acak = new Acak(10);
     }
     get angka() {
         return this._angka;
@@ -28,5 +27,11 @@ export class Angka extends BaseComponent {
     }
     set value(value) {
         this._input.value = value + '';
+    }
+    get acak() {
+        return this._acak;
+    }
+    get input() {
+        return this._input;
     }
 }

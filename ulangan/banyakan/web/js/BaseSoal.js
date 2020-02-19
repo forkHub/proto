@@ -3,11 +3,11 @@ import { Bar } from "./Bar.js";
 import { Feedback, FeedbackEnum } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
 import { Game } from "./Game.js";
-// import { Game } from "./Game.js";
+//TODO: acak masukkan ke base soal
 export class BaseSoal extends BaseComponent {
     constructor() {
         super();
-        this.jmlSoal = 10; //jumlah soal satu sesi
+        this._jmlSoal = 10; //jumlah soal satu sesi
         this.soalIdx = 0; //soal aktif sekarang
         this._nilai = 0; //nilai
         this.gambar = true; //pakai gambar
@@ -25,6 +25,9 @@ export class BaseSoal extends BaseComponent {
         this.selesai = new Selesai();
         this._feedback = new Feedback();
         this.bar = new Bar();
+    }
+    jawabanBenar() {
+        return "";
     }
     getUrl() {
         let url = window.location.search.slice(1);
@@ -101,7 +104,7 @@ export class BaseSoal extends BaseComponent {
     }
     userJawab() {
         this.soalIdx++;
-        this.bar.persen2(this.soalIdx, this.jmlSoal);
+        this.bar.persen2(this.soalIdx, this._jmlSoal);
         if (this.check()) {
             this.nilai++;
             this.feedbackBenarShow(Game.inst.cont);
@@ -113,7 +116,7 @@ export class BaseSoal extends BaseComponent {
     feedbackClick(cont) {
         console.log('feedback click, nilai ' + this.nilai);
         this._feedback.detach();
-        if (this.soalIdx >= this.jmlSoal) {
+        if (this.soalIdx >= this._jmlSoal) {
             this.selesai.attach(cont);
             this.selesai.nilai = this.nilai;
         }
@@ -125,6 +128,7 @@ export class BaseSoal extends BaseComponent {
         this._feedback.attach(cont);
         this._feedback.label = "Jawaban Salah";
         this._feedback.type = FeedbackEnum.SALAH;
+        this._feedback.jawapP.innerText = this.jawabanBenar();
         this._feedback.onClick = () => {
             this.feedbackClick(cont);
         };
@@ -133,6 +137,7 @@ export class BaseSoal extends BaseComponent {
         this._feedback.attach(cont);
         this._feedback.label = 'Jawaban Benar';
         this._feedback.type = FeedbackEnum.BENAR;
+        this._feedback.jawapP.innerText = "";
         this._feedback.onClick = () => {
             this.feedbackClick(cont);
         };
@@ -155,6 +160,12 @@ export class BaseSoal extends BaseComponent {
         // 	console.log(e.getStackTrace());
         // }
     }
+    get jmlSoal() {
+        return this._jmlSoal;
+    }
+    set jmlSoal(value) {
+        this._jmlSoal = value;
+    }
 }
 export class Query {
     constructor(key, value) {
@@ -168,5 +179,15 @@ export class Query {
     }
     get value() {
         return this._value;
+    }
+}
+export class Kirim extends BaseComponent {
+    constructor() {
+        super();
+        this._template = `
+		<div class='kirim-cont'>
+			<button class='normal kirim'>Kirim</button>
+		</div>`;
+        this.build();
     }
 }

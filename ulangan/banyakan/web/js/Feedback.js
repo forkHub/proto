@@ -1,5 +1,4 @@
 import { BaseComponent } from "./BaseComponent.js";
-// import { Game } from "./Game.js"; 
 export class Feedback extends BaseComponent {
     constructor() {
         super();
@@ -9,6 +8,7 @@ export class Feedback extends BaseComponent {
 			<div class='feedback'>
 				<div class='cont'>
 					<p class='feedback'>Jawaban kamu benar</p>
+					<P class='jawaban'></p>
 					<button class='normal'>soal berikutnya</button>
 				</div>
 			</div>
@@ -17,13 +17,13 @@ export class Feedback extends BaseComponent {
         this.button = this.getEl('button');
         this.labelP = this.getEl('p.feedback');
     }
-    // tampil(): void {
-    // 	this.attach(Game.inst.cont);
-    // }
     onAttach() {
         this.button.focus();
     }
     init() {
+    }
+    get jawapP() {
+        return this.getEl('p.jawaban');
     }
     get label() {
         return this.labelP.innerHTML;
@@ -33,9 +33,7 @@ export class Feedback extends BaseComponent {
     }
     set onClick(value) {
         this._onClick = value;
-        // console.log('feedbacak set on click ');
         this.button.onclick = () => {
-            // console.log('feedback on click');
             this.button.blur();
             this.detach();
             this._onClick();
