@@ -1,9 +1,7 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
-// import { Game } from "../Game.js";
 export class BilanganAsli extends BaseSoal {
-    // private kirimTbl: HTMLButtonElement = null;
     constructor() {
         super();
         this.angkaAr = [];
@@ -31,11 +29,19 @@ export class BilanganAsli extends BaseSoal {
         this.angkaCont = this.getEl('div.angka-cont');
         this.jawabCont = this.getEl('div.jawab-cont');
         this.batasSpan = this.getEl('p.judul-soal span.batas');
-        // this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
-        // this.kirimTbl.onclick = () => {
-        // 	this.kirimOnClick();
-        // }
         this.acak = new Acak(this.batasAtas - this.batasBawah);
+    }
+    jawabanBenar() {
+        let hsl = [];
+        let hasilStr = '';
+        hsl = this.angkaAr.slice(0, this.batasAtas);
+        for (let i = 0; i < hsl.length; i++) {
+            if (i != 0) {
+                hasilStr += hsl[i].angka + ', ';
+            }
+        }
+        hasilStr = hasilStr.slice(0, hasilStr.length - 2);
+        return hasilStr;
     }
     angkaAda(angkaP) {
         for (let i = 0; i < this.angkaAr.length; i++) {
@@ -55,14 +61,11 @@ export class BilanganAsli extends BaseSoal {
             let angka = this.angkaAr[i];
             if (angka.elHtml.parentElement == this.jawabCont) {
                 jml++;
-                // console.log('jml ' + jml + '/angka ' + angka.angka);
             }
         }
         if (jml != (this.batasAtas - 1)) {
-            // console.log("jumlah beda, jml " + jml + '/batas atas ' + this.batasAtas);
             return false;
         }
-        // console.log("check, batas atas: " + this.batasAtas + '/jml ' + jml);
         for (let i = 1; i < this.batasAtas; i++) {
             let ada = this.angkaAda(i);
             if (false == ada) {

@@ -1,12 +1,12 @@
 import { Dom } from "./Dom.js";
-import { Feedback } from "./Feedback.js";
+// import { Feedback } from "./Feedback.js";
 import { Selesai } from "./Selesai.js";
 import { Template } from "./Template.js";
-import { Banyakan } from "./banyakan/Banyakan.js";
+// import { Banyakan } from "./banyakan/Banyakan.js";
 import { Puluhan } from "./puluhan/Puluhan.js";
-import { Menu } from "./Menu.js";
+import { Menu } from "./menu/Menu.js";
 import { BandingkanTanda } from "./tanda/BandingkanTanda.js";
-import { Debug } from "./Debug.js";
+// import { Debug } from "./Debug.js";
 import { Acak } from "./Acak.js";
 import { JumlahPilih } from "./jumlah/JumlahPilih.js";
 import { Pola } from "./pola/Pola.js";
@@ -14,10 +14,10 @@ import { Pola } from "./pola/Pola.js";
 export class Game {
     constructor() {
         this._dom = null;
-        this._feedback = null;
+        // private _feedback: Feedback = null;
         this._selesai = null;
         this._template = null;
-        this._banyakan = null;
+        // private _banyakan: Banyakan = null;
         this._cont = null;
         this._puluhan = null;
         this._menu = null;
@@ -27,9 +27,9 @@ export class Game {
         Game._inst = this;
         this._template = new Template();
         this._dom = new Dom();
-        this._feedback = new Feedback();
+        // this._feedback = new Feedback();
         this._selesai = new Selesai();
-        this._banyakan = new Banyakan();
+        // this._banyakan = new Banyakan();
         this._puluhan = new Puluhan();
         this._menu = new Menu();
         this._simbol = new BandingkanTanda();
@@ -40,9 +40,9 @@ export class Game {
     }
     init() {
         this._cont = document.body.querySelector('div.cont');
-        this._banyakan.init();
+        // this._banyakan.init();
         this._selesai.init();
-        this._feedback.init();
+        // this._feedback.init();
         this._puluhan.init();
         this._simbol.init();
         this._menu.init();
@@ -57,7 +57,7 @@ export class Game {
         acak.test();
     }
     debug() {
-        Debug.tanda();
+        // Debug.tanda();
     }
     getStackTrace() {
         try {
@@ -76,18 +76,18 @@ export class Game {
     get dom() {
         return this._dom;
     }
-    get feedback() {
-        return this._feedback;
-    }
+    // public get feedback(): Feedback {
+    // 	return this._feedback;
+    // }
     get selesai() {
         return this._selesai;
     }
     get template() {
         return this._template;
     }
-    get banyakan() {
-        return this._banyakan;
-    }
+    // public get banyakan(): Banyakan {
+    // 	return this._banyakan;
+    // }
     get cont() {
         return this._cont;
     }

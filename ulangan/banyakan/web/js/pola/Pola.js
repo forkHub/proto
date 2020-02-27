@@ -2,7 +2,6 @@ import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
 export class Pola extends BaseSoal {
-    // private kirimTbl: HTMLButtonElement = null;
     constructor() {
         super();
         this.angkaAr = [];
@@ -26,10 +25,17 @@ export class Pola extends BaseSoal {
 			</div>
 		`;
         this.build();
-        // this.judulP = this.getEl('p.judul-soal') as HTMLParagraphElement;
         this.angkaCont = this.getEl('div.angka-cont');
         this.acak = new Acak(this._batasAtas);
         this.acakPos = new Acak(4);
+    }
+    jawabanBenar() {
+        for (let i = 0; i < this.angkaAr.length; i++) {
+            if (false == this.angkaAr[i].readonly) {
+                return this.angkaAr[i].angka + '';
+            }
+        }
+        return "";
     }
     check() {
         for (let i = 0; i < this.angkaAr.length; i++) {

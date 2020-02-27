@@ -1,25 +1,23 @@
-import { BaseComponent } from "../BaseComponent.js";
-import { Game } from "../Game.js";
-import { FeedbackEnum } from "../Feedback.js";
-import { Bar } from "../Bar.js";
-export class Puluhan extends BaseComponent {
+// import { BaseComponent } from "../BaseComponent.js";
+// import { Game } from "../Game.js";
+// import { FeedbackEnum } from "../Feedback.js";
+// import { Bar } from "../Bar.js";
+import { BaseSoal } from "../BaseSoal.js";
+export class Puluhan extends BaseSoal {
     constructor() {
         super();
         this.puluhan = 0;
         this.satuan = 0;
         this.jumlah = 0;
-        this.soalTotal = 10;
-        this._soalTerjawab = 0;
-        this.jmlBenar = 0;
+        // private soalTotal: number = 10;
+        // private _soalTerjawab: number = 0;
+        // private jmlBenar: number = 0;
         this.jumlahEl = null;
         this.puluhanEl = null;
         this.satuanEl = null;
-        this.kirimBtn = null;
-        this.barCont = null;
         this._template = `
 			<div class='puluhan'>
-				<div class='bar-cont'>
-				</div>
+				<div class='bar-cont'></div>
 				<p>Isilah kotak yang kosong dengan bilangan puluhan dan satuan</p>
 				<hr />
 				<br />
@@ -29,112 +27,99 @@ export class Puluhan extends BaseComponent {
 				<br />
 				<br />
 				<hr />
-				<button class='normal kirim'>Kirim</button>
+				<div class='kirim-cont'>
+					<button class='normal kirim'>Kirim</button>
+				</div>
 			</div>
 		`;
         this.build();
-        this.bar = new Bar();
     }
-    detach() {
-        super.detach();
-        // Game.inst.getStackTrace();
+    jawabanBenar() {
+        return this.puluhan + " puluhan  " + this.satuan + " satuan";
     }
     init() {
         console.log('init');
+        super.init();
         this.jumlahEl = this.getEl('span.jml');
         this.puluhanEl = this.getEl('input#puluhan');
         this.satuanEl = this.getEl('input#satuan');
-        this.barCont = this.getEl('div.bar-cont');
-        this.kirimBtn = this.getEl('button.kirim');
         this.puluhanEl.tabIndex = 0;
-        this.puluhanEl.autofocus = true;
+        // this.puluhanEl.autofocus = true;
         this.satuanEl.tabIndex = 1;
-        this.bar.attach(this.barCont);
-        this.bar.persen = 0;
-        //TODO: taruh behaviour di base soal
-        this.bar.onClick = () => {
-            this.detach();
-            Game.inst.menu.attach(Game.inst.cont);
-        };
-        this.resetSoal();
-        this.kirimBtn.onclick = () => {
-            this.kirimClick();
-        };
+        // this.resetSoal();
+        // this.kirimBtn.onclick = () => {
+        // 	this.kirimClick();
+        // }
     }
     //TODO: refactor masukin ke base class
-    feedbackOnClick() {
-        Game.inst.feedback.detach();
-        this._soalTerjawab++;
-        this.bar.persen = Math.floor((this._soalTerjawab / 10) * 100);
-        if (this._soalTerjawab >= this.soalTotal) {
-            Game.inst.selesai.attach(Game.inst.cont);
-            Game.inst.selesai.nilai = this.jmlBenar;
-            Game.inst.selesai.onMulaiClick = () => {
-                // this.detach();
-                this.selesaiMulaiLagiClick();
-            };
-            Game.inst.selesai.onMenuClick = () => {
-                // this.detach();
-                this.selesaiMenuClick();
-            };
-        }
-        else {
-            this.resetSoal();
-        }
-    }
-    selesaiMulaiLagiClick() {
-        this._soalTerjawab = 0;
-        this.bar.persen = 0;
-        this.resetSoal();
-    }
-    selesaiMenuClick() {
-        this.detach();
-        Game.inst.selesai.detach();
-        Game.inst.menu.attach(Game.inst.cont);
-    }
-    kirimClick() {
-        // console.log('kirim klik');
-        if (this.checkBenar()) {
-            // console.log('benar');
-            this.jmlBenar++;
-            this._soalTerjawab++;
-            Game.inst.feedback.attach(Game.inst.cont);
-            Game.inst.feedback.label = 'Jawaban Benar';
-            Game.inst.feedback.type = FeedbackEnum.BENAR;
-            Game.inst.feedback.onClick = () => {
-                this.feedbackOnClick();
-            };
-        }
-        else {
-            // console.log('salah');
-            this._soalTerjawab++;
-            Game.inst.feedback.attach(Game.inst.cont);
-            Game.inst.feedback.label = 'Jawaban Salah';
-            Game.inst.feedback.type = FeedbackEnum.SALAH;
-            Game.inst.feedback.onClick = () => {
-                this.feedbackOnClick();
-            };
-        }
-    }
-    mulaiLagi() {
-        this._soalTerjawab = 0;
-        // this.jmlBenar = 0;
-        // this.jmlSalah = 0;
-        this.resetSoal();
-    }
-    ambilAngka2() {
+    // feedbackOnClick(): void {
+    // 	Game.inst.feedback.detach();
+    // 	this._soalTerjawab++;
+    // 	this.bar.persen = Math.floor((this._soalTerjawab / 10) * 100);
+    // 	if (this._soalTerjawab >= this.soalTotal) {
+    // 		Game.inst.selesai.attach(Game.inst.cont);
+    // 		Game.inst.selesai.nilai = this.jmlBenar;
+    // 		Game.inst.selesai.onMulaiClick = () => {
+    // 			this.selesaiMulaiLagiClick();
+    // 		}
+    // 		Game.inst.selesai.onMenuClick = () => {
+    // 			this.selesaiMenuClick();
+    // 		}
+    // 	}
+    // 	else {
+    // 		this.resetSoal();
+    // 	}
+    // }
+    // selesaiMulaiLagiClick(): void {
+    // 	this._soalTerjawab = 0;
+    // 	this.bar.persen = 0;
+    // 	this.resetSoal();
+    // }
+    // selesaiMenuClick(): void {
+    // 	this.detach();
+    // 	Game.inst.selesai.detach();
+    // 	Game.inst.menu.attach(Game.inst.cont);
+    // }
+    // kirimClick(): void {
+    // 	if (this.checkBenar()) {
+    // 		this.jmlBenar++;
+    // 		this._soalTerjawab++;
+    // 		Game.inst.feedback.attach(Game.inst.cont);
+    // 		Game.inst.feedback.label = 'Jawaban Benar';
+    // 		Game.inst.feedback.type = FeedbackEnum.BENAR;
+    // 		Game.inst.feedback.onClick = () => {
+    // 			this.feedbackOnClick();
+    // 		}
+    // 	}
+    // 	else {
+    // 		this._soalTerjawab++;
+    // 		Game.inst.feedback.attach(Game.inst.cont);
+    // 		Game.inst.feedback.label = 'Jawaban Salah';
+    // 		Game.inst.feedback.type = FeedbackEnum.SALAH;
+    // 		Game.inst.feedback.onClick = () => {
+    // 			this.feedbackOnClick();
+    // 		}
+    // 	}
+    // }
+    // mulaiLagi(): void {
+    // 	this._soalTerjawab = 0;
+    // 	this.resetSoal();
+    // }
+    ambilAngka() {
         this.jumlah = Math.floor(Math.random() * 89) + 10;
         this.puluhan = Math.floor(this.jumlah / 10);
         this.satuan = this.jumlah % 10;
     }
-    resetSoal() {
-        this.ambilAngka2();
+    reset() {
+        super.reset();
+        this.ambilAngka();
         this.jumlahEl.innerHTML = this.jumlah + '';
         this.satuanEl.value = '';
         this.puluhanEl.value = '';
         this.puluhanEl.focus();
+        // console.log('reset');
     }
-    checkBenar() {
+    check() {
         if (this.puluhanEl.value == '')
             this.puluhanEl.value = '0';
         if (this.satuanEl.value == '')
@@ -144,11 +129,5 @@ export class Puluhan extends BaseComponent {
         if (parseInt(this.satuanEl.value) != this.satuan)
             return false;
         return true;
-    }
-    get soalTerjawab() {
-        return this._soalTerjawab;
-    }
-    set soalTerjawab(value) {
-        this._soalTerjawab = value;
     }
 }

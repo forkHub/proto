@@ -8,7 +8,7 @@ export class Feedback extends BaseComponent {
 			<div class='feedback'>
 				<div class='cont'>
 					<p class='feedback'>Jawaban kamu benar</p>
-					<P class='jawaban'></p>
+					<p class='jawaban'><b>Jawaban Benar: </b><span class='jawaban'></span></p>
 					<button class='normal'>soal berikutnya</button>
 				</div>
 			</div>
@@ -22,9 +22,12 @@ export class Feedback extends BaseComponent {
     }
     init() {
     }
-    get jawapP() {
+    get jawabP() {
         return this.getEl('p.jawaban');
     }
+    // get jawabSpan(): HTMLSpanElement {
+    // 	return this.getEl('p.jawaban span.jawaban') as HTMLSpanElement;
+    // }
     get label() {
         return this.labelP.innerHTML;
     }

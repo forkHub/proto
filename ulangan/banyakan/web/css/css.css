@@ -5,7 +5,6 @@ body, div {
 
 body {
 	padding: 8px;
-	/* width: 360px; */
 	max-width: 640px;
 	margin: 0px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -51,7 +50,6 @@ button.putih:active {
 }
 
 button.normal {
-    /* border-radius: 10px; */
     background-color: rgb(25, 182, 25);
     border-color: darkgreen;
     padding: 8px;

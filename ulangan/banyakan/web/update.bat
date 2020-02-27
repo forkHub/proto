@@ -7,5 +7,5 @@ rd .\css\ /s /q
 rd .\js\ /s /q
 rd .\template /s /q
 
-xcopy D:\xampp3\htdocs\proto\banyakan\web\*.* . /s
+xcopy D:\xampp3\htdocs\proto\banyakan\web\*.* . /s /y
 pause

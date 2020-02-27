@@ -1,8 +1,8 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
-export class BilanganGanjil extends BaseSoal {
-    // private kirimTbl: HTMLButtonElement = null;
+//TODO: disatukan
+export class BilanganBase extends BaseSoal {
     constructor() {
         super();
         this.angkaAr = [];
@@ -13,9 +13,9 @@ export class BilanganGanjil extends BaseSoal {
         this.angkaCont = null;
         this.batasSpan = null;
         this._template = `
-			<div class='bilangan ganjil'>
+			<div class='bilangan cacah'>
 				<div class='bar-cont'></div>
-				<p class='judul-soal'>Sebutkan bilangan ganjil kurang dari <span class='batas'>10</span></p>
+				<p class='judul-soal'>Sebutkan bilangan cacah kurang dari <span class='batas'>10</span></p>
 				<div class='jawab-cont'>
 				</div>
 				<hr/>
@@ -30,11 +30,43 @@ export class BilanganGanjil extends BaseSoal {
         this.angkaCont = this.getEl('div.angka-cont');
         this.jawabCont = this.getEl('div.jawab-cont');
         this.batasSpan = this.getEl('p.judul-soal span.batas');
-        // this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
-        // this.kirimTbl.onclick = () => {
-        // 	this.kirimOnClick();
-        // }
         this.acak = new Acak(this.batasAtas - this.batasBawah);
+    }
+    angkaAda(angkaP) {
+        for (let i = 0; i < this.angkaAr.length; i++) {
+            let angka;
+            angka = this.angkaAr[i];
+            if (angka.elHtml.parentElement == this.jawabCont) {
+                if (angka.angka == angkaP) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    check() {
+        let jml = 0;
+        for (let i = 0; i < this.angkaAr.length; i++) {
+            let angka = this.angkaAr[i];
+            if (angka.elHtml.parentElement == this.jawabCont) {
+                jml++;
+            }
+        }
+        if (jml != (this.batasAtas)) {
+            console.log("jml " + jml + '/batas atas ' + this.batasAtas);
+            return false;
+        }
+        console.log("check, batas atas: " + this.batasAtas);
+        for (let i = 0; i < this.batasAtas; i++) {
+            let ada = this.angkaAda(i);
+            if (false == ada) {
+                return false;
+            }
+        }
+        return true;
+    }
+    init() {
+        super.init();
         for (let i = 0; i <= 10; i++) {
             let angka = new Angka();
             angka.angka = i;
@@ -45,71 +77,6 @@ export class BilanganGanjil extends BaseSoal {
             this.angkaAr.push(angka);
         }
     }
-    jawabanBenar() {
-        let hsl = [];
-        let hasilStr = '';
-        hsl = this.angkaAr.slice(0, this.batasAtas);
-        for (let i = 0; i < hsl.length; i++) {
-            if ((i % 2) == 1) {
-                hasilStr += hsl[i].angka + ', ';
-            }
-            else {
-                console.log('bilangan bukan ganjil ' + (i % 2));
-            }
-        }
-        hasilStr = hasilStr.slice(0, hasilStr.length - 2);
-        return hasilStr;
-    }
-    angkaAda(angkaP) {
-        for (let i = 0; i < this.angkaAr.length; i++) {
-            let angka;
-            angka = this.angkaAr[i];
-            if (angka.elHtml.parentElement == this.jawabCont) {
-                if (angka.angka == angkaP) {
-                    console.log('angka ada ' + angkaP + '/true');
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    jmlJawaban() {
-        let hsl = 0;
-        console.log('jumlah jawaban');
-        for (let i = 0; i < this.batasAtas; i++) {
-            if (i % 2) {
-                hsl++;
-                console.log('hasil ' + hsl + '/angka ' + i);
-            }
-        }
-        return hsl;
-    }
-    check() {
-        let jml = 0;
-        for (let i = 0; i < this.angkaAr.length; i++) {
-            let angka = this.angkaAr[i];
-            if (angka.elHtml.parentElement == this.jawabCont) {
-                jml++;
-            }
-        }
-        if (jml != this.jmlJawaban()) {
-            console.log("jml " + jml + '/batas atas ' + this.batasAtas);
-            return false;
-        }
-        console.log("check, batas atas: " + this.batasAtas);
-        for (let i = 0; i < this.batasAtas; i++) {
-            if (1 == (i % 2)) {
-                let ada = this.angkaAda(i);
-                if (false == ada) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    // kirimOnClick(): void {
-    // 	this.userJawab();
-    // }
     angkaClick(angka) {
         if (angka.elHtml.parentElement == this.jawabCont) {
             angka.attach(this.angkaCont);

@@ -1,6 +1,7 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
+//TODO: angka cont dibuat rata tengah
 export class BilanganGenap extends BaseSoal {
     // private kirimTbl: HTMLButtonElement = null;
     constructor() {
@@ -42,6 +43,18 @@ export class BilanganGenap extends BaseSoal {
             };
             this.angkaAr.push(angka);
         }
+    }
+    jawabanBenar() {
+        let hsl = [];
+        let hasilStr = '';
+        hsl = this.angkaAr.slice(0, this.batasAtas);
+        for (let i = 0; i < hsl.length; i++) {
+            if ((i % 2) == 0) {
+                hasilStr += hsl[i].angka + ', ';
+            }
+        }
+        hasilStr = hasilStr.slice(0, hasilStr.length - 2);
+        return hasilStr;
     }
     angkaAda(angkaP) {
         for (let i = 0; i < this.angkaAr.length; i++) {

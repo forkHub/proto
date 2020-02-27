@@ -14,7 +14,6 @@ export class Urutkan extends BaseSoal {
         this._template = `
 			<div class='urutkan'>
 				<div class='bar-cont'></div>
-
 				<p class='judul-soal'>Urutkan dari yang terkecil</p c>
 				<div class='target'></div>
 				<div class='sumber'></div>
@@ -28,7 +27,6 @@ export class Urutkan extends BaseSoal {
     init() {
         console.log('init');
         super.init();
-        // this.bar.attach(this.getEl('div.bar-cont') as HTMLDivElement);
         this.acak.max = this.max;
         this.angkaSumberEl = this.getEl('div.sumber');
         this.angkaTargetEl = this.getEl('div.target');
@@ -41,6 +39,42 @@ export class Urutkan extends BaseSoal {
             };
             this.angkas.push(angka);
         }
+    }
+    jawabanBenar() {
+        let angkaAr = [];
+        for (let i = 0; i < this.angkas.length; i++) {
+            angkaAr.push(this.angkas[i].angka);
+        }
+        if (Arah.KECIL2BESAR == this._flArah) {
+            for (let i = 0; i < angkaAr.length; i++) {
+                for (let j = i + 1; j < angkaAr.length; j++) {
+                    if (angkaAr[i] > angkaAr[j]) {
+                        let n = angkaAr[i];
+                        angkaAr[i] = angkaAr[j];
+                        angkaAr[j] = n;
+                    }
+                }
+            }
+        }
+        else if (Arah.BESAR2KECIL == this._flArah) {
+            for (let i = 0; i < angkaAr.length; i++) {
+                for (let j = i + 1; j < angkaAr.length; j++) {
+                    if (angkaAr[i] < angkaAr[j]) {
+                        let n = angkaAr[i];
+                        angkaAr[i] = angkaAr[j];
+                        angkaAr[j] = n;
+                    }
+                }
+            }
+        }
+        let hsl = '';
+        for (let i = 0; i < angkaAr.length; i++) {
+            hsl += angkaAr[i];
+            if (i != angkaAr.length - 1) {
+                hsl += ',';
+            }
+        }
+        return hsl;
     }
     debugAngka() {
         let ar = [];
@@ -69,7 +103,6 @@ export class Urutkan extends BaseSoal {
     resetAngka() {
         console.log('reset angka');
         for (let i = 0; i < this.angkas.length; i++) {
-            // this.angkas[i].tempat = AngkaEnum.SUMBER;
             this.angkas[i].angka = -1;
             this.angkas[i].attach(this.angkaSumberEl);
         }
@@ -97,12 +130,27 @@ export class Urutkan extends BaseSoal {
         }
         return true;
     }
+    checkUrutBesarKecil(ar) {
+        for (let i = 0; i < ar.length - 1; i++) {
+            if (ar[i] <= ar[i + 1])
+                return false;
+        }
+        return true;
+    }
     check() {
         let target = [];
         target = this.getAngka(this.angkaTargetEl);
         if (target.length < this.jmlKotak)
             return false;
-        return this.checkUrut(target);
+        if (this._flArah == Arah.KECIL2BESAR) {
+            return this.checkUrut(target);
+        }
+        else if (Arah.BESAR2KECIL == this._flArah) {
+            return this.checkUrutBesarKecil(target);
+        }
+        else {
+            throw new Error();
+        }
     }
     angkaClick(angka) {
         if (this.angkaSumberEl.contains(angka.elHtml)) {
@@ -116,33 +164,26 @@ export class Urutkan extends BaseSoal {
             console.log(this.angkaTargetEl);
             throw new Error();
         }
-        // let angkas: Array<number> = [];
-        // angkas = this.getAngka(this.angkaTargetEl);
-        // if (angkas.length >= this.jmlKotak) {
-        // 	this.soalIdx++;
-        // 	this.bar.persen2(this.soalIdx, this.jmlSoal);
-        // 	if (this.check()) {
-        // 		this._nilai++;
-        // 		this.feedbackBenarShow(this._cont);
-        // 	}
-        // 	else {
-        // 		this.feedbackSalahShow(this._cont)
-        // 	}
-        // }
     }
     get flArah() {
         return this._flArah;
     }
+    set flArah(value) {
+        this._flArah = value;
+    }
     get flJarak() {
         return this._flJarak;
     }
+    get judul() {
+        return this.getEl('p.judul-soal');
+    }
 }
-var Jarak;
+export var Jarak;
 (function (Jarak) {
     Jarak[Jarak["JARAK_SATU"] = 0] = "JARAK_SATU";
     Jarak[Jarak["JARAK_ACAK"] = 1] = "JARAK_ACAK";
 })(Jarak || (Jarak = {}));
-var Arah;
+export var Arah;
 (function (Arah) {
     Arah[Arah["KECIL2BESAR"] = 0] = "KECIL2BESAR";
     Arah[Arah["BESAR2KECIL"] = 1] = "BESAR2KECIL";

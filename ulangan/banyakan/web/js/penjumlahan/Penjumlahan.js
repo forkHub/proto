@@ -53,7 +53,7 @@ export class Penjumlahan extends BaseSoal {
             let angka;
             angka = this.angkas[i];
             if (angka.readonly == false) {
-                return "Jawaban benar: " + angka.angka;
+                return "" + angka.angka;
             }
         }
         return "";

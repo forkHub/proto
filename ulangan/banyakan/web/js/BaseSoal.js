@@ -27,6 +27,7 @@ export class BaseSoal extends BaseComponent {
         this.bar = new Bar();
     }
     jawabanBenar() {
+        console.log('base soal:jawaban benar');
         return "";
     }
     getUrl() {
@@ -114,7 +115,7 @@ export class BaseSoal extends BaseComponent {
         }
     }
     feedbackClick(cont) {
-        console.log('feedback click, nilai ' + this.nilai);
+        // console.log('feedback click, nilai ' + this.nilai);
         this._feedback.detach();
         if (this.soalIdx >= this._jmlSoal) {
             this.selesai.attach(cont);
@@ -125,10 +126,11 @@ export class BaseSoal extends BaseComponent {
         }
     }
     feedbackSalahShow(cont) {
+        // console.log('feedback salah show');
         this._feedback.attach(cont);
         this._feedback.label = "Jawaban Salah";
         this._feedback.type = FeedbackEnum.SALAH;
-        this._feedback.jawapP.innerText = this.jawabanBenar();
+        this._feedback.jawabP.innerHTML = "<b>Jawaban benar: </b>" + this.jawabanBenar();
         this._feedback.onClick = () => {
             this.feedbackClick(cont);
         };
@@ -137,7 +139,7 @@ export class BaseSoal extends BaseComponent {
         this._feedback.attach(cont);
         this._feedback.label = 'Jawaban Benar';
         this._feedback.type = FeedbackEnum.BENAR;
-        this._feedback.jawapP.innerText = "";
+        this._feedback.jawabP.innerText = "";
         this._feedback.onClick = () => {
             this.feedbackClick(cont);
         };

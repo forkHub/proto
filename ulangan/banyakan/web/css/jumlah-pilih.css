@@ -19,6 +19,12 @@ div.jumlah-pilih button.jawab {
     padding-bottom: 16px;
 }
 
+div.jumlah-pilih button.jawab.dipilih {
+	border: 3px solid;
+	background-color: lightgray;
+}
+
+
 div.jumlah-pilih div.jawaban {
     display: flex;
     flex-grow: 1;

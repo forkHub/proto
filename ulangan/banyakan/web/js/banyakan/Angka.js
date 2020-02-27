@@ -18,7 +18,7 @@ export class Angka extends BaseComponent {
         this.build();
         this._view = this._elHtml;
     }
-    tulis(angkaSaja) {
+    buatTeks(angkaSaja) {
         let str = '';
         let idx = 0;
         let icon = '';
@@ -31,7 +31,10 @@ export class Angka extends BaseComponent {
         if (angkaSaja) {
             str = this._angka + '';
         }
-        this._view.innerHTML = str;
+        return str;
+    }
+    tulis(angkaSaja) {
+        this._view.innerHTML = this.buatTeks(angkaSaja);
     }
     get angka() {
         return this._angka;

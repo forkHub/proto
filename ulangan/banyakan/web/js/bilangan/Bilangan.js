@@ -1,9 +1,8 @@
 import { BaseSoal } from "../BaseSoal.js";
 import { Angka } from "./Angka.js";
 import { Acak } from "../Acak.js";
-// import { Game } from "../Game.js";
+//TODO: disatukan ke base bilangan
 export class Bilangan extends BaseSoal {
-    // private kirimTbl: HTMLButtonElement = null;
     constructor() {
         super();
         this.angkaAr = [];
@@ -31,13 +30,19 @@ export class Bilangan extends BaseSoal {
         this.angkaCont = this.getEl('div.angka-cont');
         this.jawabCont = this.getEl('div.jawab-cont');
         this.batasSpan = this.getEl('p.judul-soal span.batas');
-        // this.kirimTbl = this.getEl('button.normal') as HTMLButtonElement;
-        // this.kirimTbl.onclick = () => {
-        // 	this.kirimOnClick();
-        // }
         this.acak = new Acak(this.batasAtas - this.batasBawah);
     }
-    angkaAda(angkaP) {
+    jawabanBenar() {
+        let hsl = [];
+        let hasilStr = '';
+        hsl = this.angkaAr.slice(0, this.batasAtas);
+        for (let i = 0; i < hsl.length; i++) {
+            hasilStr += hsl[i].angka + ', ';
+        }
+        hasilStr = hasilStr.slice(0, hasilStr.length - 2);
+        return hasilStr;
+    }
+    angkaAdaDiJawabanCont(angkaP) {
         for (let i = 0; i < this.angkaAr.length; i++) {
             let angka;
             angka = this.angkaAr[i];
@@ -64,7 +69,7 @@ export class Bilangan extends BaseSoal {
         }
         console.log("check, batas atas: " + this.batasAtas);
         for (let i = 0; i < this.batasAtas; i++) {
-            let ada = this.angkaAda(i);
+            let ada = this.angkaAdaDiJawabanCont(i);
             if (false == ada) {
                 return false;
             }

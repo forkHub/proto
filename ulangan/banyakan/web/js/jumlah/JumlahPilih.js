@@ -37,6 +37,10 @@ export class JumlahPilih extends BaseSoal {
         this.setTombol(this.getEl('button.jawab.tiga'));
         this.acakAngkaSoal = new Acak(this.angkaMax);
     }
+    jawabanBenar() {
+        return this.angkaJawaban + '';
+        ;
+    }
     setTombol(tblView) {
         let tbl = new Tombol();
         tbl.view = tblView;
@@ -62,6 +66,11 @@ export class JumlahPilih extends BaseSoal {
     tombolClick(tombol) {
         console.log('tombol click ' + tombol.angka + '/' + this.angkaJawaban);
         this.angkaDipilih = tombol.angka;
+        for (let i = 0; i < this.tblAr.length; i++) {
+            let tombol1 = this.tblAr[i];
+            tombol1.view.classList.remove('dipilih');
+        }
+        tombol.view.classList.add('dipilih');
     }
     debug() { }
     reset() {
@@ -77,11 +86,14 @@ export class JumlahPilih extends BaseSoal {
         for (let i = 0; i < 1000; i++) {
             this.acakSoal();
         }
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < this.tblAr.length; i++) {
             this.tblAr[i].view.parentElement.removeChild(this.tblAr[i].view);
         }
         for (let i = 0; i < 3; i++) {
             this.jawabCont.appendChild(this.tblAr[i].view);
+        }
+        for (let i = 0; i < this.tblAr.length; i++) {
+            this.tblAr[i].view.classList.remove('dipilih');
         }
         let str = '';
         let iconIdx = Math.floor(Math.random() * iconBuah.length);

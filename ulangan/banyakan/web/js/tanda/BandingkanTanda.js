@@ -11,8 +11,9 @@ export class BandingkanTanda extends BaseSoal {
         this.tengahEl = null;
         this.kananEl = null;
         this.angkaAcak = null;
+        this.angkaAcak2 = null;
         this.angkas = [];
-        this.jawaban = '';
+        this.jawabanUser = '';
         this._template = `
 			<div class='banyakan-tanda'>
 				<div class='bar-cont'></div>
@@ -47,7 +48,8 @@ export class BandingkanTanda extends BaseSoal {
         this.kiriEl = this.getEl('div.soal div.angka.kiri');
         this.tengahEl = this.getEl('div.soal div.tanda');
         this.kananEl = this.getEl('div.soal div.angka.kanan');
-        this.angkaAcak = new Acak(20);
+        this.angkaAcak = new Acak(10);
+        this.angkaAcak2 = new Acak(10);
     }
     init() {
         super.init();
@@ -62,10 +64,28 @@ export class BandingkanTanda extends BaseSoal {
             this.ldClick();
         };
     }
+    jawabanBenar() {
+        // console.log('jawaban benar ');
+        if (this.angkas[0] > this.angkas[1]) {
+            // console.log('>');
+            return ">";
+        }
+        else if (this.angkas[0] < this.angkas[1]) {
+            // console.log('<');
+            return "<";
+        }
+        else if (this.angkas[0] == this.angkas[1]) {
+            // console.log('=');
+            return "=";
+        }
+        else {
+            throw new Error();
+        }
+    }
     reset() {
         super.reset();
         this.angkas[0] = this.angkaAcak.get();
-        this.angkas[1] = this.angkaAcak.get();
+        this.angkas[1] = this.angkaAcak2.get();
         if (this.angkas[0] > 10) {
             this.angkas[0] -= 10;
         }
@@ -77,28 +97,28 @@ export class BandingkanTanda extends BaseSoal {
         this.tengahEl.innerHTML = '';
     }
     kdClick() {
-        this.jawaban = '<';
-        this.tengahEl.innerHTML = this.jawaban;
+        this.jawabanUser = '<';
+        this.tengahEl.innerHTML = this.jawabanUser;
     }
     sdClick() {
-        this.jawaban = '=';
-        this.tengahEl.innerHTML = this.jawaban;
+        this.jawabanUser = '=';
+        this.tengahEl.innerHTML = this.jawabanUser;
     }
     ldClick() {
-        this.jawaban = '>';
-        this.tengahEl.innerHTML = this.jawaban;
+        this.jawabanUser = '>';
+        this.tengahEl.innerHTML = this.jawabanUser;
     }
     check() {
         if (this.angkas[0] > this.angkas[1]) {
-            if (this.jawaban != '>')
+            if (this.jawabanUser != '>')
                 return false;
         }
         if (this.angkas[0] == this.angkas[1]) {
-            if (this.jawaban != '=')
+            if (this.jawabanUser != '=')
                 return false;
         }
         if (this.angkas[0] < this.angkas[1]) {
-            if (this.jawaban != '<')
+            if (this.jawabanUser != '<')
                 return false;
         }
         return true;

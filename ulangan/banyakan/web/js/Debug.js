@@ -1,7 +1,5 @@
+// import { click } from "./menu/Data.js";
 // import { Game } from "./Game";
-import { click } from "./Menu.js";
+// import { click } from "./menu/Menu.js";
 export class Debug {
-    static tanda() {
-        click.membandingkan.simbol(new MouseEvent(null, null));
-    }
 }
