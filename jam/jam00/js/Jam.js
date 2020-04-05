@@ -5,7 +5,11 @@ class Jam {
         this.ctx = null;
         this.sudut2rad = (Math.PI / 180);
     }
-    init() {
+    gambar(jam, menit) {
+        if (menit > 15)
+            jam += .5;
+        if (menit >= 30)
+            jam += .5;
         //dapatkan context
         this.ctx = this._canvas.getContext("2d");
         //bersihkan canvas
@@ -15,12 +19,6 @@ class Jam {
         this.ctx.arc(120, 120, 100, 0, 2 * Math.PI);
         this.ctx.stroke();
         this.gambarTitik();
-    }
-    gambar(jam, menit) {
-        if (menit > 15)
-            jam += .5;
-        if (menit >= 30)
-            jam += .5;
         this.gambarJarum(jam, 50);
         this.gambarJarum(menit / 5, 70);
     }
@@ -65,6 +63,5 @@ window.onload = () => {
     let canvas = document.body.querySelector('canvas');
     let jam = new Jam();
     jam.canvas = canvas;
-    jam.init();
     jam.gambar(9, 33);
 };
