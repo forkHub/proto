@@ -1,0 +1,222 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='css/bootstrap.min.css' rel='stylesheet' />
+	<link href='css/css.css' rel='stylesheet' />
+
+	<style>
+		div.cont {
+			text-align: left;
+		}
+
+		div.cont div.edit-foto img {
+			border: 1px solid grey;
+			padding: 4px;
+			box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.75);
+		}
+
+		p.judul {
+			font-weight: bold;
+		}
+
+		div.pilih-foto.daftar-foto,
+		div.pilih-anak {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			flex-direction: column;
+			background-color: white;
+			display: none;
+			box-sizing: border-box;
+			padding: 8px;
+		}
+
+		div.pilih-foto.daftar-foto div.list-cont,
+		div.pilih-anak div.list-cont {
+			overflow-y: auto;
+			flex-grow: 1;
+		}
+
+		div.item-foto {
+			display: inline-block;
+			margin: 4px;
+		}
+
+		div.item-foto img {
+			width: 64px;
+			border: 1px solid gray;
+		}
+	</style>
+
+	<script src='./js/Enum.js'></script>
+	<script type='module' src='./js/edit-profile-page/EditProfilePage.js'></script>
+
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+
+</head>
+
+<body>
+	<div class='cont'>
+		<div class='edit-foto'>
+			<img class='' src='./imgs/kucing.png' width="128" height="128" />
+			<br />
+			<br />
+			<button type="button" class='btn btn-primary edit'>Edit</button>
+			<button type="button" class='btn btn-danger hapus'>Hapus</button>
+		</div>
+
+		<hr />
+
+		<form class='profile'>
+
+			<p class='judul'>Data Pibadi:</p>
+
+			<div class='form-group'>
+				<label>Nama Lengkap:</label><br />
+				<input type='text' class='form-control nama-lengkap' placeholder="nama-lengkap" maxlength="100">
+			</div>
+
+			<div class='form-group'>
+				<label>Nama Panggilan:</label><br />
+				<input type='text' class='nama form-control' placeholder="nama" maxlength="30">
+			</div>
+
+			<div class='form-group'>
+				<label>Jenis Kelamin:</label>
+				<div class="form-check">
+					<input class="form-check-input jkl" name="jkl" type="radio" value="L" id="defaultCheck1">
+					<label class="form-check-label" for="defaultCheck1">
+						Laki-laki
+					</label>
+				</div>
+
+				<div class="form-check">
+					<input class="form-check-input jkl" name="jkl" type="radio" value="P" id="defaultCheck2">
+					<label class="form-check-label" for="defaultCheck2">
+						Perempuan
+					</label>
+				</div>
+
+			</div>
+
+
+			<div class='form-group'>
+				<label>Alamat:</label><br />
+				<textarea class='form-control alamat' placeholder="alamat" maxlength="300"></textarea>
+			</div>
+
+			<div class='form-group'>
+				<label>Tgl. Lahir:</label><br />
+				<input type='date' class='form-control tgl-lahir'>
+			</div>
+
+			<div class='form-group'>
+				<label>Tgl. Meninggal:</label><br />
+				<input type='date' class='form-control tgl-meninggal'>
+			</div>
+
+			<p class='judul'>Akun Sosial:</p>
+
+			<label>WA:</label><br />
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">+62</span>
+				</div>
+				<input type="text" class="form-control wa" placeholder="">
+			</div>
+
+			<div class='form-group'>
+				<label>Facebook:</label><br />
+				<input type='text' class='form-control facebook'>
+			</div>
+
+			<div class='form-group'>
+				<label>LinkedIn:</label><br />
+				<input type='text' class='form-control linkedin'>
+			</div>
+
+			<div class='form-group'>
+				<label>Instagram:</label><br />
+				<input type='text' class='form-control instagram'>
+			</div>
+
+
+			<div>
+				<button type="button" class="btn btn-nromal btn-primary ok">simpan profile</button>
+			</div>
+		</form>
+
+		<hr />
+
+		<div class='pasangan'>
+			<p class='judul'>Data Pasangan</p>
+			<div class='form-group'>
+				<label>Nama Pasangan</label>
+				<input type='text' readonly class='form-control nama'></input>
+			</div>
+			<button class='hapus btn btn-primary'>hapus data pasangan</button>
+			<button class='tambah btn btn-primary'>tambah data pasangan</button>
+		</div>
+
+		<hr />
+
+		<div class='anak-anak'>
+			<p class='judul'>Data Anak</p>
+			<div class='anak-cont'>
+			</div>
+			<br />
+			<button type="button" class='btn btn-primary tambah'>Tambah Anak</button>
+		</div>
+
+		<hr />
+		<br />
+
+		<button type="button" class='btn btn-primary tutup'>Selesai</button>
+
+		<div class='pilih-foto daftar-foto'>
+			<p style="text-align: right;">
+				<button class='batal'>X</button>
+			</p>
+			<p class='judul'>Pilih foto</p>
+			<div class='list-cont'>
+
+			</div>
+		</div>
+
+		<div class='pilih-anak' style='display:none'>
+			<p class='judul'>Pilih Anak</p>
+			<div class='list-cont'>
+
+			</div>
+			<button type='button' class='btn btn-primary tutup'>Tutup</button>
+		</div>
+	</div>
+
+	<template>
+		<div class='item-foto'>
+			<img class='' src='' />
+		</div>
+
+		<div class='item-anak card'>
+			<div class='card-body'>
+				<p class='nama'></p>
+				<hr />
+				<button type="button" class='btn btn-danger hapus btn-sm'>hapus</button>
+				<button type="button" class='btn btn-outline-primary btn-sm atas'>&#x2B06</button>
+				<button type="button" class='btn btn-outline-primary btn-sm bawah'>&#x2B07</button>
+			</div>
+		</div>
+
+		<div class='item-anak-dipilih'>
+			<p class='nama'></p>
+		</div>
+	</template>
+</body>
+
+</html>

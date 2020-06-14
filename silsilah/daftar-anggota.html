@@ -1,0 +1,71 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<link href='css/bootstrap.min.css' rel='stylesheet' />
+	<link href='css/css.css' rel='stylesheet' />
+
+	<style>
+		div.cont {
+			text-align: left;
+		}
+
+		/* div.cont div.form-anggota-baru { */
+		/* display: none; */
+		/* } */
+
+		div.list-item {
+			margin-bottom: 16px;
+		}
+
+		div.list-item div.group-tbl {
+			display: block;
+		}
+
+		div.list-item div.group-tbl.sembunyi {
+			display: none;
+		}
+	</style>
+
+	<script type='module' src='./js/daftar-anggota-page/DaftarAnggotaPage.js'></script>
+
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+</head>
+
+<body>
+	<div class='cont'>
+
+		<h3>Form Anggota Baru:</h3>
+		<div class='form-anggota-baru'>
+			<div class='form-group'>
+				<label>nama:</label><br />
+				<input type='text' name='nama' class='nama form-control' required placeholder="nama lengkap" /><br />
+				<button type='button' class='simpan btn btn-primary'>Simpan dan Edit</button>
+			</div>
+			<hr />
+		</div>
+
+		<h3>Daftar Anggota Keluarga:</h3>
+		<!-- <button type="button" class='btn btn-primary tambah'>Tambah Data</button> -->
+		<!-- <hr /> -->
+
+		<!-- cari data -->
+		<div class='search'>
+			<div class=''>
+				<button type="button" disabled class=""> 🍳 </button>
+				<input type="text" class="search" />
+				<br />
+				<br />
+			</div>
+		</div>
+		<div class='list-item-cont'>
+
+		</div>
+	</div>
+</body>
+
+</html>
