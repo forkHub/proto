@@ -101,6 +101,9 @@ export class EditProfilePage {
         else {
             throw new Error('user tidak ditemukan');
         }
+        let linkStr = Util.urlLink + "?id=" + this.id + "&nama=" + window.encodeURIComponent(this.anggota.namaLengkap);
+        this.link.href = linkStr;
+        this.link.innerHTML = linkStr;
         this.rel = await this.ambilDataRelasi();
         this.pilihFoto = new PilihFoto();
         this.pilihFoto.init(this.server);
@@ -135,6 +138,9 @@ export class EditProfilePage {
                 Util.alertMsg(e.message);
             });
         };
+        // this.copyClipboardTbl.onclick = () => {
+        // 	window.Clipboard.
+        // }
         this.tutupBtn.onclick = () => {
             if (this.urlBalik) {
                 window.top.location.href = this.urlBalik;
@@ -211,6 +217,9 @@ export class EditProfilePage {
     }
     get pilihAnakTutupTbl() {
         return Util.getEl('div.pilih-anak button.tutup');
+    }
+    get link() {
+        return Util.getEl('a.link-silsilah');
     }
 }
 new EditProfilePage();

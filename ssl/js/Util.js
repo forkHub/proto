@@ -94,6 +94,7 @@ Util.urlDaftarAnggota = './daftar-anggota.html';
 Util.urlMenu = './admin.html';
 Util.urlFoto = './foto-upload.html';
 Util.urlUploadPhoto = './foto-upload2.html';
+Util.urlLink = 'http://localhost/proto/silsilah/silsilah03/s02/web/index.html';
 Util.defImage = "./imgs/kucing.png";
 Util.redirect_edit_relasi = 'rer';
 Util.paramUrlBalik = 'url_balik';

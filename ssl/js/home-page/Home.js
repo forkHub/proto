@@ -1,6 +1,7 @@
 import { AnggotaView } from "./AnggotaView.js";
 import { Util } from "../Util.js";
 import { FireBaseClient } from "../server/firebase-client/FirebaseClient.js";
+// import { IFBUser } from "../IFirebase.js";
 export class Home {
     constructor() {
         this._viewAr = [];
@@ -8,11 +9,15 @@ export class Home {
             Util.loadingStart();
             this.init().then(() => {
                 Util.loadingEnd();
-                // Util.alertMsg('test alert');
+                // this.client.auth.onAuthStateChanged((user: IFBUser) => {
+                // 	console.group('auth status:');
+                // 	console.log(user.uid); 
+                // 	console.groupEnd();
+                // })
             }).catch((e) => {
                 console.log(e);
                 Util.loadingEnd();
-                Util.alertMsg(e.message, false);
+                Util.alertMsg(e.message);
             });
         };
     }
