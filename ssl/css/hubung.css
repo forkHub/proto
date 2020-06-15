@@ -1,0 +1,103 @@
+div.orang2-cont.tampil div.hubung.kanan {
+	display: table;
+	width: 100%;
+}
+
+div.orang2-cont.tampil div.hubung.kanan div.kiri {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-right: 3px solid;
+}
+
+div.orang2-cont.tampil div.hubung.kanan div.kanan {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-left: 3px solid;
+	border-top: 6px solid;
+}
+
+div.orang2-cont.tampil div.hubung.kiri {
+	display: table;
+	width: 100%;
+}
+
+div.orang2-cont.tampil div.hubung.kiri div.kiri {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-right: 3px solid;
+	border-top: 6px solid;
+}
+
+div.orang2-cont.tampil div.hubung.kiri div.kanan {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-left: 3px solid;
+}
+
+/* tengah */
+div.orang2-cont.tampil div.hubung.tengah {
+	display: table;
+	width: 100%;
+}
+
+div.orang2-cont.tampil div.hubung.tengah div.kiri {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-right: 3px solid;
+	border-top: 6px solid;
+}
+
+div.orang2-cont.tampil div.hubung.tengah div.kanan {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-top: 6px solid;
+	border-left: 3px solid;
+}
+
+/* atas */
+div.orang2-cont.tampil div.hubung2 {
+	display: none;
+	width: 100%;
+}
+
+div.orang2-cont.tampil div.hubung2 div.kiri {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-right: 3px solid;
+	/* border-top: 6px solid; */
+}
+
+div.orang2-cont.tampil div.hubung2 div.kanan {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	/* border-top: 6px solid; */
+	border-left: 3px solid;
+}
+
+/* hubung3 */
+div.orang2-cont.tampil div.hubung3 {
+	display: none;
+	width: 100%;
+}
+
+div.orang2-cont.tampil div.hubung3 div.kiri {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-right: 3px solid;
+}
+
+div.orang2-cont.tampil div.hubung3 div.kanan {
+	display: table-cell;
+	width: 50%;
+	height: 30px;
+	border-left: 3px solid;
+}

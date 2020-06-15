@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='css/bootstrap.min.css' rel='stylesheet' />
+	<link href='css/css.css' rel='stylesheet' />
+
+	<style>
+		div.cont {
+			text-align: left;
+		}
+
+		img {
+			border: 1px solid grey;
+			padding: 4px;
+			box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.75);
+		}
+	</style>
+
+	<script type='module' src='./js/photo-page/PhotoUploadPage2.js'></script>
+
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+
+</head>
+
+<body>
+	<div class="cont">
+		<div class='foto-page'>
+			<h3>Upload Foto:</h3>
+			<form>
+				<input type="file" accept="">
+				<input type='submit' class='upload' value='upload' accept="image/*">
+				<br />
+				<canvas class='foto' width="128" height="128"></canvas>
+				<canvas class='thumb' width="32" height="32"></canvas>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
