@@ -19,8 +19,10 @@ export class Login {
         let id = '';
         let nama = '';
         //TODO: set default later
-        id = Util.getQuery('id') || 'tAKrKdJqBU6sCVzd7rlf';
-        nama = Util.getQuery('nama') || 'ayah';
+        id = Util.getQuery('id') || 'KxpUGabpITtGAEyHDJcL';
+        nama = Util.getQuery('nama') || 'Baihaqi Sofwan';
+        if (nama)
+            nama = window.decodeURIComponent(nama);
         this.spanNama.innerHTML = nama;
         console.log('login click');
         await this.client.init();

@@ -5,6 +5,8 @@ export class Util {
         Util.loadingStart();
         window.top.location.href = Util.urlEditProfile + "?id=" + id + "&url_balik=" + window.encodeURIComponent(url);
     }
+    reloadPage() {
+    }
     static bukaHome(id) {
         Util.loadingStart();
         window.top.location.href = Util.urlHome + '?id=' + id;
@@ -94,7 +96,8 @@ Util.urlDaftarAnggota = './daftar-anggota.html';
 Util.urlMenu = './admin.html';
 Util.urlFoto = './foto-upload.html';
 Util.urlUploadPhoto = './foto-upload2.html';
-Util.urlLink = 'http://localhost/proto/silsilah/silsilah03/s02/web/index.html';
+Util.urlLink = 'https://hagarden.netlify.app/ssl/index.html';
+// https://hagarden.netlify.app/ssl/index.html?id=KxpUGabpITtGAEyHDJcL&nama=Baihaqi%20Sofwan
 Util.defImage = "./imgs/kucing.png";
 Util.redirect_edit_relasi = 'rer';
 Util.paramUrlBalik = 'url_balik';

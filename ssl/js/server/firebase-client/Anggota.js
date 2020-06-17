@@ -42,7 +42,7 @@ export class Anggota {
         if (null == key)
             return null;
         doc = await this.db.collection(this.nama).doc(key).get();
-        console.log('get by doc, hasil');
+        console.log('anggota: get by doc, hasil');
         console.log(doc.data());
         if (!doc.data())
             return null;
@@ -51,7 +51,7 @@ export class Anggota {
     async getByKey(key, value, err = false) {
         let res = [];
         let snapshot;
-        console.group('get by key, key ' + key + '/value ' + value);
+        console.group('anggota: get by key, key ' + key + '/value ' + value);
         console.log('this db ' + this.db);
         if (key == "id") {
             let anggotaObj = await this.getByDoc(value);

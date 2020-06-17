@@ -5,8 +5,9 @@ export class Relasi {
         this.nama = 'silsilah_relasi';
     }
     async hapus(rel) {
-        console.log('relasi hapus:');
+        console.group('relasi hapus:');
         console.log(rel);
+        console.groupEnd();
         await this.db.collection(this.nama).doc(rel.id).delete();
     }
     async init(db) {

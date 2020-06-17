@@ -58,7 +58,7 @@ div.foto2-cont img {
 	=======
 */
 
-div.loading {
+div.ssl_loading {
 	position: fixed;
 	background-color: rgba(0,0,0,.3);
 	top:0px;
@@ -67,7 +67,7 @@ div.loading {
 	bottom: 0px;
 }
 
-div.loading 
+div.ssl_loading 
 div.box {
 	border: 1px solid;
 	background-color: white;
@@ -80,7 +80,7 @@ div.box {
 	text-align: center;
 }
 
-div.loading
+div.ssl_loading
 img {
 	vertical-align: middle;
 }

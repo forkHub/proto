@@ -13,17 +13,17 @@ export class EditProfilePage {
         this.server = new FireBaseClient();
         this.id = '';
         this.urlBalik = '';
-        window.onload = () => {
-            Util.loadingStart();
-            this.init().then(() => {
-                Util.loadingEnd();
-            }).catch((e) => {
-                console.log(e.message);
-                console.log(e);
-                Util.loadingEnd();
-                Util.alertMsg(e.message, false);
-            });
-        };
+        // window.onload = () => {
+        Util.loadingStart();
+        this.init().then(() => {
+            Util.loadingEnd();
+        }).catch((e) => {
+            console.log(e.message);
+            console.log(e);
+            Util.loadingEnd();
+            Util.alertMsg(e.message, false);
+        });
+        // }
     }
     async tambahPasangan() {
         this.pilihAnakFragment.style.display = 'block';

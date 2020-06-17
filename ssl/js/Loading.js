@@ -3,7 +3,7 @@ export class Loading extends BaseComponent {
     constructor() {
         super();
         this._template = `
-			<div class='loading'>
+			<div class='ssl_loading'>
 				<div class='box'>
 					<p class='memuat'><img src='./imgs/loading.gif'> Tunggu sebentar ... </p>
 				</div>
