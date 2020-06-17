@@ -14,7 +14,7 @@ export class EditProfilePage {
         this.id = '';
         this.urlBalik = '';
         // window.onload = () => {
-        Util.loadingStart();
+        // Util.loadingStart();
         this.init().then(() => {
             Util.loadingEnd();
         }).catch((e) => {
