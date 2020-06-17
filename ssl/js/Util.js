@@ -26,7 +26,7 @@ export class Util {
             throw new Error('query not found ');
         }
     }
-    static alertMsg(msg, tbl = true) {
+    static alertMsg(msg, tbl = true, fn = null) {
         Util.loadingEnd();
         this.alert.text.innerHTML = msg;
         this.alert.attach(document.body);
@@ -38,6 +38,9 @@ export class Util {
         }
         this.alert.okTbl.onclick = () => {
             this.alert.detach();
+            if (fn) {
+                fn();
+            }
         };
     }
     static padding(str) {

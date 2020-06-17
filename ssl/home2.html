@@ -8,6 +8,16 @@
 	<link href='css/hubung.css' rel='stylesheet' />
 
 	<style>
+		div.cont2 {
+			display: flex;
+			flex-direction: column;
+		}
+
+		div.cont3 {
+			overflow: auto;
+			flex-grow: 1;
+		}
+
 		div#foto button.edit,
 		div#foto button.utama {
 			display: none;
@@ -22,22 +32,19 @@
 		}
 	</style>
 
-	<!-- <script src='./js/Enum.js'></script> -->
-	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
-
-	<script type='module' src='./js/home-page/Home.js'></script>
 </head>
 
 <body>
-	<div class='header' style="text-align: right;">
-		<button class='btn btn-primary admin btn-sm'>admin</button>
-		<br />
-	</div>
-	<div class='cont'>
+	<div class='cont2'>
+		<div class='header' style="text-align: right;">
+			<button class='btn btn-primary admin btn-sm'>admin</button>
+			<br />
+		</div>
+		<div class='cont3'>
+			<div class='cont'>
 
+			</div>
+		</div>
 	</div>
 
 	<template>
@@ -71,6 +78,13 @@
 		</div>
 
 	</template>
+
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+
+	<script type='module' src='./js/home-page/Home.js'></script>
 </body>
 
 </html>

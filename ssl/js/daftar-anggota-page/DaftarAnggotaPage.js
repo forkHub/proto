@@ -7,9 +7,9 @@ export class DaftarAnggotaPage extends BaseComponent {
     constructor() {
         super();
         this.client = new FireBaseClient();
+        Util.loadingStart();
         window.onload = () => {
             this._elHtml = Util.getEl('div.cont');
-            Util.loadingStart();
             this.init().then(() => {
                 Util.loadingEnd();
             }).catch((e) => {
@@ -30,25 +30,30 @@ export class DaftarAnggotaPage extends BaseComponent {
             });
             this.renderList(this.anggotaRenderAr);
         };
-        this.simpanTbl.onclick = () => {
-            if (this.inputNama.value == '') {
-                console.log('nama wajib diisi');
-                return;
+        this.formSearch.onsubmit = () => {
+            return false;
+        };
+        this.formTambahAnggota.onsubmit = () => {
+            try {
+                let anggota = new AnggotaObj();
+                anggota.namaLengkap = this.inputNama.value;
+                Util.loadingStart();
+                this.client.anggota.insert(anggota).then((id) => {
+                    console.log('success ' + id);
+                    Util.bukaEditProfile(id, window.top.location.href);
+                    return false;
+                }).catch((e) => {
+                    console.log(e);
+                    console.log(e.message);
+                    Util.alertMsg(e.message);
+                    return false;
+                });
+                return false;
             }
-            let anggota = new AnggotaObj();
-            anggota.namaLengkap = this.inputNama.value;
-            // anggota.tglLahir = 0;
-            // anggota.tglMeninggal = 0;
-            Util.loadingStart();
-            this.client.anggota.insert(anggota).then((id) => {
-                console.log('success ' + id);
-                Util.bukaEditProfile(id, window.top.location.href);
-            }).catch((e) => {
-                // Util.loadingEnd();
+            catch (e) {
                 console.log(e);
-                console.log(e.message);
-                Util.alertMsg(e.message);
-            });
+                return false;
+            }
         };
     }
     reload() {
@@ -102,16 +107,19 @@ export class DaftarAnggotaPage extends BaseComponent {
         return this.getEl('div.list-item-cont');
     }
     get inputNama() {
-        return this.getEl('div.form-anggota-baru input[name="nama"]');
+        return this.getEl('form.form-anggota-baru input[name="nama"]');
     }
     get simpanTbl() {
-        return this.getEl('div.form-anggota-baru button.simpan');
+        return this.getEl('form.form-anggota-baru button.simpan');
     }
     get tambahTbl() {
         return this.getEl('button.tambah');
     }
     get formTambahAnggota() {
-        return this.getEl('div.form-anggota-baru');
+        return this.getEl('form.form-anggota-baru');
+    }
+    get formSearch() {
+        return this.getEl('form.search');
     }
     get cariInput() {
         return this.getEl('input.search');

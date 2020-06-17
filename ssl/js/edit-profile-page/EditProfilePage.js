@@ -14,7 +14,7 @@ export class EditProfilePage {
         this.id = '';
         this.urlBalik = '';
         // window.onload = () => {
-        // Util.loadingStart();
+        Util.loadingStart();
         this.init().then(() => {
             Util.loadingEnd();
         }).catch((e) => {
@@ -26,7 +26,7 @@ export class EditProfilePage {
         // }
     }
     async tambahPasangan() {
-        this.pilihAnakFragment.style.display = 'block';
+        this.pilihAnakFragment.style.display = 'flex';
         let anggotaAr;
         console.group('Tambah pasangan');
         anggotaAr = await this.server.anggota.get();
@@ -138,9 +138,6 @@ export class EditProfilePage {
                 Util.alertMsg(e.message);
             });
         };
-        // this.copyClipboardTbl.onclick = () => {
-        // 	window.Clipboard.
-        // }
         this.tutupBtn.onclick = () => {
             if (this.urlBalik) {
                 window.top.location.href = this.urlBalik;
@@ -193,6 +190,9 @@ export class EditProfilePage {
         console.group('anak dipilih, id ');
         console.log('id');
         console.log(view.anggota.id);
+        if (!this.editAnak.rel) {
+            throw new Error('data pasangan belum ada');
+        }
         this.editAnak.rel.anaks.push(view.anggota.id);
         // view.anggota.orangTuaId = this.editAnak.rel.anak1;
         await this.editAnak.simpan();

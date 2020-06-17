@@ -32,6 +32,7 @@
 			display: none;
 			box-sizing: border-box;
 			padding: 8px;
+			/* overflow-y: auto; */
 		}
 
 		div.pilih-foto.daftar-foto div.list-cont,
@@ -49,14 +50,13 @@
 			width: 64px;
 			border: 1px solid gray;
 		}
+
+		div.link-cont {
+			width: 100%;
+			overflow-y: auto;
+			overflow-x: auto;
+		}
 	</style>
-
-	<script src='./js/Enum.js'></script>
-
-	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
 
 </head>
 
@@ -78,18 +78,19 @@
 
 			<div class='form-group'>
 				<label>Nama Lengkap:</label><br />
-				<input type='text' class='form-control nama-lengkap' placeholder="nama-lengkap" maxlength="100">
+				<input type='text' class='form-control nama-lengkap' placeholder="nama-lengkap" maxlength="100"
+					required>
 			</div>
 
 			<div class='form-group'>
 				<label>Nama Panggilan:</label><br />
-				<input type='text' class='nama form-control' placeholder="nama" maxlength="30">
+				<input type='text' class='nama form-control' placeholder="nama" maxlength="30" required>
 			</div>
 
 			<div class='form-group'>
 				<label>Jenis Kelamin:</label>
 				<div class="form-check">
-					<input class="form-check-input jkl" name="jkl" type="radio" value="L" id="defaultCheck1">
+					<input class="form-check-input jkl" name="jkl" type="radio" value="L" id="defaultCheck1" checked>
 					<label class="form-check-label" for="defaultCheck1">
 						Laki-laki
 					</label>
@@ -147,7 +148,7 @@
 
 
 			<div>
-				<button type="button" class="btn btn-nromal btn-primary ok">simpan profile</button>
+				<button type="submit" class="btn btn-nromal btn-primary ok">simpan profile</button>
 			</div>
 		</form>
 
@@ -175,9 +176,10 @@
 
 		<hr />
 
-		<p class='judul'>Link Silsilah</p>
-		<a href="" class='link-silsilah'></a><br />
-		<!-- <button type='button' class='btn btn-primary link-copy'>copy</button> -->
+		<div class='link-cont'>
+			<p class='judul'>Link Silsilah</p>
+			<a href="" class='link-silsilah'></a><br />
+		</div>
 
 		<hr />
 		<br />
@@ -201,6 +203,7 @@
 			</div>
 			<button type='button' class='btn btn-primary tutup'>Tutup</button>
 		</div>
+
 	</div>
 
 	<template>
@@ -218,14 +221,20 @@
 			</div>
 		</div>
 
-		<div class='item-anak-dipilih'>
-			<p class='nama'></p>
+		<div class='item-anak-dipilih card'>
+			<div class='card-body'>
+				<p class='nama'></p>
+			</div>
 		</div>
 	</template>
-	<script type='module' src='./js/edit-profile-page/EditProfilePage.js'>
-		// console.log('script loaded');
-		// new EditProfilePage();
-	</script>
+
+	<script type='module' src='./js/edit-profile-page/EditProfilePage.js'>	</script>
+	<script src='./js/Enum.js'></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+
 </body>
 
 </html>

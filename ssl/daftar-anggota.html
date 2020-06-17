@@ -11,10 +11,6 @@
 			text-align: left;
 		}
 
-		/* div.cont div.form-anggota-baru { */
-		/* display: none; */
-		/* } */
-
 		div.list-item {
 			margin-bottom: 16px;
 		}
@@ -25,6 +21,14 @@
 
 		div.list-item div.group-tbl.sembunyi {
 			display: none;
+		}
+
+		form.search {
+			display: flex;
+		}
+
+		form.search input {
+			flex-grow: 1;
 		}
 	</style>
 
@@ -40,28 +44,25 @@
 	<div class='cont'>
 
 		<h3>Form Anggota Baru:</h3>
-		<div class='form-anggota-baru'>
+		<form class='form-anggota-baru'>
 			<div class='form-group'>
 				<label>nama:</label><br />
 				<input type='text' name='nama' class='nama form-control' required placeholder="nama lengkap" /><br />
-				<button type='button' class='simpan btn btn-primary'>Simpan dan Edit</button>
+				<button type='submit' class='simpan btn btn-primary'>Simpan dan Edit</button>
 			</div>
 			<hr />
-		</div>
+		</form>
 
 		<h3>Daftar Anggota Keluarga:</h3>
 		<!-- <button type="button" class='btn btn-primary tambah'>Tambah Data</button> -->
 		<!-- <hr /> -->
 
 		<!-- cari data -->
-		<div class='search'>
-			<div class=''>
-				<button type="button" disabled class=""> 🍳 </button>
-				<input type="text" class="search" />
-				<br />
-				<br />
-			</div>
-		</div>
+		<form class='search'>
+			<button type="submit" class=""> 🍳 </button>
+			<input type="text" class="search" />
+		</form>
+		<br />
 		<div class='list-item-cont'>
 
 		</div>

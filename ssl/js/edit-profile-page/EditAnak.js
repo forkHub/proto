@@ -25,6 +25,9 @@ export class EditAnak extends BaseComponent {
             let anak = await this.client.anggota.getByDoc(this._rel.anaks[i]);
             if (!anak) {
                 anak = new AnggotaObj();
+                anak.nama = 'error';
+                anak.namaLengkap = 'error';
+                anak.jkl = 'L';
                 anak.id = this._rel.anaks[i];
             }
             anaks.push(anak);

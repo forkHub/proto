@@ -18,15 +18,20 @@ export class Profile extends BaseComponent {
         this.inputLinkedIn.value = anggota.linkedin;
         this.inputInstagram.value = anggota.instagram;
         this._elHtml = Util.getEl('div.cont form.profile');
-        this.simpanTbl.onclick = () => {
-            Util.loadingStart();
-            this.simpanClick().then(() => {
-                window.top.location.reload();
-            }).catch((e) => {
-                console.log(e);
-                Util.loadingEnd();
+        this.form.onsubmit = () => {
+            try {
+                Util.loadingStart();
+                this.simpanClick().then(() => {
+                    window.top.location.reload();
+                }).catch((e) => {
+                    console.log(e);
+                    Util.loadingEnd();
+                    Util.alertMsg(e.message);
+                });
+            }
+            catch (e) {
                 Util.alertMsg(e.message);
-            });
+            }
             return false;
         };
     }
@@ -77,6 +82,9 @@ export class Profile extends BaseComponent {
     }
     get inputInstagram() {
         return Util.getEl('form.profile input.instagram');
+    }
+    get form() {
+        return Util.getEl('form.profile');
     }
     setInputJKL(value) {
         document.querySelectorAll('input[name="jkl"]').forEach((item) => {
