@@ -18,6 +18,10 @@
 </head>
 
 <body>
+	<div class='nomodule' style='display:none'>
+		Maaf sepertinya browser Anda tidak bisa menjalankan applikasi ini.
+		Silahkan mengupgrade browser Anda.
+	</div>
 	<div class='cont'>
 		<p>silsilah keluarga <span class='nama'></span></p>
 
@@ -37,6 +41,9 @@
 			<button type='button' class='btn btn-secondary tamu'>Login sebagai tamu</button>
 		</form>
 	</div>
+	<script nomodule>
+		document.querySelector('div.nomodule').style.display = 'block';
+	</script>
 </body>
 
 </html>
