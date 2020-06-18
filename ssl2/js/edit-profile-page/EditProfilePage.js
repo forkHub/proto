@@ -7,7 +7,6 @@ import { EditAnak } from "./EditAnak.js";
 import { ItemAnakDipilih } from "./ItemAnakDipilih.js";
 import { RelPasanganObj } from "../ent/RelPasanganObj.js";
 import { Pasangan } from "./Pasangan.js";
-// import { IFBUser } from "../IFirebase.js";
 export class EditProfilePage {
     constructor() {
         this.server = new FireBaseClient();

@@ -99,7 +99,7 @@ Util.urlDaftarAnggota = './daftar-anggota.html';
 Util.urlMenu = './admin.html';
 Util.urlFoto = './foto-upload.html';
 Util.urlUploadPhoto = './foto-upload2.html';
-Util.urlLink = 'https://hagarden.netlify.app/ssl/index.html';
+Util.urlLink = 'https://hagarden.netlify.app/ssl2/index.html';
 // https://hagarden.netlify.app/ssl/index.html?id=KxpUGabpITtGAEyHDJcL&nama=Baihaqi%20Sofwan
 Util.defImage = "./imgs/kucing.png";
 Util.redirect_edit_relasi = 'rer';
