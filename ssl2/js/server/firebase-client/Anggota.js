@@ -1,6 +1,4 @@
 import { AnggotaObj } from "../../ent/AnggotaObj.js";
-// import { Util } from "../../Util.js";
-// import { Util } from "../../Util.js";
 export class Anggota {
     constructor() {
         this.nama = 'silsilah-nama';
@@ -11,20 +9,10 @@ export class Anggota {
         return Promise.resolve();
     }
     async update(anggota) {
-        return this.db.collection(this.nama).doc(anggota.id).set(this.toObj(anggota));
+        return await this.db.collection(this.nama).doc(anggota.id).set(this.toObj(anggota));
     }
     async hapus(id) {
-        if (!id || id == '')
-            return;
-        for (let i = 0; i < 3; i++) {
-            await this.db.collection(this.nama).doc(id).delete().then(() => {
-                return;
-            }).catch((e) => {
-                console.log('error');
-                console.log(e.message);
-            });
-        }
-        return;
+        await this.db.collection(this.nama).doc(id).delete();
     }
     async get() {
         let snapshot;
@@ -37,18 +25,26 @@ export class Anggota {
     }
     async getByDoc(key) {
         let doc;
-        if ('' == key)
-            return null;
-        if (null == key)
-            return null;
-        doc = await this.db.collection(this.nama).doc(key).get();
-        console.log('anggota: get by doc, hasil');
-        console.log(doc.data());
-        if (!doc.data())
-            return null;
-        return this.fromObj(doc.data(), key);
+        try {
+            console.group('get by doc');
+            doc = await this.db.collection(this.nama).doc(key).get();
+            console.log('anggota: get by doc, hasil');
+            console.log(doc.data());
+            if (!doc.data()) {
+                console.log('undefined');
+                console.groupEnd();
+                return null;
+            }
+            console.groupEnd();
+            return this.fromObj(doc.data(), key);
+        }
+        catch (e) {
+            console.log(e);
+            console.groupEnd();
+            throw new Error(e.message);
+        }
     }
-    async getByKey(key, value, err = false) {
+    async getByKey(key, value) {
         let res = [];
         let snapshot;
         console.group('anggota: get by key, key ' + key + '/value ' + value);
@@ -62,12 +58,7 @@ export class Anggota {
                 return [anggotaObj];
             }
             else {
-                if (err) {
-                    throw new Error('anggota tidak ditemukan');
-                }
-                else {
-                    return [];
-                }
+                return [];
             }
         }
         snapshot = await this.db.collection(this.nama)
@@ -78,12 +69,6 @@ export class Anggota {
             anggota = this.fromObj(item.data(), item.id);
             res.push(anggota);
         });
-        if (err) {
-            if (!res)
-                throw new Error('user tidak ditemukan');
-            if (res.length == 0)
-                throw new Error('user tidak ditemukan');
-        }
         console.groupEnd();
         return res;
     }
@@ -93,15 +78,15 @@ export class Anggota {
         hasil.nama = obj.nama ? obj.nama : '';
         hasil.namaLengkap = obj.namaLengkap || '';
         hasil.idFoto = obj.idFoto ? obj.idFoto : '';
-        // hasil.orangTuaId = obj.orangTuaId ? obj.orangTuaId : '';
         hasil.alamat = obj.alamat || '';
         hasil.facebook = obj.facebook || '';
         hasil.instagram = obj.instagram || '';
         hasil.wa = obj.wa || '';
         hasil.linkedin = obj.linkedin || '';
-        hasil.tglLahir = obj.tglLahir;
-        hasil.tglMeninggal = obj.tglMeninggal;
-        hasil.jkl = obj.jkl;
+        hasil.tglLahir = obj.tglLahir || 0;
+        hasil.tglMeninggal = obj.tglMeninggal || 0;
+        hasil.jkl = obj.jkl || 'L';
+        hasil.keterangan = obj.keterangan || '';
         return hasil;
     }
     toObj(data) {
@@ -118,15 +103,13 @@ export class Anggota {
             tglLahir: data.tglLahir,
             tglMeninggal: data.tglMeninggal,
             wa: data.wa,
-            jkl: data.jkl
+            jkl: data.jkl,
+            keterangan: data.keterangan
         };
         return obj;
     }
     async insert(anggota) {
         let docRef = null;
-        // let anggota2: AnggotaObj[] = null;
-        // anggota2 = await this.getByKey('nama', anggota.nama, false);
-        // if (anggota2 && anggota2.length > 0) throw new Error('duplicate ' + anggota.nama);
         docRef = await this.db.collection(this.nama).add(this.toObj(anggota));
         return docRef.id;
     }

@@ -3,7 +3,6 @@ export class AnggotaObj {
         this._nama = '';
         this._id = '';
         this._idFoto = '';
-        // private _orangTuaId: string = '';
         this._namaLengkap = '';
         this._alamat = '';
         this._tglLahir = NaN;
@@ -13,6 +12,35 @@ export class AnggotaObj {
         this._instagram = '';
         this._linkedin = '';
         this._jkl = '';
+        this._keterangan = '';
+        //populated object
+        this._thumbUrl = '';
+        this._fotoUrl = '';
+        this._isDefault = false;
+    }
+    get keterangan() {
+        return this._keterangan;
+    }
+    set keterangan(value) {
+        this._keterangan = value;
+    }
+    get isDefault() {
+        return this._isDefault;
+    }
+    set isDefault(value) {
+        this._isDefault = value;
+    }
+    get fotoUrl() {
+        return this._fotoUrl;
+    }
+    set fotoUrl(value) {
+        this._fotoUrl = value;
+    }
+    get thumbUrl() {
+        return this._thumbUrl;
+    }
+    set thumbUrl(value) {
+        this._thumbUrl = value;
     }
     get jkl() {
         return this._jkl;

@@ -1,0 +1,172 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='css/bootstrap.min.css' rel='stylesheet' />
+	<link href='css/css.css' rel='stylesheet' />
+
+	<style>
+		div.cont {
+			text-align: left;
+		}
+
+		div.cont div.edit-foto img {
+			border: 1px solid grey;
+			padding: 4px;
+			box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.75);
+		}
+
+		p.judul {
+			font-weight: bold;
+			font-size: larger;
+		}
+
+		div.pilih-foto.daftar-foto,
+		div.pilih-anak {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			flex-direction: column;
+			background-color: white;
+			display: none;
+			box-sizing: border-box;
+			padding: 8px;
+			/* overflow-y: auto; */
+		}
+
+		div.pilih-foto.daftar-foto div.list-cont,
+		div.pilih-anak div.list-cont {
+			overflow-y: auto;
+			flex-grow: 1;
+		}
+
+		div.item-foto {
+			display: inline-block;
+			margin: 4px;
+		}
+
+		div.item-foto img {
+			width: 64px;
+			border: 1px solid gray;
+		}
+
+		div.link-cont {
+			width: 100%;
+			/* overflow-y: auto; */
+			overflow-x: auto;
+			word-break: break-all;
+			overflow-wrap: break-word;
+			word-wrap: break-word;
+		}
+
+		button.pasangan.profile,
+		button.pasangan.silsilah {
+			display: none;
+		}
+
+		p.label {
+			font-size: small;
+			font-weight: bold;
+		}
+
+		p.info {
+			font-size: large;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class='cont'>
+		<div class='edit-foto'>
+			<img class='' src='./imgs/kucing.png' width="128" height="128" />
+		</div>
+
+		<hr />
+
+		<p class='judul'>Data Pibadi:</p>
+
+		<p class='label'>Nama Lengkap:</p>
+		<p class='info nama-lengkap'></p>
+
+		<p class='label'>Nama Panggilan:</p>
+		<p class='info nama'></p>
+
+		<p class='label'>Jenis Kelamin:</p>
+		<p class='info jkl'></p>
+
+		<p class='label'>Alamat:</p>
+		<p class='info alamat'></p>
+
+		<p class='label'>Tgl. Lahir:</p>
+		<p class='info tgl-lahir'></p>
+
+		<p class='label'>Tgl. Meninggal:</p>
+		<p class='info tgl-meninggal'></p>
+
+		<p class='label'>keterangan:</p>
+		<p class='info keterangan'></p>
+
+		<hr />
+
+		<p class='judul'>Akun Sosial:</p>
+		<p class='label'>WA:</p>
+		<p class='info wa'></p>
+
+		<p class='label'>Instagram:</p>
+		<p class='info instagram'></p>
+
+		<p class='label'>Facebook:</p>
+		<p class='info fb'></p>
+
+		<p class='label'>Linkedin:</p>
+		<p class='info linkedin'></p>
+
+		<hr />
+
+		<p class='judul'>Data Pasangan:</p>
+		<p class='info pasangan'>[-----]</p>
+		<button type='button' class='btn btn-primary pasangan profile'>Profile</button>&nbsp;
+		<button type='button' class='btn btn-primary pasangan silsilah'>Silsilah</button>
+
+		<hr />
+		<p class='judul'>Data Anak</p>
+		<div class='anak-cont'>
+		</div>
+
+		<hr />
+		<div class='link-cont'>
+			<p class='judul'>Link Silsilah</p>
+			<a href="" class='link-silsilah'></a><br />
+			<br />
+		</div>
+
+		<hr />
+		<button type="button" class='btn btn-primary tutup'>Selesai</button>
+		<br />
+	</div>
+
+
+	<template>
+		<div class='item-anak card'>
+			<div class='card-body'>
+				<p class='nama'></p>
+				<hr />
+				<button type='button' class='btn btn-primary profile'>Profile</button>
+				<button type='button' class='btn btn-primary silsilah'>Silsilah</button>
+			</div>
+		</div>
+	</template>
+
+	<script type='module' src='./js/edit-profile-page/ViewProfilePage.js'>	</script>
+	<script src='./js/Enum.js'></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+
+</body>
+
+</html>

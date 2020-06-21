@@ -17,12 +17,15 @@ export class Profile extends BaseComponent {
         this.inputWA.value = anggota.wa;
         this.inputLinkedIn.value = anggota.linkedin;
         this.inputInstagram.value = anggota.instagram;
+        this.inputKeterangan.value = anggota.keterangan;
         this._elHtml = Util.getEl('div.cont form.profile');
         this.form.onsubmit = () => {
             try {
                 Util.loadingStart();
                 this.simpanClick().then(() => {
-                    window.top.location.reload();
+                    // window.top.location.reload();
+                    console.log('success');
+                    Util.loadingEnd();
                 }).catch((e) => {
                     console.log(e);
                     Util.loadingEnd();
@@ -37,8 +40,6 @@ export class Profile extends BaseComponent {
     }
     async simpanClick() {
         console.log('jkl');
-        // console.log(this.inputJKL);
-        // console.log(this.inputJKL.value);
         this.anggota.nama = this.inputNama.value;
         this.anggota.alamat = this.inputAlamat.value;
         this.anggota.namaLengkap = this.inputNamaLengkap.value;
@@ -47,6 +48,7 @@ export class Profile extends BaseComponent {
         this.anggota.instagram = this.inputInstagram.value;
         this.anggota.linkedin = this.inputLinkedIn.value;
         this.anggota.wa = this.inputWA.value;
+        this.anggota.keterangan = this.inputKeterangan.value;
         this.anggota.tglLahir = Util.Input2Date(this.inputTglLahir.value);
         this.anggota.tglMeninggal = Util.Input2Date(this.inputTglMeninggal.value);
         console.log('simpan profile');
@@ -64,6 +66,9 @@ export class Profile extends BaseComponent {
     }
     get inputAlamat() {
         return Util.getEl('form.profile textarea.alamat');
+    }
+    get inputKeterangan() {
+        return Util.getEl('form.profile textarea.keterangan');
     }
     get inputTglLahir() {
         return Util.getEl('form.profile input.tgl-lahir');

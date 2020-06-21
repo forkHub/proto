@@ -26,7 +26,15 @@ export class DaftarAnggotaPage extends BaseComponent {
         this.renderList(this.anggota);
         this.cariInput.oninput = () => {
             this.anggotaRenderAr = this.anggota.filter((item) => {
-                return item.namaLengkap.toLocaleLowerCase().indexOf(this.cariInput.value.toLowerCase()) > -1;
+                if (item.namaLengkap.toLocaleLowerCase().indexOf(this.cariInput.value.toLowerCase()) > -1) {
+                    return true;
+                }
+                ;
+                if (item.keterangan.toLocaleLowerCase().indexOf(this.cariInput.value.toLowerCase()) > -1) {
+                    return true;
+                }
+                ;
+                return false;
             });
             this.renderList(this.anggotaRenderAr);
         };
@@ -72,7 +80,7 @@ export class DaftarAnggotaPage extends BaseComponent {
             let view = new Item();
             console.log(item);
             view.id = item.id;
-            view.namaP.innerHTML = item.namaLengkap + " (" + item.nama + ")";
+            view.namaP.innerHTML = item.namaLengkap + " (" + item.nama + ")" + " - " + item.keterangan;
             view.attach(this.listCont);
             view.elHtml.onclick = () => {
                 console.log(view.elHtml.querySelectorAll('div.group-tbl'));

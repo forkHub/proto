@@ -31,37 +31,6 @@ export class FireBaseClient {
         await this._auth.setPersistence(persistence);
         return await this._auth.signInWithEmailAndPassword(username, password);
     }
-    async getAnak(anggota) {
-        let rel;
-        let anaks = [];
-        rel = await this.relasi.getByAnggotaId(anggota.id);
-        if (!rel)
-            return [];
-        for (let i = 0; i < rel.anaks.length; i++) {
-            let anak = await this._anggota.getByDoc(rel.anaks[i]);
-            if (anak) {
-                anaks.push(anak);
-            }
-            else {
-                //error
-            }
-        }
-        return anaks;
-    }
-    async getPasangan(anakId) {
-        let rel = await this._relasi.getByAnggotaId(anakId);
-        if (!rel)
-            return null;
-        if (rel.anak1 == anakId) {
-            return await this._anggota.getByDoc(rel.anak2);
-        }
-        else if (rel.anak2 == anakId) {
-            return await this._anggota.getByDoc(rel.anak1);
-        }
-        else {
-            return null;
-        }
-    }
     get foto() {
         return this._foto;
     }

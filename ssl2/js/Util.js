@@ -1,9 +1,31 @@
 import { Loading } from "./Loading.js";
 import { Alert } from "./Alert.js";
+import { AnggotaObj } from "./ent/AnggotaObj.js";
+import { FotoObj } from "./ent/FotoObj.js";
 export class Util {
     static bukaEditProfile(id, url) {
         Util.loadingStart();
         window.top.location.href = Util.urlEditProfile + "?id=" + id + "&url_balik=" + window.encodeURIComponent(url);
+    }
+    static bukaViewProfile(id, urlBalik) {
+        Util.loadingStart();
+        window.top.location.href = Util.urlViewProfile + "?id=" + id + "&url_balik=" + window.encodeURIComponent(urlBalik);
+    }
+    static anakError() {
+        let anak;
+        anak = new AnggotaObj();
+        anak.nama = '[-----]';
+        anak.namaLengkap = '[-----]';
+        anak.jkl = 'L';
+        anak.id = '';
+        anak.isDefault = true;
+        return anak;
+    }
+    static fotoError() {
+        let foto = new FotoObj();
+        foto.thumbUrl = Util.defImage;
+        foto.photoUrl = Util.defImage;
+        return foto;
     }
     reloadPage() {
     }
@@ -95,13 +117,14 @@ export class Util {
 }
 Util.urlHome = "./home2.html";
 Util.urlEditProfile = './edit-profile.html';
+Util.urlViewProfile = './view-profile-page.html';
 Util.urlDaftarAnggota = './daftar-anggota.html';
 Util.urlMenu = './admin.html';
 Util.urlFoto = './foto-upload.html';
 Util.urlUploadPhoto = './foto-upload2.html';
 Util.urlLink = 'https://hagarden.netlify.app/ssl2/index.html';
-// https://hagarden.netlify.app/ssl/index.html?id=KxpUGabpITtGAEyHDJcL&nama=Baihaqi%20Sofwan
 Util.defImage = "./imgs/kucing.png";
+Util.imgSalah = "./imgs/profile_salah.png";
 Util.redirect_edit_relasi = 'rer';
 Util.paramUrlBalik = 'url_balik';
 Util.loading = new Loading();

@@ -25,6 +25,9 @@ export class Relasi {
         querySnapshot.forEach((item) => {
             hasil = this.fromObj(item.data(), item.id);
         });
+        console.log('hasil:');
+        console.log(hasil);
+        console.groupEnd();
         return hasil;
     }
     async getByAnggotaId(id) {

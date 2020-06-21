@@ -8,7 +8,7 @@ export class Foto extends BaseComponent {
         this.lihatTbl.onclick = (e) => {
             e.stopPropagation();
             console.log('edit tbl click');
-            Util.bukaEditProfile(this._anggota.id, window.top.location.href);
+            Util.bukaViewProfile(this._anggota.id, window.top.location.href);
         };
         this.utamaTbl.onclick = (e) => {
             e.stopPropagation();
@@ -17,6 +17,9 @@ export class Foto extends BaseComponent {
         };
     }
     init() {
+        this.img.onerror = () => {
+            this.img.src = Util.imgSalah;
+        };
     }
     // updateTampil(): void {
     // 	if (this._elHtml.classList.contains('tampil')) {

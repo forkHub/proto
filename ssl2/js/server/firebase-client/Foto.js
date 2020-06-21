@@ -1,39 +1,76 @@
 import { FotoObj } from "../../ent/FotoObj.js";
+import { Util } from "../../Util.js";
 export class Foto {
     constructor() {
         this.storage = null;
         this.nama = 'silsilah_foto';
         this.dir = 'silsilah/';
     }
-    //TODO: batch
     async hapus(foto) {
-        await this.db.collection(this.nama).doc(foto.id).delete();
-        await this.hapusGbr(foto.idPhoto);
-        await this.hapusGbr(foto.idThumb);
+        await this.db.collection(this.nama).doc(foto.id).delete().catch((e) => {
+            console.log(e);
+        });
+        await this.hapusGbr(foto.idPhoto).catch((e) => {
+            console.log(e);
+        });
+        await this.hapusGbr(foto.idThumb).catch((e) => {
+            console.log(e);
+        });
     }
     async fotoInsert(foto) {
         let id = await this.db.collection(this.nama).add(this.toObj(foto));
         return id.id;
     }
+    async getByIdOrDefault(id) {
+        let hasil;
+        try {
+            hasil = await this.getById(id);
+            if (!hasil) {
+                hasil = Util.fotoError();
+            }
+        }
+        catch (e) {
+            console.log(e);
+            hasil = Util.fotoError();
+        }
+        return hasil;
+    }
     async getById(id) {
         let docSnapshot;
-        console.log('foto get by id, id ' + id);
-        if (!id)
-            return null;
-        if (0 == id.length)
-            return null;
-        docSnapshot = await this.db.collection(this.nama).doc(id).get();
-        if (!docSnapshot.data())
-            return null;
-        return this.fromObj(docSnapshot.data(), id);
+        let hasil = null;
+        try {
+            console.group('foto get by id, id ' + id);
+            docSnapshot = await this.db.collection(this.nama).doc(id).get();
+            if (!docSnapshot.data()) {
+                console.log('no data');
+                console.groupEnd();
+                return null;
+            }
+            hasil = this.fromObj(docSnapshot.data(), id);
+            console.log('hasil:');
+            console.log(hasil);
+            console.groupEnd();
+            return hasil;
+        }
+        catch (e) {
+            // console.log(e);
+            console.groupEnd();
+            throw new Error(e.message);
+        }
     }
     async get() {
-        let qSnapshot = await this.db.collection(this.nama).get();
         let res = [];
-        console.log('get');
-        qSnapshot.forEach((item) => {
-            res.push(this.fromObj(item.data(), item.id));
-        });
+        try {
+            let qSnapshot = await this.db.collection(this.nama).get();
+            console.log('get');
+            qSnapshot.forEach((item) => {
+                res.push(this.fromObj(item.data(), item.id));
+            });
+        }
+        catch (e) {
+            console.log(e.message);
+            res = [];
+        }
         return res;
     }
     async hapusGbr(id) {
@@ -95,7 +132,6 @@ export class Foto {
     getUploadTask(dataUrl, name) {
         let storageRef = this.storage.ref();
         let fileRef;
-        // let name: string = this.createName();
         console.log(name);
         try {
             fileRef = storageRef.child('silsilah/' + name);

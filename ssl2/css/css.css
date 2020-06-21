@@ -52,6 +52,7 @@ div.saya-cont div.foto2-cont {
 div.foto2-cont img {
 	border-radius: 50%;
 	max-width: 64px;
+	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.90);
 }
 
 /* 

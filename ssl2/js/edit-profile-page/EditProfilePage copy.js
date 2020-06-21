@@ -45,15 +45,13 @@ export class EditProfilePage {
         for (let i = 0; i < anggotaAr.length; i++) {
             let anggota = anggotaAr[i];
             let view = new ItemAnakDipilih();
-            view.namaP.innerHTML = anggota.namaLengkap + " (" + anggota.nama + ") - " + anggota.keterangan;
+            view.namaP.innerHTML = anggota.namaLengkap;
             view.anggota = anggota;
             view.attach(this.pilihAnggotaListCont);
             view.elHtml.onclick = () => {
                 Util.loadingStart();
                 this.pasanganDipilih(view).then(() => {
-                    // window.top.location.reload();
-                    console.log('sukses');
-                    Util.loadingEnd();
+                    window.top.location.reload();
                 }).catch((e) => {
                     console.log(e);
                     Util.loadingEnd();
@@ -71,7 +69,6 @@ export class EditProfilePage {
         let rel = new RelPasanganObj();
         rel.anak1 = this.anggota.id;
         rel.anak2 = view.anggota.id;
-        this.pasangan.namaInput.value = view.anggota.namaLengkap;
         // if ("" != rel.anak1 && rel.anak2 == "") {
         // 	rel.anak2 = view.anggota.id;
         // }
@@ -172,7 +169,7 @@ export class EditProfilePage {
         for (let i = 0; i < anggotaAr.length; i++) {
             let anggota = anggotaAr[i];
             let view = new ItemAnakDipilih();
-            view.namaP.innerHTML = anggota.namaLengkap + " (" + anggota.nama + ") - " + anggota.keterangan;
+            view.namaP.innerHTML = anggota.namaLengkap;
             view.anggota = anggota;
             view.attach(this.pilihAnggotaListCont);
             view.elHtml.onclick = () => {
