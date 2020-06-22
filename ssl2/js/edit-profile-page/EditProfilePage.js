@@ -1,10 +1,11 @@
 import { Util } from "../Util.js";
+import { AnggotaObj } from "../ent/AnggotaObj.js";
 import { FireBaseClient } from "../server/firebase-client/FirebaseClient.js";
 import { Profile } from "./Profile.js";
 import { EditFoto } from "./EditFoto.js";
 import { PilihFoto } from "./PilihFoto.js";
 import { EditAnak } from "./EditAnak.js";
-import { ItemAnakDipilih } from "./ItemAnakDipilih.js";
+import { PilihAnggota } from "./PilihAnggota.js";
 import { RelPasanganObj } from "../ent/RelPasanganObj.js";
 import { Pasangan } from "./Pasangan.js";
 export class EditProfilePage {
@@ -12,7 +13,7 @@ export class EditProfilePage {
         this.server = new FireBaseClient();
         this.id = '';
         this.urlBalik = '';
-        // window.onload = () => {
+        this.pilihAnggota = new PilihAnggota();
         Util.loadingStart();
         this.init().then(() => {
             Util.loadingEnd();
@@ -24,62 +25,52 @@ export class EditProfilePage {
         });
         // }
     }
-    async tambahPasangan() {
-        this.pilihAnakFragment.style.display = 'flex';
-        let anggotaAr;
-        console.group('Tambah pasangan');
-        anggotaAr = await this.server.anggota.get();
-        console.log('jumlah anggota ' + anggotaAr.length);
-        console.log('anggota:');
-        console.log(anggotaAr);
-        console.groupEnd();
-        this.pilihAnggotaListCont.innerHTML = '';
-        this.pilihJudul.innerHTML = 'Pilih Pasangan';
-        anggotaAr.sort((item1, item2) => {
-            if (item1.namaLengkap.charCodeAt(0) > item2.namaLengkap.charCodeAt(0))
-                return 1;
-            if (item1.namaLengkap.charCodeAt(0) < item2.namaLengkap.charCodeAt(0))
-                return -1;
-            return 0;
-        });
-        for (let i = 0; i < anggotaAr.length; i++) {
-            let anggota = anggotaAr[i];
-            let view = new ItemAnakDipilih();
-            view.namaP.innerHTML = anggota.namaLengkap + " (" + anggota.nama + ") - " + anggota.keterangan;
-            view.anggota = anggota;
-            view.attach(this.pilihAnggotaListCont);
-            view.elHtml.onclick = () => {
-                Util.loadingStart();
-                this.pasanganDipilih(view).then(() => {
-                    // window.top.location.reload();
-                    console.log('sukses');
-                    Util.loadingEnd();
-                }).catch((e) => {
-                    console.log(e);
-                    Util.loadingEnd();
-                    Util.alertMsg(e.message);
-                });
-            };
+    async anggotaDipilih(anggota, mode) {
+        Util.loadingStart();
+        if (mode == PilihAnggota.PILIH_PASANGAN) {
+            let rel = new RelPasanganObj();
+            rel.anak1 = this.anggota.id;
+            rel.anak2 = anggota.id;
+            await this.server.relasi.insert(rel);
+            window.top.location.reload();
+        }
+        else if (PilihAnggota.PILIH_ANAK == mode) {
+            console.group('anak dipilih, id ');
+            console.log('id');
+            console.log(anggota.id);
+            if (!this.editAnak.rel) {
+                throw new Error('data pasangan belum ada');
+            }
+            this.editAnak.rel.anaks.push(anggota.id);
+            await this.editAnak.simpan();
+            window.top.location.reload();
+            console.groupEnd();
+        }
+        else {
+            console.error('mode tidak ada');
         }
     }
-    async pasanganDipilih(view) {
-        console.group('pasangan dipilih');
-        console.log('data anggota');
-        console.log(view.anggota);
-        // console.log('relasi ');
-        // console.log(rel);
-        let rel = new RelPasanganObj();
-        rel.anak1 = this.anggota.id;
-        rel.anak2 = view.anggota.id;
-        this.pasangan.namaInput.value = view.anggota.namaLengkap;
-        // if ("" != rel.anak1 && rel.anak2 == "") {
-        // 	rel.anak2 = view.anggota.id;
-        // }
-        // if ("" != rel.anak2 && "" == rel.anak1) {
-        // 	rel.anak1 = view.anggota.id;
-        // }
-        await this.server.relasi.insert(rel);
+    async ambilDataAnak(rel) {
+        let anaks = [];
+        console.group('ambil data anak');
+        console.log(this.rel);
+        if (!this.rel)
+            return [];
+        for (let i = 0; i < rel.anaks.length; i++) {
+            let anak = await this.server.anggota.getByDoc(rel.anaks[i]);
+            if (!anak) {
+                anak = new AnggotaObj();
+                anak.nama = 'error';
+                anak.namaLengkap = 'error';
+                anak.jkl = 'L';
+                anak.id = rel.anaks[i];
+            }
+            anaks.push(anak);
+        }
+        console.log('anaks');
+        console.log(anaks);
         console.groupEnd();
+        return anaks;
     }
     async ambilDataRelasi() {
         let rel;
@@ -107,38 +98,23 @@ export class EditProfilePage {
         this.link.href = linkStr;
         this.link.innerHTML = linkStr;
         this.rel = await this.ambilDataRelasi();
+        this.anaks = await this.ambilDataAnak(this.rel);
         this.pilihFoto = new PilihFoto();
         this.pilihFoto.init(this.server);
+        this.pilihAnggota.init(this.server);
         this.editFoto = new EditFoto();
         await this.editFoto.init(this.server, this.anggota);
         this.profile = new Profile();
         await this.profile.init(this.anggota, this.server);
         this.editAnak = new EditAnak();
-        await this.editAnak.init(this.server, this.rel);
+        await this.editAnak.init(this.server, this.rel, this.anaks);
         this.pasangan = new Pasangan();
         await this.pasangan.init(this.anggota, this.rel, this.server);
         this.pasangan.tambahTbl.onclick = () => {
-            Util.loadingStart();
-            this.tambahPasangan().then(() => {
-                Util.loadingEnd();
-            }).catch((e) => {
-                console.log(e.message);
-                console.group();
-                console.log(e);
-                console.groupEnd();
-                Util.alertMsg(e.message);
-            });
+            this.pilihAnggota.tampil('Pilih Pasangan', this, PilihAnggota.PILIH_PASANGAN);
         };
         this.editAnak.tambahTbl.onclick = () => {
-            console.log('fragment anak tambah tbl click');
-            Util.loadingStart();
-            this.anakTambahForm().then(() => {
-                Util.loadingEnd();
-            }).catch((e) => {
-                console.log(e);
-                Util.loadingEnd();
-                Util.alertMsg(e.message);
-            });
+            this.pilihAnggota.tampil('Pilih Anak', this, PilihAnggota.PILIH_ANAK);
         };
         this.tutupBtn.onclick = () => {
             if (this.urlBalik) {
@@ -149,62 +125,48 @@ export class EditProfilePage {
             this.pilihAnakFragment.style.display = 'none';
         };
     }
-    async anakTambahForm() {
-        this.pilihAnakFragment.style.display = 'flex';
-        let anggotaAr;
-        console.group('anak tambah form');
-        console.log('list anggota');
-        anggotaAr = await this.server.anggota.get();
-        console.log('hasil, length ' + anggotaAr.length);
-        console.log(anggotaAr);
-        console.log('edit anak');
-        console.log(this.editAnak);
-        console.groupEnd();
-        this.pilihAnggotaListCont.innerHTML = '';
-        this.pilihJudul.innerHTML = 'Pilih Anak';
-        anggotaAr.sort((item1, item2) => {
-            if (item1.namaLengkap.charCodeAt(0) > item2.namaLengkap.charCodeAt(0))
-                return 1;
-            if (item1.namaLengkap.charCodeAt(0) < item2.namaLengkap.charCodeAt(0))
-                return -1;
-            return 0;
-        });
-        for (let i = 0; i < anggotaAr.length; i++) {
-            let anggota = anggotaAr[i];
-            let view = new ItemAnakDipilih();
-            view.namaP.innerHTML = anggota.namaLengkap + " (" + anggota.nama + ") - " + anggota.keterangan;
-            view.anggota = anggota;
-            view.attach(this.pilihAnggotaListCont);
-            view.elHtml.onclick = () => {
-                Util.loadingStart();
-                this.anakDipilih(view).then(() => {
-                    // Util.loadingEnd();
-                    window.top.location.reload();
-                }).catch((e) => {
-                    console.log(e);
-                    Util.loadingEnd();
-                    Util.alertMsg(e.message);
-                });
-            };
-        }
-    }
-    async anakDipilih(view) {
-        console.group('anak dipilih, id ');
-        console.log('id');
-        console.log(view.anggota.id);
-        if (!this.editAnak.rel) {
-            throw new Error('data pasangan belum ada');
-        }
-        this.editAnak.rel.anaks.push(view.anggota.id);
-        // view.anggota.orangTuaId = this.editAnak.rel.anak1;
-        await this.editAnak.simpan();
-        // await this.server.anggota.update(view.anggota);
-        view.elHtml.onclick = null;
-        this.pilihAnakFragment.style.display = 'none';
-        console.log(this.editAnak.rel);
-        console.groupEnd();
-        // window.top.location.reload();
-    }
+    // pilihAnggotaForm(anggotaAr: AnggotaObj[], judul: string, dipilih: Function): void {
+    // 	this.pilihAnakFragment.style.display = 'flex';
+    // 	// let anggotaAr: AnggotaObj[];
+    // 	this.pilihAnggotaListCont.innerHTML = '';
+    // 	this.pilihJudul.innerHTML = judul;
+    // 	anggotaAr.sort((item1: AnggotaObj, item2: AnggotaObj) => {
+    // 		if (item1.namaLengkap.charCodeAt(0) > item2.namaLengkap.charCodeAt(0)) return 1;
+    // 		if (item1.namaLengkap.charCodeAt(0) < item2.namaLengkap.charCodeAt(0)) return -1;
+    // 		return 0;
+    // 	})
+    // 	for (let i: number = 0; i < anggotaAr.length; i++) {
+    // 		let anggota: AnggotaObj = anggotaAr[i];
+    // 		let view: ItemPilihAnggota = new ItemPilihAnggota();
+    // 		view.namaP.innerHTML = anggota.namaLengkap + " (" + anggota.nama + ") - " + anggota.keterangan;
+    // 		view.anggota = anggota;
+    // 		view.attach(this.pilihAnggotaListCont);
+    // 		view.elHtml.onclick = () => {
+    // 			Util.loadingStart();
+    // 			dipilih(view).then(() => {
+    // 				window.top.location.reload();
+    // 			}).catch((e: Error) => {
+    // 				console.log(e);
+    // 				Util.loadingEnd();
+    // 				Util.alertMsg(e.message);
+    // 			});
+    // 		}
+    // 	}
+    // }
+    // async anakDipilih(view: ItemPilihAnggota): Promise<void> {
+    // 	console.group('anak dipilih, id ');
+    // 	console.log('id');
+    // 	console.log(view.anggota.id);
+    // 	if (!this.editAnak.rel) {
+    // 		throw new Error('data pasangan belum ada');
+    // 	}
+    // 	this.editAnak.rel.anaks.push(view.anggota.id);
+    // 	await this.editAnak.simpan();
+    // 	view.elHtml.onclick = null;
+    // 	this.pilihAnakFragment.style.display = 'none';
+    // 	console.log(this.editAnak.rel);
+    // 	console.groupEnd();
+    // }
     get pilihAnakFragment() {
         return Util.getEl('div.pilih-anak');
     }

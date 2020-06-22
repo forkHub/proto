@@ -1,42 +1,39 @@
 import { BaseComponent } from "../ha/BaseComponent.js";
 import { Util } from "../Util.js";
 import { FireBaseClient } from "../server/firebase-client/FirebaseClient.js";
-import { AnggotaObj } from "../ent/AnggotaObj.js";
 import { ItemAnak } from "./ItemAnak.js";
 export class EditAnak extends BaseComponent {
     constructor() {
         super();
         this.client = new FireBaseClient();
     }
-    async init(client, rel) {
+    async init(client, rel, anaks) {
         this.client = client;
         this._rel = rel;
         this._elHtml = Util.getEl('div.anak-anak');
-        let anak = await this.ambilDataAnak();
-        this.renderAnak(anak);
+        this.renderAnak(anaks);
     }
-    async ambilDataAnak() {
-        let anaks = [];
-        console.group('ambil data anak');
-        console.log(this._rel);
-        if (!this._rel)
-            return [];
-        for (let i = 0; i < this._rel.anaks.length; i++) {
-            let anak = await this.client.anggota.getByDoc(this._rel.anaks[i]);
-            if (!anak) {
-                anak = new AnggotaObj();
-                anak.nama = 'error';
-                anak.namaLengkap = 'error';
-                anak.jkl = 'L';
-                anak.id = this._rel.anaks[i];
-            }
-            anaks.push(anak);
-        }
-        console.log('anaks');
-        console.log(anaks);
-        console.groupEnd();
-        return anaks;
-    }
+    // async ambilDataAnak(): Promise<AnggotaObj[]> {
+    // 	let anaks: AnggotaObj[] = [];
+    // 	console.group('ambil data anak');
+    // 	console.log(this._rel);
+    // 	if (!this._rel) return [];
+    // 	for (let i: number = 0; i < this._rel.anaks.length; i++) {
+    // 		let anak: AnggotaObj = await this.client.anggota.getByDoc(this._rel.anaks[i]);
+    // 		if (!anak) {
+    // 			anak = new AnggotaObj();
+    // 			anak.nama = 'error';
+    // 			anak.namaLengkap = 'error';
+    // 			anak.jkl = 'L';
+    // 			anak.id = this._rel.anaks[i];
+    // 		}
+    // 		anaks.push(anak);
+    // 	}
+    // 	console.log('anaks');
+    // 	console.log(anaks);
+    // 	console.groupEnd();
+    // 	return anaks;
+    // }
     renderAnak(anaks) {
         console.log('render anak');
         console.log(anaks);

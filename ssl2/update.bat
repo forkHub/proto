@@ -8,4 +8,5 @@ rd .\js\ /s /q
 rd .\template /s /q
 
 xcopy D:\xampp3\htdocs\proto\silsilah\silsilah03\s02\web\*.* . /s /y
+del index-dev.html
 pause

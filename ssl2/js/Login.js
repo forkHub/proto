@@ -29,7 +29,14 @@ export class Login {
         this.loginBtn.onclick = () => {
             Util.loadingStart();
             this.loginClick().then(() => {
-                Util.bukaHome(id);
+                if (this.uid == "7S9TWZXggIPLWX6R8RGH0E7EOZ52") {
+                    window.top.location.href = './admin.html';
+                }
+                else {
+                    console.log('buka home');
+                    // console.log(this.uid);
+                    Util.bukaHome(id);
+                }
             }).catch((e) => {
                 Util.alertMsg(e.message);
             });
@@ -41,11 +48,13 @@ export class Login {
     async loginClick() {
         console.log('client login');
         await this.client.login(this.inputUsername.value, this.inputPassword.value, firebase.auth.Auth.Persistence.SESSION).then((data) => {
-            console.log(data);
-            console.log(data.credential ? data.credential.providerId : "");
-            console.log(data.credential ? data.credential.signInMethod : "");
-            console.log(data.user.displayName);
-            console.log(data.user.email);
+            // console.log(data);
+            // console.log(data.credential ? data.credential.providerId : "");
+            // console.log(data.credential ? data.credential.signInMethod : "");
+            // console.log(data.user.displayName);
+            // console.log(data.user.email);
+            // console.log(data.user.uid);
+            this.uid = data.user.uid;
         });
     }
     get inputUsername() {
