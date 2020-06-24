@@ -74,6 +74,8 @@ export class Util {
         let res;
         let month = (date.getMonth() + 1) + '';
         let day = (date.getDate()) + '';
+        if (dateP == 0)
+            return '';
         res = date.getFullYear() + '-' + Util.padding(month) + '-' + Util.padding(day);
         return res;
     }

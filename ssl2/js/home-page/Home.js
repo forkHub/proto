@@ -27,6 +27,8 @@ export class Home {
         if (id) {
             await this.renderById(id);
         }
+        else {
+        }
     }
     // async renderDefault(): Promise<void> {
     // 	console.log('render default');

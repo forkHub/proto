@@ -91,6 +91,9 @@ export class AnggotaView extends BaseComponent {
             Util.loadingStart();
             this.fotoDiClick().then(() => {
                 Util.loadingEnd();
+                if (!this.relPasangan) {
+                    Util.alertMsg('Tidak ada data');
+                }
             }).catch((e) => {
                 Util.loadingEnd();
                 Util.alertMsg(e.message);

@@ -41,9 +41,9 @@ export class Login {
                 Util.alertMsg(e.message);
             });
         };
-        this.tblTamu.onclick = () => {
-            Util.bukaHome(id);
-        };
+        // this.tblTamu.onclick = () => {
+        // 	Util.bukaHome(id);
+        // }
     }
     async loginClick() {
         console.log('client login');
@@ -66,9 +66,9 @@ export class Login {
     get loginBtn() {
         return Util.getEl('button.login');
     }
-    get tblTamu() {
-        return Util.getEl('button.tamu');
-    }
+    // get tblTamu(): HTMLButtonElement {
+    // 	return Util.getEl('button.tamu') as HTMLButtonElement;
+    // }
     get spanNama() {
         return Util.getEl('span.nama');
     }

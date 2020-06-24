@@ -74,6 +74,10 @@
 		p.info {
 			font-size: large;
 		}
+
+		p.anak.kosong {
+			display: inline;
+		}
 	</style>
 
 </head>
@@ -106,9 +110,6 @@
 		<p class='label'>Tgl. Meninggal:</p>
 		<p class='info tgl-meninggal'></p>
 
-		<p class='label'>keterangan:</p>
-		<p class='info keterangan'></p>
-
 		<hr />
 
 		<p class='judul'>Akun Sosial:</p>
@@ -127,12 +128,13 @@
 		<hr />
 
 		<p class='judul'>Data Pasangan:</p>
-		<p class='info pasangan'>[-----]</p>
+		<p class='info pasangan'>Tidak ada Data</p>
 		<button type='button' class='btn btn-primary pasangan profile'>Profile</button>&nbsp;
 		<button type='button' class='btn btn-primary pasangan silsilah'>Silsilah</button>
 
 		<hr />
 		<p class='judul'>Data Anak</p>
+		<p class='info anak kosong'>Tidak ada Data</p>
 		<div class='anak-cont'>
 		</div>
 

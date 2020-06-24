@@ -81,6 +81,8 @@ export class ViewProfilePage {
                 btnProfile.style.display = 'inline';
                 btnSilsilah.style.display = 'inline';
             }
+            else {
+            }
         }
         catch (e) {
             console.log(e);
@@ -92,9 +94,26 @@ export class ViewProfilePage {
         console.log('url balik:');
         console.log(this.urlBalik);
     }
+    normalize2(data) {
+        if ('' == data)
+            return 'Tidak ada data';
+        return data;
+    }
+    normalize() {
+        // if (0 == this.anggota.tglLahir)
+        // if ('' == this.anggota.nama) this.anggota.nama = 'Tidak ada data';
+        // if ('' == this.anggota.alamat) this.anggota.alamat = 'Tidak ada data';
+        this.anggota.nama = this.normalize2(this.anggota.nama);
+        this.anggota.alamat = this.normalize2(this.anggota.alamat);
+        this.anggota.namaLengkap = this.normalize2(this.anggota.namaLengkap);
+        this.anggota.wa = this.normalize2(this.anggota.wa);
+        this.anggota.facebook = this.normalize2(this.anggota.facebook);
+        this.anggota.instagram = this.normalize2(this.anggota.instagram);
+        this.anggota.linkedin = this.normalize2(this.anggota.linkedin);
+    }
     renderSelf() {
         Util.getEl('p.nama-lengkap').innerHTML = this.anggota.namaLengkap;
-        Util.getEl('p.nama').innerHTML = this.anggota.namaLengkap;
+        Util.getEl('p.nama').innerHTML = this.anggota.nama;
         Util.getEl('p.jkl').innerHTML = this.anggota.jkl;
         Util.getEl('p.alamat').innerHTML = this.anggota.alamat;
         Util.getEl('p.tgl-lahir').innerHTML = Util.date2Input(this.anggota.tglLahir);
@@ -142,6 +161,9 @@ export class ViewProfilePage {
             };
             anakCont.appendChild(view);
         });
+        if (anaks.length > 0) {
+            Util.getEl('p.anak.kosong').style.display = 'none';
+        }
         console.groupEnd();
     }
     populateLinkSilsilah() {
@@ -155,6 +177,7 @@ export class ViewProfilePage {
         await this.populateAnggota();
         this.populateLinkSilsilah();
         this.rel = await this.ambilDataRelasi();
+        this.normalize();
         this.renderSelf();
         await this.renderPasangan(this.anggota, this.rel);
         await this.renderAnak();
