@@ -23,6 +23,7 @@ class Input extends BaseComponent {
             this.id = null;
             this.mode = App.MODE_BARU;
             this.textArea.value = '';
+            this.nohp.value = '';
             this.render();
         };
     }
@@ -32,16 +33,19 @@ class Input extends BaseComponent {
         this.list.style.display = 'block';
         posts.forEach((item) => {
             let view = new ItemView();
-            let text = item.teks;
-            // text = this.ubahWAME(text, item.noHp);
             view.text.innerHTML = (this.renderHtml(item.teks));
             view.post = item;
             view.attach(this.list);
-            view.share.href = 'whatsapp://send?text=' + window.encodeURIComponent(text);
+            view.share.href = 'whatsapp://send?text=' + window.encodeURIComponent(this.ubahWAME(item.teks, item.noHp));
             view.editTbl.onclick = () => {
                 this.edit(view.post.id);
             };
             view.delTbl.onclick = () => {
+                let jawaban = window.confirm("hapus data?");
+                if (jawaban) {
+                    App.db.hapus(item.id);
+                    this.render();
+                }
             };
         });
     }

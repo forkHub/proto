@@ -3,6 +3,16 @@ class Db {
     constructor() {
         this.nama = "share_data";
     }
+    hapus(id) {
+        let postAr = this.get();
+        let post2 = [];
+        postAr.forEach((item) => {
+            if (item.id != id) {
+                post2.push(item);
+            }
+        });
+        this.simpan(post2);
+    }
     update(post) {
         let postAr = this.get();
         postAr.forEach((item) => {
