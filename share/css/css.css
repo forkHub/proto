@@ -1,0 +1,7 @@
+div, body, html {
+    box-sizing: border-box;
+}
+
+div.cont {
+	padding: 16px;
+}

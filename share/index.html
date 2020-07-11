@@ -1,0 +1,54 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='css/bootstrap.min.css' rel='stylesheet' />
+	<link href='css/css.css' rel='stylesheet' />
+
+	<style>
+		div.item div.text {
+			border: 1px solid #aaa;
+			box-sizing: border-box;
+			padding: 8px;
+		}
+	</style>
+
+	<script src="js/BaseComponent.js"></script>
+	<!-- <script src="js/Item.js"></script> -->
+	<script src="js/input.js"></script>
+	<script src="js/Data.js"></script>
+	<script src="js/Itemview.js"></script>
+	<script src="js/Db.js"></script>
+	<script src="js/App.js"></script>
+</head>
+
+<body>
+	<div class='cont'>
+		<div class='input'>
+			<textarea rows="10"></textarea><br />
+			<br />
+			<button type='button' class='simpan btn btn-normal btn-primary'>Simpan</button>
+		</div>
+		<br />
+		<div class='list-cont'>
+
+		</div>
+	</div>
+	<template>
+		<div class='item'>
+			<div class='text'>
+
+			</div>
+			<br />
+
+			<!-- <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a> -->
+			<a href='' data-action="share/whatsapp/share">share</a>
+			<button type='button' class='edit btn btn-secondary'>edit</button>
+			<button type='button' class='hapus btn btn-danger'>hapus</button>
+			<hr />
+		</div>
+	</template>
+</body>
+
+</html>
