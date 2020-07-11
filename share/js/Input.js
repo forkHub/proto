@@ -33,8 +33,8 @@ class Input extends BaseComponent {
         posts.forEach((item) => {
             let view = new ItemView();
             let text = item.teks;
-            text = this.ubahWAME(text, item.noHp);
-            view.text.innerHTML = this.ubahWAME(this.renderHtml(item.teks), item.noHp);
+            // text = this.ubahWAME(text, item.noHp);
+            view.text.innerHTML = (this.renderHtml(item.teks));
             view.post = item;
             view.attach(this.list);
             view.share.href = 'whatsapp://send?text=' + window.encodeURIComponent(text);
