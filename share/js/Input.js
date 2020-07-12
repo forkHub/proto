@@ -58,7 +58,7 @@ class Input extends BaseComponent {
         this.list.style.display = 'none';
     }
     ubahWAME(str, nohp) {
-        return str.replace(/#wame#/gi, 'https://wa.me/' + nohp);
+        return str.replace(/#wame#/gi, 'https://wa.me/' + nohp + "?text=Assalamualaikum");
     }
     renderHtml(str) {
         let hasil = '';
