@@ -58,9 +58,7 @@ class Input extends BaseComponent {
         this.list.style.display = 'none';
     }
     ubahWAME(str, nohp) {
-        // let idx: number = 0;
-        // let ulang: boolean = true;
-        return str.replace(/#wame/gi, 'https://wa.me/' + nohp);
+        return str.replace(/#wame#/gi, 'https://wa.me/' + nohp);
     }
     renderHtml(str) {
         let hasil = '';
