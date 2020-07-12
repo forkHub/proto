@@ -58,17 +58,9 @@ class Input extends BaseComponent {
         this.list.style.display = 'none';
     }
     ubahWAME(str, nohp) {
-        let idx = 0;
-        let ulang = true;
-        while (ulang) {
-            ulang = false;
-            idx = str.toLocaleLowerCase().indexOf('[wame]');
-            if (idx > -1) {
-                str = str.replace('[wame]', 'https://wa.me/' + nohp);
-                ulang = true;
-            }
-        }
-        return str;
+        // let idx: number = 0;
+        // let ulang: boolean = true;
+        return str.replace(/#wame/gi, 'https://wa.me/' + nohp);
     }
     renderHtml(str) {
         let hasil = '';
