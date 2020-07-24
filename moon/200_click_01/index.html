@@ -1,0 +1,46 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		html,
+		body {
+			text-align: center;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		canvas {
+			margin: auto;
+		}
+	</style>
+	<script src="js/js.js"></script>
+</head>
+
+<body>
+	<div style='display:none'>
+		<img src='imgs/bola.png' id='img-bola'>
+		<img src='imgs/box.png' id='img-box'>
+	</div>
+	<canvas id="canvas" width="360" height="640" style="width:360px; height:640px"></canvas>
+	<script>
+		function resize() {
+			let canvas = document.getElementById("canvas");
+			let cp = parseInt(canvas.style.width);
+			let cl = parseInt(canvas.style.height);
+			let wp = window.innerWidth;
+			let wl = window.innerHeight;
+			let ratio = Math.min((wp / cp), (wl / cl));
+
+			canvas.style.width = Math.floor(cp * ratio) + 'px';
+			canvas.style.height = Math.floor(cl * ratio) + 'px';
+		}
+
+		resize();
+
+		window.onresize = resize;
+	</script>
+</body>
+
+
+</html>
