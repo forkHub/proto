@@ -1,0 +1,90 @@
+html, body, div, header, daftar-barang-cont, item {
+	box-sizing: border-box;
+	padding: 0px;
+	font-family: sans-serif;
+}
+
+h1.judul-toko {
+	margin: 16px;
+	margin-top: 0px;
+	color: white;
+}
+
+body {
+	max-width: 960px;
+	margin: auto;
+	padding-top: 0px;
+	margin-top: 0px;
+	-webkit-box-shadow: 0px 0px 16px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 16px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 16px 1px rgba(0,0,0,0.75);
+}
+
+header {
+	background-image: url("../gambar/kucing-header.jpg");
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 300px;
+	margin-bottom: 32px;
+	padding: 16px;
+}
+
+daftar-barang-cont {
+	text-align: center;
+}
+
+daftar-barang-cont item {
+	width: 33%;
+	/* display: inline-flex; */
+	padding: 16px;
+	float: left;
+}
+
+daftar-barang-cont item img {
+	width: 100%;
+}
+
+daftar-barang-cont item p.nama-barang {
+	color: chocolate;
+	font-weight: bold;
+}
+
+daftar-barang-cont item p.harga {
+	color: orangered;
+	font-weight: bold;
+}
+
+div.clear {
+	float: none;
+	clear: both;
+}
+
+daftar-barang-cont item.fokus {
+	width: 90%;
+	border: 1px solid chocolate;
+	clear: both;
+	margin: auto;
+	float: none;
+	display: block;
+}
+
+
+@media only screen and (max-width: 600px) {
+	daftar-barang-cont item {
+		width: 50%;
+		/* display: inline-flex; */
+		padding: 16px;
+		float: left;
+	}	
+}
+
+
+@media only screen and (max-width: 400px) {
+	daftar-barang-cont item {
+		width: 90%;
+		/* display: inline-flex; */
+		padding: 16px;
+		float: left;
+	}	
+}
