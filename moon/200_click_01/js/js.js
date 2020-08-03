@@ -33,8 +33,8 @@ window.onload = () => {
     gbrBox = document.body.querySelector("img#img-box");
     gambarPeta();
     canvas.onclick = (e) => {
-        let posx = Math.floor(e.clientX / 32);
-        let posy = Math.floor(e.clientY / 32);
+        let posx = Math.floor((e.clientX) / 32);
+        let posy = Math.floor((e.clientY) / 32);
         bersihkanLayar();
         let hasil = pfCariJalan(1, 1, posx, posy);
         gambarPeta();
@@ -265,9 +265,9 @@ function petaKosong(x, y) {
 function petaPosValid(x, y) {
     if (x < 0)
         return false;
-    if (y > peta.length)
+    if (y >= peta.length)
         return false;
-    if (x > peta[y].length)
+    if (x >= peta[y].length)
         return false;
     return petaKosong(x, y);
 }
