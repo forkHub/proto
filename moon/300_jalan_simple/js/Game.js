@@ -40,6 +40,10 @@ window.onload = () => {
     };
     resize();
     render();
+    setTimeout(() => {
+        resize();
+        render();
+    }, 100);
     canvas.onclick = (e) => {
         if (karakter.status != st_idle)
             return;

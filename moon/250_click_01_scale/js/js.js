@@ -36,6 +36,9 @@ window.onload = () => {
     gbrBox = document.body.querySelector("img#img-box");
     window.onresize = resize;
     resize();
+    setTimeout(() => {
+        resize();
+    }, 100);
     gambarPeta();
     canvas.onclick = (e) => {
         let rect = canvas.getBoundingClientRect();

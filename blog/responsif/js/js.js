@@ -9,6 +9,9 @@ window.onload = () => {
     gambarCanvas(canvasCtx);
     window.onresize = resize;
     resize();
+    setTimeout(() => {
+        resize();
+    }, 100);
 };
 function resize() {
     let cp = 360;
