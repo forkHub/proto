@@ -50,8 +50,8 @@ window.onload = () => {
     };
 };
 function resize() {
-    let cp = parseInt(canvas.style.width);
-    let cl = parseInt(canvas.style.height);
+    let cp = 360;
+    let cl = 640;
     let wp = window.innerWidth;
     let wl = window.innerHeight;
     let ratio = Math.min((wp / cp), (wl / cl));
