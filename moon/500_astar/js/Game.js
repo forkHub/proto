@@ -1,6 +1,6 @@
 "use strict";
 let cellAr = [];
-let cellMax = 100; //maksimum cell boleh dibuat
+let cellMax = 1000; //maksimum cell boleh dibuat
 let peta = [
     "XXXXXXXXXXX",
     "X         X",
