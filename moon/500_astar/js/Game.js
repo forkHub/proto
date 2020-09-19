@@ -28,7 +28,7 @@ const st_jalan = 2;
 let karakter = {
     jalur: [],
     jalurn: 0,
-    pindahJml: 4,
+    pindahJml: 2,
     pindahn: 0,
     pos: {
         x: 32,

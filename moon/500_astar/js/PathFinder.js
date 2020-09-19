@@ -122,9 +122,10 @@ function cellBuat(parent, x, y, tx, ty) {
         buka: 1,
         jarak: -1,
         induk: parent,
+        g: parent ? parent.g + 1 : 0
     };
     cell.jarak = Math.abs(tx - x) + Math.abs(ty - y);
-    cell.jarak += parent ? ((parent.jarak + 1)) : 0;
+    cell.jarak += (cell.g * 1.1);
     return cell;
 }
 /**
