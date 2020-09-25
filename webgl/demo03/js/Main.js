@@ -2,29 +2,35 @@
 let gl;
 let canvas;
 let gbr;
-let skala = 0;
 let sudut = 0;
+let gpj = 320;
+let glb = 320;
 window.onload = () => {
     canvas = document.querySelector('canvas');
-    gbr = document.querySelector('img#sprite');
+    gbr = document.querySelector('img#kotak');
     gl = new Hagl(canvas);
     window.onresize = resize;
     resize();
     requestAnimationFrame(update);
 };
 function resize() {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    let wp = window.innerWidth;
+    let wl = window.innerHeight;
+    let ratio = Math.min((wp / gpj), (wl / glb));
+    let cp2 = Math.floor(gpj * ratio);
+    let cl2 = Math.floor(glb * ratio);
+    canvas.style.width = cp2 + 'px';
+    canvas.style.height = cl2 + 'px';
+    canvas.style.top = ((wl - cl2) / 2) + 'px';
+    canvas.style.left = ((wp - cp2) / 2) + 'px';
+    canvas.width = gpj;
+    canvas.height = glb;
 }
 function update() {
     sudut += 5;
     if (sudut > 360) {
         sudut -= 360;
     }
-    skala = Math.sin(sudut * (Math.PI / 180.0));
-    skala = Math.abs(skala);
-    skala *= 5;
-    skala += 1;
     render();
     requestAnimationFrame(update);
 }
@@ -33,7 +39,8 @@ function render() {
     gl.drawImage(gbr, canvas.width / 2, canvas.height / 2, {
         offsetX: gbr.width / 2,
         offsetY: gbr.height / 2,
-        scaleX: skala,
-        scaleY: skala
+        rotation: sudut,
+        scaleX: 3,
+        scaleY: 3
     });
 }
