@@ -1,7 +1,7 @@
 "use strict";
 class Hagl {
 	constructor(kanvas) {
-		this.dev = false;
+		this.dev = true;
 		this.shaderVertek = ``; //TODO
 		this.shaderFragment = ``; //TODO:
 		this.daftarPosObj = [];
