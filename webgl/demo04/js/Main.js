@@ -2,8 +2,8 @@
 let gl;
 let canvas;
 let gbr;
-let gpj = 320;
-let glb = 320;
+let gpj = 128;
+let glb = 128;
 let frame = 0;
 let skala = 1 / 8;
 window.onload = () => {

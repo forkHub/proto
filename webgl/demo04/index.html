@@ -10,6 +10,7 @@
 			padding: 0px;
 			box-sizing: border-box;
 			margin: 0px;
+			background-color: black;
 		}
 
 		canvas {
@@ -19,6 +20,16 @@
 			image-rendering: crisp-edges;
 			position: absolute;
 		}
+
+		p.credit {
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			background-color: rgba(255, 255, 255, .9);
+			margin: 0px;
+			padding: 16px;
+		}
 	</style>
 </head>
 
@@ -26,6 +37,10 @@
 	<img src='gbr/ledakan.png' id="ledakan" style='display:none'>
 
 	<canvas></canvas>
+
+	<p class='credit'>
+		Image Credit: <a href="http://gushh.net/blog/free-game-sprites-explosion-3/">gushh.net</a>
+	</p>
 </body>
 
 </html>
