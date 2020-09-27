@@ -65,7 +65,7 @@ function gambar() {
         for (let j = 0; j < 8; j++) {
             let n = petaNilai(i, j);
             let f = nilai2Frame(n);
-            gambarFrame(i * 32, j * 32, f);
+            gambarFrame(i * 32 + 16, j * 32 + 16, f);
         }
     }
 }

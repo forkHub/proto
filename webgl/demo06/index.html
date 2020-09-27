@@ -10,6 +10,7 @@
 			padding: 0px;
 			box-sizing: border-box;
 			margin: 0px;
+			background-color: black;
 		}
 
 		canvas {
@@ -19,6 +20,17 @@
 			image-rendering: crisp-edges;
 			position: absolute;
 		}
+
+		p.kredit {
+			position: fixed;
+			padding: 16px;
+			background-color: rgba(255, 255, 255, .5);
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			text-align: center;
+			margin: 0px;
+		}
 	</style>
 </head>
 
@@ -26,7 +38,9 @@
 	<img src='gbr/tileset.png' id="tileset" style='display:none'>
 
 	<canvas></canvas>
-	<canvas class='kanvas2'></canvas>
+	<p class='kredit'>
+		Image from : <a href="https://opengameart.org/content/rpg-tiles-cobble-stone-paths-town-objects">opengameart</a>
+	</p>
 </body>
 
 </html>
