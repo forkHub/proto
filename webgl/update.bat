@@ -23,7 +23,7 @@ xcopy "..\..\..\proto\webgl\demo02_skala\web\*.*" .\demo02 /s /y
 xcopy "..\..\..\proto\webgl\demo03_rotasi\web\*.*" .\demo03 /s /y
 xcopy "..\..\..\proto\webgl\demo04_anim\web\*.*" .\demo04 /s /y
 xcopy "..\..\..\proto\webgl\demo05_alpha\web\*.*" .\demo05 /s /y
-xcopy "..\..\..\proto\webgl\demo06_tileset\tile\web\*.*" .\demo06 /s /y
+xcopy "..\..\..\proto\webgl\demo06_tileset\web\*.*" .\demo06 /s /y
 xcopy "..\..\..\proto\webgl\demo07_scroll\web\*.*" .\demo07 /s /y
 
 pause
