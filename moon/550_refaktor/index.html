@@ -1,0 +1,42 @@
+<html>
+
+<head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, target-densityDpi=device-dpi">
+	<style>
+		html,
+		body {
+			text-align: center;
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+		}
+
+		canvas {
+			position: absolute;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: -webkit-crisp-edges;
+			image-rendering: pixelated;
+			image-rendering: crisp-edges;
+		}
+	</style>
+	<script src="js/Data.js"></script>
+	<script src="js/karakter.js"></script>
+	<script src="js/PathFinder.js"></script>
+	<script src="js/Peta.js"></script>
+	<script src="js/Window.js"></script>
+	<script src="js/Game.js"></script>
+</head>
+
+<body>
+	<div style='display:none'>
+		<img src='imgs/bola.png' id='img-bola'>
+		<img src='imgs/box.png' id='img-box'>
+		<img src='imgs/tigan.png' id='img-tigan'>
+	</div>
+
+	<canvas></canvas>
+</body>
+
+
+</html>
