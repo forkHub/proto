@@ -12,10 +12,14 @@ let gbr3;
 let gbr4;
 let gbr5;
 let gbr6;
+let viewLoading;
+let viewLoadingP;
 window.onload = () => {
     canvas = document.querySelector('canvas');
     gbr = document.querySelector('img#kotak');
     gl = new Hagl(canvas);
+    viewLoading = document.querySelector('div.loading');
+    viewLoadingP = viewLoading.querySelector('p');
     window.onresize = resize;
     resize();
     init();
@@ -40,6 +44,7 @@ async function init() {
     backs.push(buatBack(gbr4, 4));
     backs.push(buatBack(gbr5, 8));
     backs.push(buatBack(gbr6, 16));
+    viewLoading.style.display = 'none';
     requestAnimationFrame(update);
 }
 function buatBack(gbr, kec) {
@@ -50,17 +55,17 @@ function buatBack(gbr, kec) {
     };
 }
 async function loading() {
-    console.log('1');
+    viewLoadingP.innerHTML = 'Loading 1/6';
     gbr1 = await load('gbr/back02.png');
-    console.log('1');
+    viewLoadingP.innerHTML = 'Loading 2/6';
     gbr2 = await load('gbr/house3.png');
-    console.log('1');
+    viewLoadingP.innerHTML = 'Loading 3/6';
     gbr3 = await load('gbr/houses2.png');
-    console.log('1');
+    viewLoadingP.innerHTML = 'Loading 4/6';
     gbr4 = await load('gbr/houses1.png');
-    console.log('1');
+    viewLoadingP.innerHTML = 'Loading 5/6';
     gbr5 = await load('gbr/fence.png');
-    console.log('1');
+    viewLoadingP.innerHTML = 'Loading 6/6';
     gbr6 = await load('gbr/road2.png');
 }
 function resize() {

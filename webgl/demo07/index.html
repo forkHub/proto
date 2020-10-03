@@ -6,7 +6,9 @@
 	<script src='./js/Main.js'></script>
 	<style>
 		html,
-		body {
+		body,
+		div,
+		p {
 			padding: 0px;
 			box-sizing: border-box;
 			margin: 0px;
@@ -19,12 +21,46 @@
 			image-rendering: crisp-edges;
 			position: absolute;
 		}
+
+		div.loading {
+			position: fixed;
+			background-color: rgba(0, 0, 0, .5);
+			display: flex;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+		}
+
+		div.kredit {
+			text-align: center;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			padding: 16px;
+		}
+
+		div.loading p {
+			padding: 32px;
+			margin: auto;
+			background-color: rgba(255, 255, 255, .5);
+			font-weight: bold;
+			font-size: xx-large;
+			text-align: center;
+		}
 	</style>
 </head>
 
 <body>
-
 	<canvas></canvas>
+
+	<div class='kredit'>
+		Image from <a href="https://craftpix.net/">https://craftpix.net/</a>
+	</div>
+
+	<div class='loading'>
+		<p>Loading...</p>
+	</div>
 </body>
 
 </html>
