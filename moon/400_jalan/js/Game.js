@@ -83,13 +83,13 @@ function update() {
     }
     else if (karakter.status == st_jalan) {
         if (krkCheckPosisiDiGrid(karakter)) {
-            if (karakter.jalurn >= karakter.jalur.length - 2) {
+            karakter.jalurn++;
+            if (karakter.jalurn >= karakter.jalur.length - 1) {
                 karakter.status = st_idle;
             }
             else {
                 karakter.status = st_jalan;
                 karakter.pindahn = 0;
-                karakter.jalurn++;
                 krkPindahGrid(karakter);
             }
         }
