@@ -1,0 +1,74 @@
+div.dialog {
+	position: fixed;
+	box-sizing: border-box;
+	top:0px;
+	left:0px;
+	bottom: 0px;
+	right: 0px;;
+	background-color: rgba(0, 0, 0, .1);
+	/* display: none; */
+	z-index: 1000;
+}
+
+div.dialog div.box {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	width: 100%;
+	min-height: 200px;
+	background-color: white;
+	text-align: center;
+}
+
+div.dialog div.box p {
+	flex-grow: 1;
+}
+
+/* form barang */
+div.form-barang div.foto-cont img {
+	min-width: 128px;
+	min-height: 128px;
+	border: 1px solid;
+}
+
+/* Daftar barang page */
+div.daftar-barang-page 
+div.item-barang  {
+	display: block;
+}
+
+div.daftar-barang-page 
+div.item-barang  
+img.gbr {
+	max-width: 100px;
+	max-height: 100px;
+	margin: 4px;
+}
+
+
+div.daftar-barang-page 
+div.item-barang  
+div.atas {
+	display: flex;
+}
+
+div.daftar-barang-page 
+div.atas 
+div.deskripsi {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+div.daftar-barang-page 
+div.atas 
+div.deskripsi 
+div.bawah {
+	text-align: right;
+}
+
+div.daftar-barang-page 
+div.deskripsi 
+p.nama {
+	flex-grow: 1;
+}
