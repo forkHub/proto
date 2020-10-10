@@ -1,92 +1,115 @@
+<!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
-	<title>HA Store </title>
-	<link rel='stylesheet' href="./css/css.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='css/bootstrap.min.css' rel='stylesheet' />
+	<link href='css/css_admin.css' rel='stylesheet' />
+
+	<style>
+
+	</style>
+
+	<script src="lib/tinymce/tinymce.min.js"></script>
+	<script src="lib/load-image.all.min.js"></script>
+	<script src="js/BaseComponent.js"></script>
+	<script src="js/DaftarBarangPage.js"></script>
+	<script src="js/Barang.js"></script>
+	<script src="js/Dialog.js"></script>
+	<script src="js/FormBarangView.js"></script>
+	<script src="js/FormBarangPage.js"></script>
+	<script src="js/PhotoUploadPage.js"></script>
+	<script src="js/Login2.js"></script>
+	<script src="js/Util.js"></script>
+	<script src="js/md5.min.js"></script>
+	<script src="js/App.js"></script>
+
 </head>
 
 <body>
-	<header>
-		<p> </p>
-		<h1 class='judul-toko'>HA Store</h1>
-	</header>
-	<daftar-barang-cont>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
+	<div class='container'>
+
+	</div>
+	<template>
+
+		<div class='form form-barang' action="">
+			<h2>Form Barang</h2>
+			<div class='foto-cont'>
+				<img src='' class='foto'>
+				<button class='btn btn-primary edit-foto'>edit foto</button>
+				<br />
+				<br />
 			</div>
-		</item>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-		<item class='fokus'>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='deskripsi-panjang'>deskripsi panjang1 deskripsi-panjang2 deskripsi-panjang3</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-		<item>
-			<div class='cont'>
-				<img src='./gambar/kucing-barang.jpg'>
-				<p class='nama-barang'>nama-barang</p>
-				<p class='deskripsi-singkat'>deskripsi singkat</p>
-				<p class='harga'>Rp. 10.000</p>
-				<button class='chat'>Chat</button>
-			</div>
-		</item>
-	</daftar-barang-cont>
-	<div class='clear'></div>
+			<form action="">
+				<div class="form-group">
+					<label for="nama-barang">Nama:</label>
+					<input type="text" class="form-control nama-barang" name="nama-barang" id="nama-barang" required />
+				</div>
+
+				<div class="form-group deskripsi-barang-panjang">
+					<label for="deskripsi-barang-panjang">Deskripsi:</label>
+					<textarea rows="20" class="form-control" id="deskripsi-barang-panjang"
+						name="deskripsi-barang-panjang" required></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="harga-barang">Harga:</label>
+					<input type="text" class="form-control" id="harga-barang" name="harga-barang" required />
+				</div>
+				<div class="form-group">
+					<label for="wa">WA:</label>
+					<input type="text" class="form-control" id="wa" name="wa" required />
+				</div>
+				<input type="hidden" class='file_id' value="">
+				<input type="hidden" class='post_id' value="">
+				<button type="submit" class="btn btn-primary submit">Simpan</button>
+				<button type="button" class="btn btn-secondary draft">Draft</button>
+				<button type="button" class="btn btn-danger tutup">Tutup</button>
+			</form>
+		</div>
+
+		<div class='foto-page'>
+			<h3>Upload Foto:</h3>
+			<form>
+				<input type="file" accept="">
+				<br />
+				<p>Foto:</p>
+				<div class='foto-cont'>
+
+				</div>
+				<p>Thumbnail:</p>
+				<div class='thumb-cont'>
+
+				</div>
+				<br />
+
+				<input type='submit' class='btn btn-primary upload' value='upload'>
+				<!-- <button type="button" class='btn btn-primary rotasi'>Putar</button> -->
+				<button type="button" class='btn btn-secondary tutup'>tutup</button>
+			</form>
+		</div>
+
+		<div class='form-login'>
+			<h2>Form login</h2>
+			<form class='form-login' action="" method="post">
+
+				<div class="form-group">
+					<label for="user-name">User:</label>
+					<input type="text" class="form-control user-name" name="user-name" id="user-name" required
+						value="auni" />
+				</div>
+
+				<div class="form-group">
+					<label for="password">Deskripsi:</label>
+					<input type="password" class="form-control password" name="password" id="password" required
+						value="12345" />
+				</div>
+				<button type="submit" class="btn btn-primary submit">Login</button>
+			</form>
+		</div>
+
+	</template>
 </body>
 
 </html>
