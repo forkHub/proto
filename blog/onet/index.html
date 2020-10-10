@@ -1,0 +1,94 @@
+<html>
+
+<head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, target-densityDpi=device-dpi">
+	<style>
+		html,
+		body,
+		div {
+			text-align: center;
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+		}
+
+		canvas {
+			position: absolute;
+			background-color: black;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: -webkit-crisp-edges;
+			image-rendering: pixelated;
+			image-rendering: crisp-edges;
+		}
+
+		div.depan,
+		div.selesai,
+		div.game-over {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, .1);
+			display: flex;
+		}
+
+		div.depan div.box,
+		div.selesai div.box,
+		div.game-over div.box {
+			width: 80%;
+			margin: auto;
+			background-color: white;
+			padding: 32px;
+		}
+
+		div.depan div.box p,
+		div.selesai div.box p,
+		div.game-over div.box p {
+			font-weight: bold;
+		}
+
+		div.selesai,
+		div.game-over {
+			display: none;
+		}
+	</style>
+	<script src="js/Data.js"></script>
+	<script src="js/karakter.js"></script>
+	<script src="js/PathFinder.js"></script>
+	<script src="js/Peta.js"></script>
+	<script src="js/Window.js"></script>
+	<script src="js/Game.js"></script>
+</head>
+
+<body>
+	<div style='display:none'>
+		<img src='imgs/box.png' id='img-box'>
+	</div>
+
+	<canvas></canvas>
+
+	<div class='depan'>
+		<div class='box'>
+			<p>GAME ONET</p>
+			<button>Mulai</button>
+		</div>
+	</div>
+
+	<div class='selesai'>
+		<div class='box'>
+			<p>SELESAI</p>
+			<button>OK</button>
+		</div>
+	</div>
+
+	<div class='game-over'>
+		<div class='box'>
+			<p>WAKTU HABIS</p>
+			<button>OK</button>
+		</div>
+	</div>
+
+</body>
+
+
+</html>
