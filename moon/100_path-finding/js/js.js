@@ -7,18 +7,6 @@ let peta = [
     "X    X   X",
     "X    X   X",
     "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
     "X        X",
     "XXXXXXXXXX"
 ];
@@ -27,26 +15,22 @@ let canvasCtx;
 let gbrBox;
 let gbrBola;
 window.onload = () => {
+    //persiapan canvas
     canvas = document.body.querySelector('canvas');
     canvasCtx = canvas.getContext("2d");
     gbrBola = document.body.querySelector("img#img-bola");
     gbrBox = document.body.querySelector("img#img-box");
-    gambarPeta();
-    canvas.onclick = (e) => {
-        let posx = Math.floor((e.clientX) / 32);
-        let posy = Math.floor((e.clientY) / 32);
-        bersihkanLayar();
-        let hasil = pfCariJalan(1, 1, posx, posy);
-        gambarPeta();
-        gambarJalan(hasil);
-    };
+    let hasil = pfCariJalan(2, 2, 8, 3);
+    gambarTembok();
+    gambarJalan(hasil);
+    console.log(JSON.stringify(hasil));
 };
 function gambarJalan(hasil) {
     hasil.forEach((item) => {
         canvasCtx.drawImage(gbrBola, item[0] * 32, item[1] * 32);
     });
 }
-function gambarPeta() {
+function gambarTembok() {
     for (let jx = 0; jx < peta.length; jx++) {
         for (let ix = 0; ix < peta[jx].length; ix++) {
             if (petaKosong(ix, jx)) {
@@ -56,9 +40,6 @@ function gambarPeta() {
             }
         }
     }
-}
-function bersihkanLayar() {
-    canvasCtx.clearRect(0, 0, 360, 640);
 }
 /**
  * Buka cell
@@ -257,9 +238,12 @@ function petaKosong(x, y) {
 function petaPosValid(x, y) {
     if (x < 0)
         return false;
-    if (y >= peta.length)
+    if (y > peta.length)
         return false;
-    if (x >= peta[y].length)
+    if (x > peta[y].length)
         return false;
     return petaKosong(x, y);
+}
+function test() {
+    console.log(pfCariJalan(2, 2, 4, 4));
 }

@@ -1,65 +1,4 @@
 "use strict";
-let cellAr = [];
-let cellMax = 100; //maksimum cell boleh dibuat
-let peta = [
-    "XXXXXXXXXX",
-    "X        X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X    X   X",
-    "X        X",
-    "XXXXXXXXXX"
-];
-let canvas;
-let canvasCtx;
-let gbrBox;
-let gbrBola;
-window.onload = () => {
-    canvas = document.body.querySelector('canvas');
-    canvasCtx = canvas.getContext("2d");
-    gbrBola = document.body.querySelector("img#img-bola");
-    gbrBox = document.body.querySelector("img#img-box");
-    gambarPeta();
-    canvas.onclick = (e) => {
-        let posx = Math.floor((e.clientX) / 32);
-        let posy = Math.floor((e.clientY) / 32);
-        bersihkanLayar();
-        let hasil = pfCariJalan(1, 1, posx, posy);
-        gambarPeta();
-        gambarJalan(hasil);
-    };
-};
-function gambarJalan(hasil) {
-    hasil.forEach((item) => {
-        canvasCtx.drawImage(gbrBola, item[0] * 32, item[1] * 32);
-    });
-}
-function gambarPeta() {
-    for (let jx = 0; jx < peta.length; jx++) {
-        for (let ix = 0; ix < peta[jx].length; ix++) {
-            if (petaKosong(ix, jx)) {
-            }
-            else {
-                canvasCtx.drawImage(gbrBox, ix * 32, jx * 32);
-            }
-        }
-    }
-}
-function bersihkanLayar() {
-    canvasCtx.clearRect(0, 0, 360, 640);
-}
 /**
  * Buka cell
  * @param cellCr cell sekarang
@@ -250,16 +189,4 @@ function pfTelusurBalik(cell) {
             cell = cellParent;
         }
     }
-}
-function petaKosong(x, y) {
-    return (peta[y].charAt(x) == " ");
-}
-function petaPosValid(x, y) {
-    if (x < 0)
-        return false;
-    if (y >= peta.length)
-        return false;
-    if (x >= peta[y].length)
-        return false;
-    return petaKosong(x, y);
 }

@@ -6,14 +6,12 @@ function krkCheckPosisiDiGrid(karakter) {
         return false;
     return true;
 }
-
 function krkPosisiGrid(karakter) {
     return {
         x: Math.floor(karakter.pos.x / 32),
         y: Math.floor(karakter.pos.y / 32)
     };
 }
-
 function krkPindahGrid(karakter) {
     let posAwalX;
     let posAwalY;
