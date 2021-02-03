@@ -92,5 +92,5 @@ function gambarPeta() {
     }
 }
 function bersihkanLayar() {
-    canvasCtx.clearRect(0, 0, 320, 640);
+    canvasCtx.clearRect(0, 0, gp, gl);
 }

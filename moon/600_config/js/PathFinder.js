@@ -128,6 +128,7 @@ function cellBuat(parent, x, y, tx, ty) {
         cell.jarak = Math.abs(tx - x) + Math.abs(ty - y);
     }
     else if (PF_A_STAR == pfConfig.mode) {
+        cell.jarak = Math.abs(tx - x) + Math.abs(ty - y);
         cell.jarak += (cell.g * 1.1);
     }
     return cell;
