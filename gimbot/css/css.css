@@ -30,7 +30,7 @@ div.gimbot div.tombol-cont div.nav-cont {
 div.gimbot div.tombol-cont div.aksi-cont {
 	width: 50%;
 	/* display: flex; */
-	text-align: center;
+	text-align: right;
 	/* margin: 16px; */
 }
 
