@@ -1,0 +1,39 @@
+html, body, div {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+div.gimbot {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+div.gimbot div.canvas-cont {
+	flex-grow: 1;
+	border: 1px solid;
+	margin: 16px;;
+}
+
+div.gimbot div.tombol-cont {
+	display: flex;
+	margin: 16px;
+}
+
+div.gimbot div.tombol-cont div.nav-cont {
+	width: 50%;
+	display: flex;
+	/* margin: 16px; */
+}
+
+div.gimbot div.tombol-cont div.aksi-cont {
+	width: 50%;
+	/* display: flex; */
+	text-align: center;
+	/* margin: 16px; */
+}
+
+button {
+	padding: 16px;;
+}
