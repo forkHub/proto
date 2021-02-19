@@ -2,6 +2,7 @@ html, body, div {
 	padding: 0px;
 	margin: 0px;
 	box-sizing: border-box;
+	overflow: hidden;
 }
 
 div.gimbot {
@@ -13,8 +14,14 @@ div.gimbot {
 div.gimbot div.canvas-cont {
 	flex-grow: 1;
 	border: 1px solid;
-	margin: 16px;;
+	margin: 16px;
+	background-color: black;
 }
+
+div.gimbot div.canvas-cont canvas {
+	background-color: #0000ff;
+}
+
 
 div.gimbot div.tombol-cont {
 	display: flex;
