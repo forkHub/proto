@@ -24,14 +24,11 @@ class AnggotaController {
     populate(anggota) {
         if (anggota.populate)
             return;
+        if (anggota.stPasangan)
+            return;
         if (anggota.pasanganId && !anggota.pasangan) {
             anggota.pasangan = db.getById(anggota.pasanganId);
             this.normalise(anggota.pasangan);
-            if (anggota.view) {
-                this.renderFoto(anggota.pasangan, anggota.view.istriCont);
-                this.updateViewToggle(anggota);
-                this.updateViewToggle(anggota.pasangan);
-            }
         }
         anggota.anak2 = [];
         anggota.anak2 = db.getByInduk(anggota.id).slice();
@@ -39,9 +36,6 @@ class AnggotaController {
             this.normalise(item);
         });
         anggota.populate = true;
-        if (anggota.view) {
-            this.renderAnak(anggota);
-        }
         console.log('populate');
     }
     renderAnak(anggota) {
@@ -82,6 +76,13 @@ class AnggotaController {
             }
         }
     }
+    renderPasangan(anggota) {
+        let pasangan = anggota.pasangan;
+        if (pasangan) {
+            pasangan.pasangan = anggota;
+            this.renderFoto(pasangan, anggota.view.istriCont);
+        }
+    }
     resetMenuPopUp() {
         if (data.menuAktif)
             data.menuAktif.style.display = null;
@@ -99,10 +100,13 @@ class AnggotaController {
         }
     }
     updateViewToggle(anggota) {
+        console.log('update view toggle');
         //status terbuka
         if (anggota.buka) {
+            console.log('anggota buka');
             //ada anak
             if (anggota.view && anggota.view.anakCont) {
+                console.log('render anak');
                 anggota.view.anakCont.style.display = 'table';
             }
             //punya pasangan
@@ -130,7 +134,9 @@ class AnggotaController {
         }
         //anggota tutup
         else {
+            console.log('status tutup');
             if (anggota.view && anggota.view.anakCont) {
+                console.log('tutup anak');
                 anggota.view.anakCont.style.display = 'none';
             }
             //punya pasangan
@@ -167,6 +173,11 @@ class AnggotaController {
             if (!anggota.populate) {
                 this.populate(anggota);
                 anggota.buka = true;
+                //render
+                this.renderAnak(anggota);
+                if (anggota.pasangan) {
+                    this.renderPasangan(anggota);
+                }
             }
             else {
                 anggota.buka = !anggota.buka;
@@ -194,13 +205,18 @@ class AnggotaController {
         foto.hapusTbl.onclick = (e) => {
             e.stopPropagation();
             console.log('hapus tombol');
-            console.log('status pasangan ' + anggota.stPasangan);
+            // console.log('status pasangan ' + anggota.stPasangan);
             if (!anggota.stPasangan) {
                 //hapus suami
-                this.hapusAnak(anggota.induk, anggota);
-                this.renderAnak(anggota.induk);
-                db.hapus(anggota.id);
-                // db.simpan();
+                if (anggota.induk) {
+                    this.hapusAnak(anggota.induk, anggota);
+                    this.renderAnak(anggota.induk);
+                    this.updateViewToggle(anggota.induk);
+                    db.hapus(anggota.id);
+                }
+                else {
+                    //TODO: info tidak bisa hapus anggota awal
+                }
             }
             else {
                 //hapus istri
@@ -209,7 +225,6 @@ class AnggotaController {
                 suami.pasangan = null;
                 anggota.pasangan = null;
                 db.hapus(anggota.id);
-                // db.simpan();
                 this.updateViewToggle(suami);
             }
             this.resetMenuPopUp();
@@ -228,11 +243,12 @@ class AnggotaController {
             this.resetMenuPopUp();
             let pasangan = db.buatAnggotaObj();
             pasangan.stPasangan = true;
+            pasangan.populate = true;
             pasangan.pasangan = anggota;
             anggota.pasangan = pasangan;
             anggota.buka = true;
-            this.renderFoto(anggota.pasangan, anggota.view.istriCont);
             db.baru(anggota.pasangan);
+            this.renderPasangan(anggota);
             this.updateViewToggle(anggota);
         };
         foto.tambahAnakTbl.onclick = (e) => {
@@ -240,11 +256,13 @@ class AnggotaController {
             this.resetMenuPopUp();
             let anak = db.buatAnggotaObj();
             anak.induk = anggota;
-            anggota.anak2.push(anak);
             anggota.buka = true;
-            this.renderAnak(anggota);
+            anggota.populate = true;
             db.baru(anak);
+            anggota.anak2.push(anak);
+            this.renderAnak(anggota);
             this.updateViewToggle(anggota);
+            this.updateViewToggle(anak);
         };
         foto.debugTbl.onclick = (e) => {
             e.stopPropagation();
@@ -278,26 +296,21 @@ class AnggotaController {
             view.kanan.classList.add('border-kiri');
         }
     }
-    renderContainer(anggota, hubung) {
+    renderContainer(hubung) {
         let view = new KotakView();
         let hubungView = new Hubung();
-        anggota.view = view;
         hubungView.attach(view.hubungCont);
         this.renderHubung(hubungView, hubung);
         return view;
     }
     renderAnggota(anggota, cont, hubung) {
-        let viewLayout = this.renderContainer(anggota, hubung);
+        let viewLayout = this.renderContainer(hubung);
         viewLayout.attach(cont);
+        anggota.view = viewLayout;
         this.renderFoto(anggota, viewLayout.suamiCont);
-        //render info istri
-        let pasangan = anggota.pasangan;
-        if (pasangan) {
-            pasangan.pasangan = anggota;
-            this.renderFoto(pasangan, viewLayout.istriCont);
-        }
+        this.renderPasangan(anggota);
         this.renderAnak(anggota);
-        this.updateViewToggle(anggota);
+        // this.updateViewToggle(anggota);
     }
 }
 export var anggotaController = new AnggotaController();

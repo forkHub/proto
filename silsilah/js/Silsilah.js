@@ -8,6 +8,7 @@ window.onload = () => {
     anggotaController.normalise(data.anggotaAwal);
     anggotaController.populate(data.anggotaAwal);
     anggotaController.renderAnggota(data.anggotaAwal, document.body, -1);
+    anggotaController.updateViewToggle(data.anggotaAwal);
     window.document.body.onclick = () => {
         console.log('window on click');
         anggotaController.resetMenuPopUp();
