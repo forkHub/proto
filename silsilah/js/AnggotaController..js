@@ -80,6 +80,7 @@ class AnggotaController {
         let pasangan = anggota.pasangan;
         if (pasangan) {
             pasangan.pasangan = anggota;
+            anggota.view.istriCont.innerHTML = '';
             this.renderFoto(pasangan, anggota.view.istriCont);
         }
     }
