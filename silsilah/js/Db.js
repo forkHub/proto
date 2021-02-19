@@ -2,11 +2,14 @@ import { id } from "./Counter.js";
 import { file2 } from "./Data.js";
 class Db {
     constructor() {
+        this.counter = new CounterDb();
         this.anggotaAr = [];
+        this.counter;
     }
     load() {
         let dataStr = window.localStorage.getItem(file2);
         let dbObj;
+        console.log(dataStr);
         if (!dataStr || dataStr == '') {
             dbObj = {
                 anggota: [this.buatAnggotaObj()],
@@ -14,11 +17,13 @@ class Db {
                 awal: null
             };
             dbObj.awal = 1;
+            id.id = 0;
+            dbObj.anggota[0].id = id.id;
         }
         else {
             dbObj = JSON.parse(dataStr);
+            id.id = dbObj.ctr;
         }
-        id.id = dbObj.ctr;
         this.anggotaAr = [];
         dbObj.anggota.forEach((item) => {
             this.anggotaAr.push(item);
@@ -27,8 +32,8 @@ class Db {
         return dbObj;
     }
     buatAnggotaObj() {
+        console.log('buat anggota');
         return {
-            id: id.id,
             indukId: 0,
             nama: 'nama',
             anak2: [],
@@ -64,12 +69,6 @@ class Db {
         console.log('hasil:');
         console.log(hasil);
         console.groupEnd();
-        // for (let i: number = 0; i < anggota.anak2.length; i++) {
-        // hasil.anak2.push(this.toObj(anggota.anak2[i]))
-        // }
-        // if (anggota.pasangan && (anggota.stPasangan == false)) {
-        // hasil.pasangan = this.toObj(anggota.pasangan);
-        // }
         return hasil;
     }
     getByInduk(id) {
@@ -81,6 +80,7 @@ class Db {
         return hasil;
     }
     baru(anggota) {
+        anggota.id = id.id;
         this.anggotaAr.push(anggota);
         console.log('anggota insert');
         console.log(anggota);
@@ -110,6 +110,7 @@ class Db {
         return hasil;
     }
     simpan() {
+        console.log('simpan');
         let idb = {
             anggota: [],
             ctr: id.id,
@@ -119,6 +120,12 @@ class Db {
             idb.anggota.push(this.toObj(item));
         });
         window.localStorage.setItem(file2, JSON.stringify(idb));
+    }
+}
+class CounterDb {
+    load() {
+    }
+    simpan() {
     }
 }
 export var db = new Db();

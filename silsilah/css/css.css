@@ -1,6 +1,8 @@
-html {
+html, body {
 	background-image: url(../gbr/back.png);
 	background-repeat: repeat;
+	box-sizing: border-box;
+	margin: 0px;
 }
 
 body {

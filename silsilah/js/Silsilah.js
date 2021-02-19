@@ -4,6 +4,7 @@ import { anggotaController } from "./AnggotaController..js";
 window.onload = () => {
     db.load();
     data.anggotaAwal = db.getById(1);
+    console.log(data.anggotaAwal);
     anggotaController.normalise(data.anggotaAwal);
     anggotaController.populate(data.anggotaAwal);
     anggotaController.renderAnggota(data.anggotaAwal, document.body, -1);

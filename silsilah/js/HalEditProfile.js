@@ -1,9 +1,7 @@
 import { BaseComponent } from "./BaseComponent.js";
-import { db } from "./Db.js";
 class EditProfile {
     constructor() {
         this._view = new View();
-        this.anggotaLama = db.buatAnggotaObj();
         this._view.tblTutup.onclick = () => {
             this.anggota.nama = this.anggotaLama.nama;
             this._view.detach();
@@ -28,6 +26,7 @@ class EditProfile {
         console.log(this.anggotaLama);
         this._view.inputNama.value = anggota.nama;
         this.anggotaLama.nama = anggota.nama;
+        this.anggotaLama.id = anggota.id;
         this.anggota = anggota;
         this._view.attach(document.body);
     }
