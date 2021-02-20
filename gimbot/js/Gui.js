@@ -27,3 +27,9 @@ GUI.aksi.ontouchend = (e) => {
     e.stopPropagation();
     console.log('tombol aksi di lepas');
 };
+let test = document.body.querySelector('div.canvas-cont');
+test.onmousedown = (e) => {
+    e.preventDefault();
+    console.log('test mouse down');
+};
+console.log(test);
