@@ -1,0 +1,71 @@
+
+html, body, div {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: black;
+	height: 100%;
+}
+
+div.tdl {
+	max-width: 720px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+div.tdl div.header {
+	display: flex;
+	padding: 8px;
+	background-color: #000080;
+}
+
+div.tdl div.header span.judul {
+	flex-grow: 1;
+	font-weight: bold;
+	color: white;
+	padding-top: 8px;
+}
+
+div.tdl div.header button {
+	font-weight: bold;
+	color: black;
+	padding:8px;
+}
+
+div.tdl div.daftar-cont {
+	flex-grow: 1;
+	background-color: #008080;
+	padding: 8px;
+}
+
+
+div.tdl div.daftar-cont div.item {
+	padding: 8px;
+	background-color: #008000;
+	margin-bottom: 4px;
+}
+
+div.item p.desk {
+	border: 1px solid yellow;
+	margin: 0px;
+	padding:8px;
+	color: white;
+}
+
+div.item div.tombol-cont {
+	padding: 8px;
+	background-color: #008000;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	text-align: right;
+}
+
+div.item div.tombol-cont button {
+	padding: 8px;
+}
+
