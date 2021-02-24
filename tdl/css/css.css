@@ -10,6 +10,28 @@ body {
 	height: 100%;
 }
 
+button {
+	position: relative;
+	box-shadow: 4px 4px #333;
+}
+
+button:active {
+	top:2px;
+	left: 2px;
+	box-shadow: none;
+}
+
+div.color-wheel {
+	display: flex;
+}
+
+div.color-wheel div.b {
+	height: 32px;
+	flex-grow: 1;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
 div.tdl {
 	max-width: 720px;
 	margin: auto;
@@ -21,14 +43,21 @@ div.tdl {
 div.tdl div.header {
 	display: flex;
 	padding: 8px;
-	background-color: #000080;
+	padding-right: 12px;
+	padding-bottom: 12px;
+	background-color: #008000;
+}
+
+div.bayangan {
+	height: 4px;
+	background-color: black;
 }
 
 div.tdl div.header span.judul {
 	flex-grow: 1;
 	font-weight: bold;
 	color: white;
-	padding-top: 8px;
+	padding-top: 12px;
 }
 
 div.tdl div.header button {
@@ -47,7 +76,9 @@ div.tdl div.daftar-cont {
 div.tdl div.daftar-cont div.item {
 	padding: 8px;
 	background-color: #008000;
-	margin-bottom: 4px;
+	margin-bottom: 8px;
+	margin-right: 6px;
+	box-shadow: 4px 4px #333;
 }
 
 div.item p.desk {
