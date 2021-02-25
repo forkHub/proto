@@ -42,4 +42,8 @@ let canvasScaleY = 1;
 let gbrBox;
 let gbrBola;
 let gbrTigan;
+let gbrCentang;
 let pilihan;
+let centangX = 0;
+let centangY = 0;
+let centangTerlihat = false;
