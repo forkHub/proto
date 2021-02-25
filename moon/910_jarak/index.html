@@ -10,6 +10,7 @@
 			margin: 0px;
 			padding: 0px;
 			box-sizing: border-box;
+			background-color: black;
 		}
 
 		canvas {
@@ -22,11 +23,12 @@
 
 		div.pilih {
 			position: fixed;
-			top: 0px;
-			right: 0px;
+			top: 12px;
+			right: 12px;
 			padding: 16px;
-			background-color: rgba(255, 255, 255, .5);
-			border: 1px rgba(0, 0, 0, .2);
+			background-color: rgba(255, 255, 255, 1);
+			border: 1px rgba(0, 0, 0, 1);
+			box-shadow: 4px 4px #333;
 		}
 	</style>
 	<script src="js/Data.js"></script>
@@ -42,6 +44,7 @@
 		<img src='imgs/bola.png' id='img-bola'>
 		<img src='imgs/box.png' id='img-box'>
 		<img src='imgs/tigan.png' id='img-tigan'>
+		<img src='imgs/centang.png' id='img-centang'>
 	</div>
 
 	<canvas></canvas>
@@ -49,8 +52,7 @@
 	<div class='pilih'>
 		Mode:<br />
 		<input type="radio" name="mode" class="mode" value="1" id="cepat"><label for="cepat">Cepat</label><br />
-		<input type="radio" name="mode" class="mode" value="2" checked id="astar"><label for="astar">A
-			Star</label><br />
+		<input type="radio" name="mode" class="mode" value="2" checked id="astar"><label for="astar">A Star</label><br />
 	</div>
 </body>
 
