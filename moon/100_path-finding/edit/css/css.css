@@ -1,0 +1,139 @@
+html, body, div,p, form, iframe {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+button {
+	position: relative;
+	box-shadow: 4px 4px #333;
+	padding: 4px 8px 4px 8px;
+}
+
+button:active {
+	top:2px;
+	left: 2px;
+	box-shadow: none;
+	background-color: #808080;
+}
+
+button:disabled {
+	top:2px;
+	left: 2px;
+	box-shadow: none;
+	color: white;
+	background-color: #333;
+}
+
+html {
+	background-color: black;
+	width: 100%;
+}
+
+div.kontainer-utama {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+div.kontainer-utama div.kontainer-2{
+	flex-grow: 1;
+	display: flex;
+	background-color: #c0c0c0;
+}
+
+div.kontainer-utama div.kontainer-2 div.edit-text,
+div.kontainer-utama div.kontainer-2 div.daftar-file
+{
+	display: none;
+	width: 100%;
+}
+
+div.kontainer-utama div.kontainer-2 div.daftar-file button
+{
+	margin-bottom: 8px;
+}
+
+
+div.kontainer-utama div.kontainer-2 div.edit-text {
+	flex-direction: column;
+}
+
+div.kontainer-utama div.kontainer-2 div.edit-text textarea {
+	width: 100%;
+	height: 100%;
+}
+
+div.kontainer-2 div.edit-text div.nav {
+	display: flex;
+	padding: 8px;
+	background-color: #808080;
+}
+
+div.kontainer-2 div.edit-text div.nav div.judul {
+	flex-grow: 1;
+	padding: 8px;
+	color: white;
+}
+
+div.kontainer-2 div.edit-text div.CodeMirror {
+	flex-grow: 1;
+}
+
+
+
+div.kontainer-utama div.header {
+	display: flex;
+	background-color: #c0c0c0;
+}
+
+div.pisah {
+	border: 1px solid;
+	height: 3px;
+	background-color: #c0c0c0;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-bottom: 1px solid #808080;
+	border-right: 1px solid #808080;
+}
+
+div.kontainer-utama div.header div.edit, 
+div.kontainer-utama div.header div.jalan {
+	width: 50%;
+	text-align: center;
+	padding: 8px;
+}
+
+div.kontainer-utama div.kontainer-2 div.edit, 
+div.kontainer-utama div.kontainer-2 div.daftar-file, 
+div.kontainer-utama div.kontainer-2 div.web, 
+div.kontainer-utama div.kontainer-2 div.jalan {
+	flex-grow: 1;
+	margin: 16px;
+	background-color: #c0c0c0;
+	width: 100%;
+}
+
+div.kontainer-utama div.kontainer-2 div.web {
+	display: flex;
+}
+
+
+div.kontainer-utama div.kontainer-2 div.web iframe {
+	/* width: 100%; */
+	/* height: 100%; */
+	border: none;
+	flex-grow: 1;
+}
+
+div.loading {
+	position: fixed;
+	left:0px;
+	right: 0px;
+	top:0px;
+	bottom: 0px;
+	background-color: rgba(0,0,0,.5);
+	display: none;
+	align-items: center;
+	justify-content: center;
+}

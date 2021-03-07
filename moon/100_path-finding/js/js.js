@@ -14,13 +14,25 @@ let canvas;
 let canvasCtx;
 let gbrBox;
 let gbrBola;
+function petaKosong(x, y) {
+    return (peta[y].charAt(x) == " ");
+}
+function petaPosValid(x, y) {
+    if (x < 0)
+        return false;
+    if (y > peta.length)
+        return false;
+    if (x > peta[y].length)
+        return false;
+    return petaKosong(x, y);
+}
 window.onload = () => {
-    //persiapan canvas
     canvas = document.body.querySelector('canvas');
     canvasCtx = canvas.getContext("2d");
     gbrBola = document.body.querySelector("img#img-bola");
     gbrBox = document.body.querySelector("img#img-box");
-    let hasil = pfCariJalan(2, 2, 8, 3);
+    //Ganti posisi awal dan posisi akhir untuk melihat perubahan hasilnya
+    let hasil = pfCariJalan(2, 2, 7, 2);
     gambarTembok();
     gambarJalan(hasil);
     console.log(JSON.stringify(hasil));
@@ -41,6 +53,11 @@ function gambarTembok() {
         }
     }
 }
+/**
+ * =======================
+ * Algorithma Path Finding
+ * =======================
+ */
 /**
  * Buka cell
  * @param cellCr cell sekarang
@@ -231,19 +248,4 @@ function pfTelusurBalik(cell) {
             cell = cellParent;
         }
     }
-}
-function petaKosong(x, y) {
-    return (peta[y].charAt(x) == " ");
-}
-function petaPosValid(x, y) {
-    if (x < 0)
-        return false;
-    if (y > peta.length)
-        return false;
-    if (x > peta[y].length)
-        return false;
-    return petaKosong(x, y);
-}
-function test() {
-    console.log(pfCariJalan(2, 2, 4, 4));
 }
