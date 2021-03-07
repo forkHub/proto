@@ -4,6 +4,7 @@ window.onload = () => {
     canvasCtx = canvas.getContext("2d");
     gbrBola = document.body.querySelector("img#img-bola");
     gbrBox = document.body.querySelector("img#img-box");
+    gbrCentang = document.body.querySelector("img#img-centang");
     gbrTigan = document.body.querySelector("img#img-tigan");
     document.body.querySelector('input#cepat').onclick = (e) => {
         pfConfig.mode = parseInt(e.currentTarget.value);
@@ -11,12 +12,6 @@ window.onload = () => {
     document.body.querySelector('input#astar').onclick = (e) => {
         pfConfig.mode = parseInt(e.currentTarget.value);
     };
-    // pilihan.onclick = () => {
-    // 	console.log(pilihan.value);
-    // }
-    // pilihan.onchange = () => {
-    // 	console.log('on change ' + pilihan.value);
-    // }
     window.onresize = () => {
         resize();
         render();
@@ -37,6 +32,9 @@ window.onload = () => {
         let posy = Math.floor(posly / 32);
         let posGrid = krkPosisiGrid(karakter);
         let hasil = pfCariJalan(posGrid.x, posGrid.y, posx, posy);
+        centangX = posx;
+        centangY = posy;
+        centangTerlihat = true;
         karakter.status = st_jalan;
         karakter.jalur = hasil;
         karakter.jalurn = -1;
@@ -71,6 +69,12 @@ function render() {
     gambarPeta();
     gambarJalan(karakter.jalur);
     gambarKarakter();
+    gambarCentang();
+}
+function gambarCentang() {
+    if (centangTerlihat) {
+        canvasCtx.drawImage(gbrCentang, centangX * 32, centangY * 32);
+    }
 }
 function gambarKarakter() {
     canvasCtx.drawImage(gbrTigan, karakter.pos.x, karakter.pos.y);
@@ -92,5 +96,5 @@ function gambarPeta() {
     }
 }
 function bersihkanLayar() {
-    canvasCtx.clearRect(0, 0, 320, 640);
+    canvasCtx.clearRect(0, 0, gp, gl);
 }
