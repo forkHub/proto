@@ -1,28 +1,28 @@
 "use strict";
 jln.init = async () => {
     jln.loading.tampil();
-    let hasil = await jln.load('./edit.json?r=' + Math.floor(Math.random() * 99999));
+    // let config: string = await jln.load('./edit.json?r=' + Math.floor(Math.random() * 99999));
     // let hasilAr: IProject[] = JSON.parse(hasil);
-    projek = JSON.parse(hasil);
+    projek = config;
     jln.ui.kontainer2.daftarFile.daftarCss.innerHTML = '';
     jln.ui.kontainer2.daftarFile.daftarJs.innerHTML = '';
     for (let i = 0; i < projek.file.css.length; i++) {
         let item = projek.file.css[i];
-        item.konten = await jln.load('./' + item.url + '?r=' + Math.floor(Math.random() * 99999));
+        // item.konten = await jln.load('./' + item.url + '?r=' + Math.floor(Math.random() * 99999));
         item.kontenEdit = item.konten;
         jln.buatItem(item, jln.ui.kontainer2.daftarFile.daftarCss);
     }
     for (let i = 0; i < projek.file.js.length; i++) {
         let item = projek.file.js[i];
-        item.konten = await jln.load('./' + item.url + '?r=' + Math.floor(Math.random() * 99999));
+        // item.konten = await jln.load('./' + item.url + '?r=' + Math.floor(Math.random() * 99999));
         item.kontenEdit = item.konten;
         jln.buatItem(item, jln.ui.kontainer2.daftarFile.daftarJs);
     }
     for (let i = 0; i < projek.file.html.length; i++) {
         let item = projek.file.html[i];
-        item.konten = await jln.load('./' + item.url + '?r=' + Math.floor(Math.random() * 99999));
+        // item.konten = await jln.load('./' + item.url + '?r=' + Math.floor(Math.random() * 99999));
         // console.log(item.konten);
-        item.konten = jln.html(item.konten);
+        // item.konten = jln.html(item.konten);
         item.kontenEdit = item.konten;
         // console.log(item.konten);
         jln.buatItem(item, jln.ui.kontainer2.daftarFile.daftarHtml);
