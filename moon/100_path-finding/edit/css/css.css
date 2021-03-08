@@ -54,10 +54,16 @@ div.kontainer-utama div.kontainer-2 div.daftar-file button
 	margin-bottom: 8px;
 }
 
-
 div.kontainer-utama div.kontainer-2 div.edit-text {
 	flex-direction: column;
 }
+
+div.kontainer-utama div.kontainer-2 div.edit-text form {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
 
 div.kontainer-utama div.kontainer-2 div.edit-text textarea {
 	width: 100%;
