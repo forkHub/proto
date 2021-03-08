@@ -28,7 +28,7 @@ jln.init = async () => {
         jln.buatItem(item, jln.ui.kontainer2.daftarFile.daftarHtml);
     }
     // console.log(hasil);
-    console.log(window.top.location.search);
+    // console.log(window.top.location.search);
     myCodeMirror = CodeMirror.fromTextArea(jln.ui.kontainer2.editText.textArea, {
         lineNumbers: true,
         styleActiveLine: true,
