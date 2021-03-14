@@ -1,0 +1,15 @@
+html, body, div, canvas {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+canvas {
+	background-color: white;
+}
+
+html, body {
+	background-color: black;
+}
