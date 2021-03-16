@@ -1,0 +1,101 @@
+html, body, div {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+button {
+	box-shadow: 0px 0px 0px 3px black ;
+	font-weight: bold;
+
+}
+
+button.aksi {
+	border-top: 8px solid #f0f0f0;
+	border-left: 8px solid #f0f0f0;
+	border-bottom: 8px solid #808080;
+	border-right: 8px solid #808080;
+	background-color: #c0c0c0;
+}
+
+button.aksi:active {
+	border-bottom: 8px solid #f0f0f0;
+	border-right: 8px solid #f0f0f0;
+	border-top: 8px solid #808080;
+	border-left: 8px solid #808080;
+	background-color: #c0c0c0;
+}
+
+
+button.kanan, button.kiri {
+	border-top: 8px solid #ffcccc;
+	border-left: 8px solid #ffcccc;
+	border-bottom: 8px solid #800000;
+	border-right: 8px solid #800000;
+	background-color: #ff4d4d;
+}
+
+button.kanan:active, button.kiri:active {
+	border-bottom: 8px solid #ffcccc;
+	border-right: 8px solid #ffcccc;
+	border-left: 8px solid #800000;
+	border-top: 8px solid #800000;
+}
+
+
+button.kiri {
+	margin-right: 4px;
+
+}
+
+button.kanan {
+	margin-left: 4px;
+}
+
+div.gimbot {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: cornsilk;
+	max-width: 100vh;
+	margin: auto;
+}
+
+div.gimbot div.canvas-cont {
+	flex-grow: 1;
+	border: 1px solid;
+	margin: 16px;
+	border-right: 4px solid white;
+	border-bottom: 4px solid white;
+	border-left: 4px solid coral;
+	border-top: 4px solid coral;
+	border-radius: 10px;
+	background-color: black;
+	position: relative;
+}
+
+div.gimbot div.canvas-cont canvas {
+	position: absolute;
+}
+
+div.gimbot div.tombol-cont {
+	display: flex;
+	margin: 16px;
+}
+
+div.gimbot div.tombol-cont div.nav-cont {
+	width: 50%;
+	display: flex;
+	/* margin: 16px; */
+}
+
+div.gimbot div.tombol-cont div.aksi-cont {
+	width: 50%;
+	/* display: flex; */
+	text-align: right;
+	/* margin: 16px; */
+}
+
+button {
+	padding: 16px;;
+}
