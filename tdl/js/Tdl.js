@@ -6,7 +6,14 @@ tdl.view = {
     tambahTbl: document.body.querySelector('div.tdl div.header button.tambah'),
     daftarCont: document.body.querySelector('div.tdl div.daftar-cont')
 };
-tdl.item.daftar = [];
+tdl.init = () => {
+    tdl.item.daftar = [];
+    tdl.db.load();
+    tdl.item.daftar.forEach((item) => {
+        tdl.item.updateTampilan(item);
+    });
+    tdl.renderList();
+};
 tdl.view.tambahTbl.onclick = () => {
     let isi = window.prompt('Item Baru:');
     let item = tdl.item.buat(isi);
@@ -132,8 +139,3 @@ tdl.template = (query) => {
     let template = document.body.querySelector('template').content;
     return template.querySelector(query).cloneNode(true);
 };
-function test() {
-    let item = tdl.item.buat('test');
-    tdl.item.daftar.push(item);
-    tdl.renderList();
-}
