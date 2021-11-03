@@ -7,5 +7,6 @@ rd .\css\ /s /q
 rd .\js\ /s /q
 rd .\template /s /q
 
-xcopy D:\xampp3\htdocs\proto\blog\responsif\web .\ /s /y /i
+rem xcopy D:\xampp3\htdocs\proto\blog\responsif\web .\ /s /y /i
+xcopy ..\..\..\..\proto\blog\resp\responsif\web .\ /s /y /i
 pause

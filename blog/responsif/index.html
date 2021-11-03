@@ -7,27 +7,32 @@
 		html,
 		body,
 		canvas {
-			text-align: center;
 			margin: 0px;
 			padding: 0px;
 			box-sizing: border-box;
 			background-color: black;
+			overflow: hidden;
+		}
+
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 
 		canvas {
+			image-rendering: crisp-edges;
+			image-rendering: pixelated;
+			image-rendering: crisp-edges;
 			position: absolute;
+			background-color: white;
 		}
 	</style>
-	<script src="js/js.js"></script>
 </head>
 
 <body>
-	<div style="display:none">
-		<img src="gambar/gambar.jpeg" class='gambar'>
-	</div>
-
-	<!-- <canvas id="canvas" width="360" height="218" style="width:360px; height:218px"></canvas> -->
-	<canvas id="canvas" width="360" height="218"></canvas>
+	<canvas id="canvas" width="160" height="160"></canvas>
+	<script src="js/js.js"></script>
 </body>
 
 
