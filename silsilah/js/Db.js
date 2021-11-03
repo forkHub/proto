@@ -60,9 +60,9 @@ class Db {
         if (anggota.induk) {
             hasil.indukId = anggota.induk.id;
         }
-        if (anggota.pasangan) {
+        if (anggota.pasanganObj) {
             console.log('ada pasangan');
-            hasil.pasanganId = anggota.pasangan.id;
+            hasil.pasanganId = anggota.pasanganObj.id;
         }
         console.log('anggota');
         console.log(anggota);
