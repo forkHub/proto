@@ -1,0 +1,12 @@
+pohon-item div.nama-cont button.toggle.tutup::before {
+    content: '▶';
+}
+
+pohon-item div.nama-cont,
+pohon-item div.nama-cont button  {
+    cursor: pointer;
+}
+
+pohon-item div.nama-cont.dipilih {
+    border: 1px solid;
+}

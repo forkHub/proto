@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,
+        target-densityDpi=device-dpi">
+
+	<title>Babylon.js sample code</title>
+
+	<style>
+		html,
+		body {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		#renderCanvas {
+			width: 100%;
+			height: 100%;
+			touch-action: none;
+		}
+
+		canvas-cont {
+			min-height: 100vh;
+			width: 60%;
+		}
+
+		menu-cont {
+			display: flex;
+			width: 40%;
+		}
+
+		menu-cont struktur,
+		menu-cont tombol-cont {
+			display: block;
+			overflow-y: auto;
+			overflow-x: auto;
+		}
+
+		menu-cont struktur {
+			width: 60%;
+		}
+
+		menu-cont tombol-cont {
+			width: 40%;
+		}
+
+		menu-cont struktur pohon-item {
+			display: block;
+		}
+
+		struktur pohon-item>cont {
+			display: block;
+		}
+
+		pohon-item nama {
+			cursor: pointer;
+			user-select: none;
+		}
+
+		pohon-item>cont {
+			margin-left: 8px;
+		}
+	</style>
+
+	<link href="css/grid.css" rel="stylesheet">
+	<link href="css/umum.css" rel="stylesheet">
+	<link href="css/b4.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="cont-utama display-flex">
+		<canvas-cont class="">
+			<canvas id="renderCanvas"></canvas>
+		</canvas-cont>
+
+		<menu-cont>
+			<struktur>
+
+			</struktur>
+			<tombol-cont>
+			</tombol-cont>
+		</menu-cont>
+	</div>
+
+	<template>
+		<pohon-item class='display-block'>
+			<div class='nama nama-cont display-flex'>
+				<button class='toggle tutup'></button>
+				<nama></nama>
+			</div>
+			<cont class='display-block'>
+			</cont>
+		</pohon-item>
+
+		<menu>
+
+		</menu>
+	</template>
+
+	<!-- Local Babylon -->
+	<script src="lib/babylon.js"></script>
+
+	<!-- Babylon.js -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script> -->
+
+	<!-- <script src="https://preview.babylonjs.com/ammo.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/cannon.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/Oimo.js"></script> -->
+
+	<!-- <script src="https://preview.babylonjs.com/earcut.min.js"></script> -->
+
+	<!-- <script src="https://preview.babylonjs.com/babylon.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script> -->
+
+	<!-- <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script> -->
+	<!-- <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script> -->
+
+	<script type="module" src="js/App.js"></script>
+</body>
+
+</html>
