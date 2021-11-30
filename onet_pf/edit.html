@@ -1,0 +1,88 @@
+<html>
+
+<head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, target-densityDpi=device-dpi">
+
+	<link rel="stylesheet" href='edit/css/css.css' />
+	<link rel="stylesheet" href='edit/css/dialog.css' />
+	<link rel="stylesheet" href='edit/lib/codemirror/lib/codemirror.css' />
+	<link rel="stylesheet" href='edit/lib/codemirror/theme/ambiance.css' />
+</head>
+
+<body>
+	<div class='kontainer-utama'>
+		<div class='header'>
+			<div class='edit'>
+				<button class="edit">Kode Sumber</button>
+			</div>
+			<div class='jalan'>
+				<button class="jalan">Jalankan</button>
+			</div>
+		</div>
+
+		<div class='pisah'></div>
+
+		<div class='kontainer-2'>
+
+			<div class='daftar-file'>
+				<div class='judul'>PIlih file yang akan diedit. Tekan tombol 'Jalankan' untuk melihat
+					hasilnya<br /><br />
+				</div>
+				<div class='css'>css:</div>
+				<div class='daftar-css'></div>
+				<br />
+
+				<div class='js'>javascript:</div>
+				<div class='daftar-js'></div>
+				<br />
+
+				<div class='html'>html:</div>
+				<div class='daftar-html'></div>
+				<br />
+			</div>
+
+			<div class='edit-text'>
+				<div class='nav'>
+					<button class='kembali'>&larr;</button>
+					<div class='judul'></div>
+					<button class='muat-ulang'>Muat Ulang</button>
+				</div>
+				<form>
+					<textarea class='edit'>
+
+					</textarea>
+				</form>
+			</div>
+
+			<div class='web'>
+				<iframe class='iframe'>
+
+				</iframe>
+			</div>
+		</div>
+
+	</div>
+
+	<div class='loading'>
+		<img src='edit/gbr/loading.gif'>
+	</div>
+
+	<template>
+		<div class='file'>
+			<button></button>
+		</div>
+	</template>
+
+	<script src='./edit/lib/codemirror/lib/codemirror.js'></script>
+	<script src='./edit/js/Type.js'></script>
+	<script src='./edit/js/Data.js'></script>
+	<script src='./edit.json'></script>
+	<script src='./edit/js/UI.js'></script>
+	<script src='./edit/js/UiEvent.js'></script>
+	<script src='./edit/js/Jalan.js'></script>
+	<script src='./edit/js/Loading.js'></script>
+	<script src='./edit/js/Apl.js'></script>
+</body>
+
+</html>
